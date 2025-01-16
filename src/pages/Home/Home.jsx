@@ -1,5 +1,10 @@
 import React from "react";
+import Banner from "./Banner";
 
 export default function Home() {
-  return <div>home</div>;
+  return (
+    <div>
+      <Banner></Banner>
+    </div>
+  );
 }

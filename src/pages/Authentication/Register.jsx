@@ -90,8 +90,10 @@ export default function Register() {
 
             const { data } = await axiosPublic.post("/users", user);
             console.log(data);
-            navigate("/");
-            toast.success("Registration successful");
+            if (data.insertedId) {
+              navigate("/");
+              toast.success("Registration successful");
+            }
           })
           .catch((error) => toast.error(error.code))
           .finally(() => setLoading(false));

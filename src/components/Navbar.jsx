@@ -104,20 +104,17 @@ export default function Navbar() {
                     tabIndex={0}
                     className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-52 p-2 "
                   >
-                    <NavLink className="p-2" to="/create-assignments">
-                      <li>Create Assignments</li>
+                    <NavLink className="p-2" to="/dashboard">
+                      <li>Dashboard</li>
                     </NavLink>
-                    <NavLink className="p-2" to="/my-attempted-assignments">
-                      <li>My Attempted Assignments</li>
-                    </NavLink>
+                    <Link
+                      onClick={handleSignOut}
+                      className="btn bg-gradient-to-r from-primary to-secondary text-white"
+                    >
+                      Logout
+                    </Link>
                   </ul>
                 </div>
-                <Link
-                  onClick={handleSignOut}
-                  className="btn bg-gradient-to-r from-primary to-secondary text-white"
-                >
-                  Logout
-                </Link>
               </>
             ) : (
               <Link

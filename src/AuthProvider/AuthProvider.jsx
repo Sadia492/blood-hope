@@ -10,12 +10,14 @@ import {
   updateProfile,
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 // import axios from "axios";
 
 // const googleProvider = new GoogleAuthProvider();
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -40,22 +42,16 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+        const userInfo = { email: currentUser.email };
+        const { data } = await axiosPublic.post("/jwt", userInfo);
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+        }
+      } else {
+        localStorage.removeItem("token");
+      }
       setLoading(false);
-      //   if (currentUser?.email) {
-      //     const { data } = await axios.post(
-      //       `${import.meta.env.VITE_URL}/jwt`,
-      //       { email: currentUser?.email },
-      //       { withCredentials: true }
-      //     );
-
-      //     setLoading(false);
-      //   } else {
-      //     const { data } = await axios.get(`${import.meta.env.VITE_URL}/logout`, {
-      //       withCredentials: true,
-      //     });
-
-      //     setLoading(false);
-      //   }
       return () => unsubscribe();
     });
   }, []);

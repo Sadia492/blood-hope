@@ -24,7 +24,18 @@ export default function MyDonationRequests() {
     keepPreviousData: true, // Prevents blank data during page transition
   });
 
-  const { data, totalPages } = donationRequest || {};
+  const { data: totalData } = useQuery({
+    queryKey: ["total", user.email],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(
+        `/total-donation-requests/${user.email}`
+      );
+      return data;
+    },
+  });
+
+  // Calculate total pages
+  const totalPages = totalData ? Math.ceil(totalData.count / limit) : 1;
 
   return (
     <div>
@@ -60,7 +71,7 @@ export default function MyDonationRequests() {
           </tr>
         </thead>
         <tbody>
-          {data?.map((request) => (
+          {donationRequest?.map((request) => (
             <tr key={request._id}>
               <td className="px-4 py-2 border">{request.recipientName}</td>
               <td className="px-4 py-2 border">
@@ -83,7 +94,9 @@ export default function MyDonationRequests() {
                   </button>
                 </td>
               ) : (
-                <p>No Action Allowed</p>
+                <td colSpan="7" className="px-4 py-2 border text-center">
+                  No Action Allowed
+                </td>
               )}
             </tr>
           ))}

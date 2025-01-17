@@ -6,7 +6,10 @@ import Register from "../pages/Authentication/Register";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Profile from "../pages/Dashboard/Profile";
 import PrivateRoute from "./PrivateRoute";
-import DonorHome from "../pages/Dashboard/DonorHome";
+import DonorHome from "../pages/Dashboard/Donor/DonorHome";
+import CreateDonationRequest from "../pages/Dashboard/Donor/CreateDonationRequest";
+import MyDonationRequests from "../pages/Dashboard/Donor/MyDonationRequests";
+// import DonorHome from "../pages/Dashboard/DonorHome";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,6 +40,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <DonorHome></DonorHome>,
+      },
+      {
+        path: "my-donation-requests",
+        element: <MyDonationRequests></MyDonationRequests>,
+      },
+      {
+        path: "create-donation-request",
+        element: <CreateDonationRequest></CreateDonationRequest>,
       },
       {
         path: "profile",

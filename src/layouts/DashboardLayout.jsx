@@ -6,6 +6,8 @@ import { FaHome, FaUserCog } from "react-icons/fa";
 import MenuItem from "../shared/MenuItem";
 import { CgProfile } from "react-icons/cg";
 import { BsBoxArrowUpLeft } from "react-icons/bs";
+import { IoCreateSharp } from "react-icons/io5";
+import { TbBrandMyOppo } from "react-icons/tb";
 
 export default function DashboardLayout() {
   return (
@@ -37,6 +39,16 @@ export default function DashboardLayout() {
             </Link>
 
             <MenuItem icon={FaHome} label="Home" address="/dashboard" />
+            <MenuItem
+              icon={TbBrandMyOppo}
+              label="My Donation Request"
+              address="/dashboard/my-donation-requests"
+            />
+            <MenuItem
+              icon={IoCreateSharp}
+              label="Create Donation Request"
+              address="/dashboard/create-donation-request"
+            />
             <MenuItem
               icon={CgProfile}
               label="Profile"

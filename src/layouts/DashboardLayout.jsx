@@ -25,7 +25,6 @@ export default function DashboardLayout() {
       return data;
     },
   });
-  console.log(userRole?.role);
 
   return (
     <div className="">

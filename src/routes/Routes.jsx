@@ -11,6 +11,7 @@ import CreateDonationRequest from "../pages/Dashboard/Donor/CreateDonationReques
 import MyDonationRequests from "../pages/Dashboard/Donor/MyDonationRequests";
 import SharedHome from "../pages/Dashboard/SharedHome";
 import RoleBasedHome from "../pages/Dashboard/RoleBasedHome";
+import AllUser from "../pages/Dashboard/Admin/AllUser";
 // import DonorHome from "../pages/Dashboard/DonorHome";
 const router = createBrowserRouter([
   {
@@ -55,10 +56,10 @@ const router = createBrowserRouter([
         path: "profile",
         element: <Profile></Profile>,
       },
-      // {
-      //   index: true,
-      //   element: <SharedHome></SharedHome>,
-      // },
+      {
+        path: "all-users",
+        element: <AllUser></AllUser>,
+      },
     ],
   },
 ]);

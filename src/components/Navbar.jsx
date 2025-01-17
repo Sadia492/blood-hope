@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { authContext } from "../AuthProvider/AuthProvider";
 import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
 
 export default function Navbar() {
   const { user, signOutUser } = useAuth();

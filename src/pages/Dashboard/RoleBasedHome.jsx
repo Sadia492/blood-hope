@@ -18,7 +18,6 @@ export default function RoleBasedHome() {
       return data;
     },
   });
-  console.log(userRole?.role);
   if (userRole?.role === "donor") {
     return <DonorHome />;
   } else if (userRole?.role === "admin") {

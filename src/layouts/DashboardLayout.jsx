@@ -8,8 +8,25 @@ import { CgProfile } from "react-icons/cg";
 import { BsBoxArrowUpLeft } from "react-icons/bs";
 import { IoCreateSharp } from "react-icons/io5";
 import { TbBrandMyOppo } from "react-icons/tb";
+import { useQuery } from "@tanstack/react-query";
+import useAuth from "../hooks/useAuth";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import DonorMenu from "../pages/Dashboard/Donor/DonorMenu";
+import AdminMenu from "../pages/Dashboard/Admin/AdminMenu";
 
 export default function DashboardLayout() {
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+
+  const { data: userRole, isLoading } = useQuery({
+    queryKey: ["userRole", user.email],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/users/role/${user?.email}`);
+      return data;
+    },
+  });
+  console.log(userRole?.role);
+
   return (
     <div className="">
       <div className="drawer lg:drawer-open">
@@ -34,35 +51,19 @@ export default function DashboardLayout() {
           ></label>
           <ul className="menu bg-base-200 text-base-content min-h-full p-6 w-80">
             {/* Sidebar content here */}
+
             <Link to={"/"}>
               <BsBoxArrowUpLeft />
             </Link>
 
-            <MenuItem icon={FaHome} label="Home" address="/dashboard" />
-            <MenuItem
-              icon={TbBrandMyOppo}
-              label="My Donation Request"
-              address="/dashboard/my-donation-requests"
-            />
-            <MenuItem
-              icon={IoCreateSharp}
-              label="Create Donation Request"
-              address="/dashboard/create-donation-request"
-            />
+            {userRole?.role === "donor" && <DonorMenu></DonorMenu>}
+
+            {userRole?.role === "admin" && <AdminMenu></AdminMenu>}
+
             <MenuItem
               icon={CgProfile}
               label="Profile"
               address="/dashboard/profile"
-            />
-            <MenuItem
-              icon={BsGraphUp}
-              label="Statistics"
-              address="/dashboard/statistics"
-            />
-            <MenuItem
-              icon={FaUserCog}
-              label="Manage Users"
-              address="manage-users"
             />
           </ul>
         </div>

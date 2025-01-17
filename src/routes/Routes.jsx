@@ -9,6 +9,8 @@ import PrivateRoute from "./PrivateRoute";
 import DonorHome from "../pages/Dashboard/Donor/DonorHome";
 import CreateDonationRequest from "../pages/Dashboard/Donor/CreateDonationRequest";
 import MyDonationRequests from "../pages/Dashboard/Donor/MyDonationRequests";
+import SharedHome from "../pages/Dashboard/SharedHome";
+import RoleBasedHome from "../pages/Dashboard/RoleBasedHome";
 // import DonorHome from "../pages/Dashboard/DonorHome";
 const router = createBrowserRouter([
   {
@@ -39,7 +41,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <DonorHome></DonorHome>,
+        element: <RoleBasedHome></RoleBasedHome>,
       },
       {
         path: "my-donation-requests",
@@ -53,6 +55,10 @@ const router = createBrowserRouter([
         path: "profile",
         element: <Profile></Profile>,
       },
+      // {
+      //   index: true,
+      //   element: <SharedHome></SharedHome>,
+      // },
     ],
   },
 ]);

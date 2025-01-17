@@ -5,6 +5,8 @@ import Login from "../pages/Authentication/Login";
 import Register from "../pages/Authentication/Register";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Profile from "../pages/Dashboard/Profile";
+import PrivateRoute from "./PrivateRoute";
+import DonorHome from "../pages/Dashboard/DonorHome";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,8 +28,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     children: [
+      {
+        index: true,
+        element: <DonorHome></DonorHome>,
+      },
       {
         path: "profile",
         element: <Profile></Profile>,

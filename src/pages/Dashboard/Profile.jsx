@@ -1,5 +1,277 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import toast from "react-hot-toast";
+
+const image_hosting_key = import.meta.env.VITE_Image_Hosting_Key;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 export default function Profile() {
-  return <div>profile</div>;
+  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
+  const [editMode, setEditMode] = useState(false);
+  const [image, setImage] = useState("");
+  const { user, setLoading, updateUser } = useAuth();
+  const { data: userData, isLoading } = useQuery({
+    queryKey: ["user", user.email],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/user/${user.email}`);
+      return data;
+    },
+  });
+
+  // States to manage the dropdown selections
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedUpazila, setSelectedUpazila] = useState("");
+  const { data: districts } = useQuery({
+    queryKey: ["districts"],
+    queryFn: async () => {
+      const { data } = await axiosPublic.get("/districts");
+      return data;
+    },
+  });
+
+  const { data: upazilas } = useQuery({
+    queryKey: ["upazilas", selectedDistrict], // Refetch upazilas when district changes
+    queryFn: async () => {
+      const { data } = await axiosPublic.get(
+        `/upazilas?district=${selectedDistrict}`
+      );
+      return data;
+    },
+  });
+
+  useEffect(() => {
+    if (userData) {
+      setSelectedDistrict(userData.district || "");
+      setSelectedUpazila(userData.upazila || "");
+    }
+  }, [userData]);
+
+  const handleEdit = () => {
+    setEditMode(true);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const avatar = form.avatar.files[0];
+    const bloodGroup = form.bloodGroup.value;
+    const district = form.district.value;
+    const upazila = form.upazila.value;
+
+    try {
+      let imageURL = userData?.image; // Default to current image URL
+
+      if (avatar) {
+        // Only upload the image if one is selected
+        const formData = new FormData();
+        formData.append("image", avatar);
+
+        // Upload image to imgbb
+        const res = await axiosPublic.post(image_hosting_api, formData, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        });
+
+        if (res.data.success) {
+          imageURL = res.data.data.url; // Get the new image URL
+        }
+      }
+
+      const updatedUserData = {
+        name,
+        image: imageURL, // Use the new image URL if uploaded
+        bloodGroup,
+        district,
+        upazila,
+      };
+
+      // Update user profile in Firebase
+      await updateUser({ displayName: name, photoURL: imageURL });
+
+      // Update user data in the database
+      const { data } = await axiosPublic.put(
+        `/user/${user?.email}`,
+        updatedUserData
+      );
+
+      if (data.modifiedCount) {
+        toast.success("User updated successfully");
+        setSelectedDistrict(district); // Update state after success
+        setSelectedUpazila(upazila); // Update state after success
+      }
+
+      form.reset();
+    } catch (error) {
+      toast.error(error.message);
+      console.error(error);
+    } finally {
+      setLoading(false);
+      setEditMode(false); // Exit edit mode after saving
+    }
+  };
+
+  return (
+    <div>
+      <div className="flex justify-center items-center h-screen">
+        <div className="bg-white shadow-lg rounded-2xl md:w-4/5 lg:w-3/5">
+          <div className="flex flex-col items-center justify-center p-4 -mt-16">
+            <a href="#" className="relative block">
+              <img
+                alt="profile"
+                src={user.photoURL}
+                className="mx-auto object-cover rounded-full h-24 w-24 border-2 border-white"
+              />
+            </a>
+
+            <p className="p-2 px-4 text-xs text-white bg-purple-600 rounded-full">
+              {userData?.role}
+            </p>
+
+            {!editMode && (
+              <div className="flex justify-end mt-4">
+                <button
+                  type="button"
+                  onClick={handleEdit}
+                  className="btn btn-primary"
+                >
+                  Edit
+                </button>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+              {/* Avatar */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Avatar</span>
+                </label>
+                <input
+                  type="file"
+                  name="avatar"
+                  className="file-input file-input-bordered file-input-error w-full max-w-xs"
+                  accept="image/*"
+                  disabled={!editMode}
+                />
+              </div>
+
+              {/* Name */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  defaultValue={userData?.name}
+                  className="input input-bordered"
+                  disabled={!editMode}
+                />
+              </div>
+
+              {/* Email */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  defaultValue={userData?.email}
+                  className="input input-bordered"
+                  disabled // Email is always disabled
+                />
+              </div>
+
+              {/* Blood Group */}
+              {userData?.bloodGroup && (
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Blood Group</span>
+                  </label>
+                  <select
+                    required
+                    className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+                    name="bloodGroup"
+                    defaultValue={userData?.bloodGroup || ""}
+                    disabled={!editMode}
+                  >
+                    <option value="">Select your Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                  </select>
+                </div>
+              )}
+
+              {/* District */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">District</span>
+                </label>
+                <select
+                  required
+                  className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+                  name="district"
+                  value={selectedDistrict}
+                  disabled={!editMode}
+                  onChange={(e) => {
+                    setSelectedDistrict(e.target.value);
+                  }}
+                >
+                  <option value="">Select your District</option>
+                  {districts?.map((district) => (
+                    <option value={district?.name} key={district._id}>
+                      {district?.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Upazila */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Upazila</span>
+                </label>
+                <select
+                  required
+                  className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+                  name="upazila"
+                  value={selectedUpazila}
+                  disabled={!editMode || !selectedDistrict} // Disable if not in edit mode or district not selected
+                  onChange={(e) => setSelectedUpazila(e.target.value)}
+                >
+                  <option value="">Select your Upazila</option>
+                  {upazilas?.map((upazila) => (
+                    <option value={upazila?.name} key={upazila._id}>
+                      {upazila?.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Buttons */}
+              <div className="flex justify-center col-span-2 gap-4">
+                {editMode && (
+                  <button type="submit" className="btn btn-success">
+                    Save
+                  </button>
+                )}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

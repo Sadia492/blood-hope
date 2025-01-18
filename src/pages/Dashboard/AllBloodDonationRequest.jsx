@@ -81,7 +81,7 @@ export default function AllBloodDonationRequest() {
               <td className="px-4 py-2 border">{request.donationStatus}</td>
 
               <td className="px-4 py-2 space-x-2 border">
-                <Link to={`/dashboard/details/${request._id}`} className="btn">
+                <Link to={`/donation/${request._id}`} className="btn">
                   <FaEye />
                 </Link>
                 <Link className="btn">

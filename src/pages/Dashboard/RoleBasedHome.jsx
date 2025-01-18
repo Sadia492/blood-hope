@@ -22,8 +22,5 @@ export default function RoleBasedHome() {
     return <DonorHome />;
   } else if (userRole?.role === "admin" || userRole?.role === "volunteer") {
     return <SharedHome />;
-  } else {
-    // Redirect or show an error page if the role is invalid
-    return <Navigate to="/" replace />;
   }
 }

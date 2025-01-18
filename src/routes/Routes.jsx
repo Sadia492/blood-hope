@@ -13,6 +13,7 @@ import SharedHome from "../pages/Dashboard/SharedHome";
 import RoleBasedHome from "../pages/Dashboard/RoleBasedHome";
 import AllUser from "../pages/Dashboard/Admin/AllUser";
 import AllBloodDonationRequest from "../pages/Dashboard/AllBloodDonationRequest";
+import DonationDetails from "../pages/Dashboard/DonationDetails";
 // import DonorHome from "../pages/Dashboard/DonorHome";
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/donation/:id",
+        element: <DonationDetails></DonationDetails>,
       },
     ],
   },

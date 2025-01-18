@@ -23,9 +23,9 @@ const useLocationData = () => {
     },
   });
   const { data: userData, isLoading: isUserLoading } = useQuery({
-    queryKey: ["user", user.email],
+    queryKey: ["user", user?.email],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/user/${user.email}`);
+      const { data } = await axiosSecure.get(`/user/${user?.email}`);
       return data;
     },
   });

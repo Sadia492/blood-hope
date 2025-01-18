@@ -1,6 +1,6 @@
 import React from "react";
 import { BsGraphUp } from "react-icons/bs";
-import { FaHome, FaUserCog, FaUsers } from "react-icons/fa";
+import { FaHome, FaPenAlt, FaUserCog, FaUsers } from "react-icons/fa";
 import MenuItem from "../../../shared/MenuItem";
 import { MdBloodtype } from "react-icons/md";
 
@@ -12,6 +12,11 @@ export default function VolunteerMenu() {
         icon={MdBloodtype}
         label="All Blood Donation Request"
         address="all-blood-donation-request"
+      />
+      <MenuItem
+        icon={FaPenAlt}
+        label="Content Management"
+        address="content-management"
       />
     </>
   );

@@ -42,6 +42,9 @@ export default function Navbar() {
               <NavLink to="/">
                 <li>Home</li>
               </NavLink>
+              <NavLink to="/search">
+                <li>Search</li>
+              </NavLink>
               <NavLink to="/requests">
                 <li>Donation Requests</li>
               </NavLink>
@@ -66,6 +69,9 @@ export default function Navbar() {
             <ul className="menu menu-horizontal gap-3 font-semibold px-1  hidden lg:flex">
               <NavLink to="/">
                 <li>Home</li>
+              </NavLink>
+              <NavLink to="/search">
+                <li>Search</li>
               </NavLink>
               <NavLink to="/requests">
                 <li>Donation Requests</li>

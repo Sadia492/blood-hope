@@ -16,6 +16,7 @@ import AllBloodDonationRequest from "../pages/Dashboard/AllBloodDonationRequest"
 import DonationDetails from "../pages/Dashboard/DonationDetails";
 import ContentManagement from "../pages/Dashboard/ContentManagement";
 import AddBlog from "../pages/Dashboard/AddBlog";
+import Search from "../pages/Search/Search";
 // import DonorHome from "../pages/Dashboard/DonorHome";
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/search",
+        element: <Search></Search>,
       },
       {
         path: "/donation/:id",

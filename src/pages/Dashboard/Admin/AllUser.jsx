@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import useAuth from "../../../hooks/useAuth";
 
 export default function AllUser() {
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
   const [statusFilter, setStatusFilter] = useState("");
   const {
     data: allUser,
@@ -17,24 +19,44 @@ export default function AllUser() {
       return data;
     },
   });
-  const handleBlockUnblock = async (userId, status) => {
-    console.log(userId, status);
-    const { data } = await axiosSecure.patch(`/user/${userId}`, { status });
-    if (data.modifiedCount && status === "blocked") {
-      toast.success("user blocked");
-    } else {
-      toast.success("user unblocked");
+  const handleBlockUnblock = async (userEmail, status) => {
+    try {
+      const { data } = await axiosSecure.patch(`/user/role/${userEmail}`, {
+        status,
+      });
+      if (data.modifiedCount) {
+        toast.success(
+          `User ${status === "blocked" ? "blocked" : "unblocked"} successfully.`
+        );
+        refetch();
+      } else {
+        toast.error("Failed to update user status.");
+      }
+    } catch (error) {
+      toast.error("An error occurred while updating user status.");
+      console.error(error);
     }
-    refetch();
   };
 
-  const handleRoleChange = (userId, role) => {
-    // Update user role in the backend
-    // fetch(`/api/users/${userId}`, {
-    //   method: "PUT",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ role }),
-    // }).then(() => fetchUsers());
+  const handleRoleChange = async (userEmail, currentRole, newRole) => {
+    if (currentRole === newRole) {
+      return toast.error(`User role is already ${newRole}`);
+    }
+
+    try {
+      const { data } = await axiosSecure.patch(`/user/role/${userEmail}`, {
+        role: newRole,
+      });
+      if (data.modifiedCount) {
+        toast.success(`Role updated to ${newRole} successfully!`);
+        refetch();
+      } else {
+        toast.error("Failed to update user role.");
+      }
+    } catch (error) {
+      toast.error("An error occurred while updating user role.");
+      console.error(error);
+    }
   };
 
   return (
@@ -105,7 +127,7 @@ export default function AllUser() {
                         <button
                           onClick={() =>
                             handleBlockUnblock(
-                              user._id,
+                              user?.email,
                               user.status === "active" ? "blocked" : "active"
                             )
                           }
@@ -116,7 +138,11 @@ export default function AllUser() {
                       <li>
                         <button
                           onClick={() =>
-                            handleRoleChange(user._id, "volunteer")
+                            handleRoleChange(
+                              user?.email,
+                              user?.role,
+                              "volunteer"
+                            )
                           }
                         >
                           Make Volunteer
@@ -124,7 +150,9 @@ export default function AllUser() {
                       </li>
                       <li>
                         <button
-                          onClick={() => handleRoleChange(user._id, "admin")}
+                          onClick={() =>
+                            handleRoleChange(user?.email, user?.role, "admin")
+                          }
                         >
                           Make Admin
                         </button>

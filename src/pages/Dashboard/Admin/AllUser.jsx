@@ -6,7 +6,6 @@ import useAuth from "../../../hooks/useAuth";
 
 export default function AllUser() {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
   const [statusFilter, setStatusFilter] = useState("");
   const {
     data: allUser,

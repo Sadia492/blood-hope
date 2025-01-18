@@ -13,10 +13,13 @@ import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import DonorMenu from "../pages/Dashboard/Donor/DonorMenu";
 import AdminMenu from "../pages/Dashboard/Admin/AdminMenu";
+import useRole from "../hooks/useRole";
+import VolunteerMenu from "../pages/Dashboard/volunteer/VolunteerMenu";
 
 export default function DashboardLayout() {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [role, roleLoading] = useRole();
 
   const { data: userRole, isLoading } = useQuery({
     queryKey: ["userRole", user.email],
@@ -55,9 +58,10 @@ export default function DashboardLayout() {
               <BsBoxArrowUpLeft />
             </Link>
 
-            {userRole?.role === "donor" && <DonorMenu></DonorMenu>}
+            {role === "donor" && <DonorMenu></DonorMenu>}
 
-            {userRole?.role === "admin" && <AdminMenu></AdminMenu>}
+            {role === "admin" && <AdminMenu></AdminMenu>}
+            {role === "volunteer" && <VolunteerMenu></VolunteerMenu>}
 
             <MenuItem
               icon={CgProfile}

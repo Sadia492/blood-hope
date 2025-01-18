@@ -12,6 +12,7 @@ import MyDonationRequests from "../pages/Dashboard/Donor/MyDonationRequests";
 import SharedHome from "../pages/Dashboard/SharedHome";
 import RoleBasedHome from "../pages/Dashboard/RoleBasedHome";
 import AllUser from "../pages/Dashboard/Admin/AllUser";
+import AllBloodDonationRequest from "../pages/Dashboard/AllBloodDonationRequest";
 // import DonorHome from "../pages/Dashboard/DonorHome";
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "all-users",
         element: <AllUser></AllUser>,
+      },
+      {
+        path: "all-blood-donation-request",
+        element: <AllBloodDonationRequest></AllBloodDonationRequest>,
       },
     ],
   },

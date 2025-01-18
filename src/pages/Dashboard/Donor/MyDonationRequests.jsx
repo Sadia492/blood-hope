@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import { FaEye, FaPen, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function MyDonationRequests() {
   const axiosSecure = useAxiosSecure();
@@ -13,7 +14,11 @@ export default function MyDonationRequests() {
   const limit = 2; // Number of items per page
 
   // Use the new format for useQuery in React Query v5
-  const { data: donationRequest, isLoading: isUserLoading } = useQuery({
+  const {
+    data: donationRequest,
+    refetch,
+    isLoading: isUserLoading,
+  } = useQuery({
     queryKey: ["myDonation", user.email, statusFilter, currentPage],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
@@ -33,6 +38,32 @@ export default function MyDonationRequests() {
       return data;
     },
   });
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/donation-request/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          }
+        });
+      }
+    });
+  };
 
   // Calculate total pages
   const totalPages = totalData ? Math.ceil(totalData.count / limit) : 1;
@@ -81,23 +112,26 @@ export default function MyDonationRequests() {
               <td className="px-4 py-2 border">{request.donationTime}</td>
               <td className="px-4 py-2 border">{request.bloodGroup}</td>
               <td className="px-4 py-2 border">{request.donationStatus}</td>
-              {request?.donationStatus === "inprogress" ? (
-                <td className="px-4 py-2 border">
-                  <Link>
-                    <FaEye />
-                  </Link>
-                  <Link>
-                    <FaPen />
-                  </Link>
-                  <button>
-                    <FaTrashAlt />
-                  </button>
-                </td>
+              <td className="px-4 py-2 border">
+                <Link to={`/donation/${request._id}`} className="btn">
+                  <FaEye />
+                </Link>
+                <Link to={`/donation/update/${request._id}`} className="btn">
+                  <FaPen />
+                </Link>
+                <button
+                  onClick={() => handleDelete(request._id)}
+                  className="btn"
+                >
+                  <FaTrashAlt />
+                </button>
+              </td>
+              {/* {request?.donationStatus === "inprogress" ? (
               ) : (
-                <td colSpan="7" className="px-4 py-2 border text-center">
-                  No Action Allowed
-                </td>
-              )}
+              <td colSpan="7" className="px-4 py-2 border text-center">
+                No Action Allowed
+              </td>
+              )} */}
             </tr>
           ))}
         </tbody>

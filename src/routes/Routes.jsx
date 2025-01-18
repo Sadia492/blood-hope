@@ -21,6 +21,7 @@ import PendingDonationRequest from "../pages/PendingDonationRequest/PendingDonat
 import Blog from "../pages/Blog/Blog";
 import BlogDetails from "../pages/Blog/BlogDetails";
 import Funding from "../pages/Funding/Funding";
+import DonationUpdate from "../pages/Dashboard/DonationUpdate";
 // import DonorHome from "../pages/Dashboard/DonorHome";
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "/donation/:id",
         element: <DonationDetails></DonationDetails>,
+      },
+      {
+        path: "/donation/update/:id",
+        element: <DonationUpdate></DonationUpdate>,
       },
     ],
   },

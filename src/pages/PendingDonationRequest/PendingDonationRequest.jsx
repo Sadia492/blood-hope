@@ -11,7 +11,7 @@ export default function PendingDonationRequest() {
     queryKey: ["pendingRequests"],
     queryFn: async () => {
       const { data } = await axiosPublic.get(
-        "/donation-request/status/pending"
+        `/donation-request/status/${"pending"}`
       );
       return data;
     },

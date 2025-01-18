@@ -17,6 +17,8 @@ import DonationDetails from "../pages/Dashboard/DonationDetails";
 import ContentManagement from "../pages/Dashboard/ContentManagement";
 import AddBlog from "../pages/Dashboard/AddBlog";
 import Search from "../pages/Search/Search";
+import PendingDonationRequest from "../pages/PendingDonationRequest/PendingDonationRequest";
+import Blog from "../pages/Blog/Blog";
 // import DonorHome from "../pages/Dashboard/DonorHome";
 const router = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <Search></Search>,
+      },
+      {
+        path: "/blog",
+        element: <Blog></Blog>,
+      },
+      {
+        path: "/blood-donation-requests",
+        element: <PendingDonationRequest></PendingDonationRequest>,
       },
       {
         path: "/donation/:id",

@@ -38,21 +38,23 @@ export default function Login() {
           </h2>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Email</span>
+              <span className="label-text text-error font-semibold">Email</span>
             </label>
             <input
               type="email"
               name="email"
               placeholder="email"
-              className="input input-bordered"
+              className="input input-bordered input-error "
               required
             />
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Password</span>
+              <span className="label-text text-error font-semibold">
+                Password
+              </span>
             </label>
-            <label className="input input-bordered flex  justify-between items-center gap-2">
+            <label className="input input-bordered input-error  flex  justify-between items-center gap-2">
               <input
                 type={show ? "text" : "password"}
                 name="password"

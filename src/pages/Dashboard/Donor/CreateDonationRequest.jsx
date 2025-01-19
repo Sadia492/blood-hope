@@ -64,57 +64,65 @@ const CreateDonationRequest = () => {
   };
 
   return (
-    <div className="p-6 w-full mx-auto bg-white rounded-md shadow-md">
+    <div className="w-11/12 mx-auto p-8 rounded-md shadow-md ">
       <h1 className="text-2xl font-bold text-center form-control">
         Create Donation Request
       </h1>
       <form
         onSubmit={handleFormSubmit}
-        className="grid gap-x-6 gap-y-4 grid-cols-2"
+        className="grid gap-x-6 gap-y-4 grid-cols-1 md:grid-cols-2"
       >
         {/* Requester Info (Read-Only) */}
         <div className="form-control">
-          <label className="label">Requester Name</label>
+          <label className="label text-error font-semibold">
+            Requester Name
+          </label>
           <input
             type="text"
             name="requesterName"
             value={user.displayName}
             readOnly
-            className="w-full px-4 py-3 rounded-md input input-bordered bg-gray-100"
+            className="w-full px-4 py-3 rounded-md input input-bordered input-error  bg-gray-100"
           />
         </div>
         <div className="form-control">
-          <label className="label">Requester Email</label>
+          <label className="label text-error font-semibold">
+            Requester Email
+          </label>
           <input
             type="email"
             name="requesterEmail"
             value={user.email}
             readOnly
-            className="w-full px-4 py-3 rounded-md input input-bordered bg-gray-100"
+            className="w-full px-4 py-3 rounded-md input input-bordered input-error  bg-gray-100"
           />
         </div>
 
         {/* Recipient Info */}
         {/* name */}
         <div className="form-control">
-          <label className="label">Recipient Name</label>
+          <label className="label text-error font-semibold">
+            Recipient Name
+          </label>
           <input
             type="text"
             name="recipientName"
             placeholder="Recipient's full name"
             required
-            className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+            className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error "
           />
         </div>
 
         {/* district field */}
         <div className="form-control">
-          <label className="label">
-            <span className="label-text">District</span>
+          <label className="label ">
+            <span className="label-text text-error font-semibold">
+              District
+            </span>
           </label>
           <select
             required
-            className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+            className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error "
             name="recipientDistrict"
           >
             <option value="">Select your District</option>
@@ -127,12 +135,12 @@ const CreateDonationRequest = () => {
         </div>
         {/* upazila field */}
         <div className="form-control">
-          <label className="label">
-            <span className="label-text">Upazila</span>
+          <label className="label ">
+            <span className="label-text text-error font-semibold">Upazila</span>
           </label>
           <select
             required
-            className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+            className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error "
             name="recipientUpazila"
           >
             <option value="">Select your Upazila</option>
@@ -145,34 +153,38 @@ const CreateDonationRequest = () => {
         </div>
 
         <div className="form-control">
-          <label className="label">Hospital Name</label>
+          <label className="label text-error font-semibold">
+            Hospital Name
+          </label>
           <input
             type="text"
             name="hospitalName"
             placeholder="e.g., Dhaka Medical College Hospital"
             required
-            className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+            className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error "
           />
         </div>
 
         <div className="form-control">
-          <label className="label">Full Address Line</label>
+          <label className="label text-error font-semibold">
+            Full Address Line
+          </label>
           <input
             type="text"
             name="fullAddress"
             placeholder="e.g., Zahir Raihan Rd, Dhaka"
             required
-            className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+            className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error "
           />
         </div>
 
         {/* Blood Group Selector */}
         <div className="form-control">
-          <label className="label">Blood Group</label>
+          <label className="label text-error font-semibold">Blood Group</label>
           <select
             name="bloodGroup"
             required
-            className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+            className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error "
           >
             <option value="">Select Blood Group</option>
             <option value="A+">A+</option>
@@ -188,40 +200,46 @@ const CreateDonationRequest = () => {
 
         {/* Date and Time */}
         <div className="form-control">
-          <label className="label">Donation Date</label>
+          <label className="label text-error font-semibold">
+            Donation Date
+          </label>
           <input
             type="date"
             name="donationDate"
             required
-            className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+            className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error "
           />
         </div>
         <div className="form-control">
-          <label className="label">Donation Time</label>
+          <label className="label text-error font-semibold">
+            Donation Time
+          </label>
           <input
             type="time"
             name="donationTime"
             required
-            className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+            className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error "
           />
         </div>
 
         {/* Request Message */}
-        <div className="form-control col-span-2">
-          <label className="label">Request Message</label>
+        <div className="form-control md:col-span-2">
+          <label className="label text-error font-semibold">
+            Request Message
+          </label>
           <textarea
             name="requestMessage"
             rows="4"
             placeholder="Explain why blood is needed in detail..."
             required
-            className="textarea textarea-bordered w-full px-4 py-3 rounded-md bg-white"
+            className="textarea textarea-bordered textarea-error w-full px-4 py-3 rounded-md bg-white"
           ></textarea>
         </div>
 
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full col-span-2 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+          className="btn bg-gradient-to-r md:col-span-2 text-white from-primary to-secondary"
         >
           Submit Request
         </button>

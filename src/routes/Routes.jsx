@@ -114,6 +114,10 @@ const router = createBrowserRouter([
         path: "content-management/add-blog",
         element: <AddBlog></AddBlog>,
       },
+      {
+        path: "donor-home",
+        element: <DonorHome></DonorHome>,
+      },
     ],
   },
 ]);

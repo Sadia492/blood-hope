@@ -120,38 +120,40 @@ export default function Register() {
           {/* name field */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Name</span>
+              <span className="label-text text-error font-semibold">Name</span>
             </label>
             <input
               type="text"
               placeholder="name"
               name="name"
-              className="input input-bordered"
+              className="input input-bordered input-error"
               required
             />
           </div>
           {/* email field */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Email</span>
+              <span className="label-text text-error font-semibold">Email</span>
             </label>
             <input
               type="email"
               name="email"
               placeholder="email"
-              className="input input-bordered"
+              className="input input-bordered input-error"
               required
             />
           </div>
           {/* image field */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Avatar</span>
+              <span className="label-text text-error font-semibold">
+                Avatar
+              </span>
             </label>
             <input
               type="file"
               name="avatar"
-              className="file-input file-input-bordered file-input-error w-full max-w-xs"
+              className="file-input file-input-bordered input-error file-input-error w-full max-w-xs"
               accept="image/*"
               required
             />
@@ -159,11 +161,13 @@ export default function Register() {
           {/* blood group field */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Blood Group</span>
+              <span className="label-text text-error font-semibold">
+                Blood Group
+              </span>
             </label>
             <select
               required
-              className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+              className="w-full px-4 py-3 rounded-md select select-error bg-white input input-bordered input-error"
               name="bloodGroup"
             >
               <option value="">Select your Blood Group</option>
@@ -180,11 +184,13 @@ export default function Register() {
           {/* district field */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">District</span>
+              <span className="label-text text-error font-semibold">
+                District
+              </span>
             </label>
             <select
               required
-              className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+              className="w-full px-4 py-3 select select-error rounded-md bg-white input input-bordered input-error"
               name="district"
             >
               <option value="">Select your District</option>
@@ -198,11 +204,13 @@ export default function Register() {
           {/* upazila field */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Upazila</span>
+              <span className="label-text text-error font-semibold">
+                Upazila
+              </span>
             </label>
             <select
               required
-              className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+              className="w-full px-4 py-3 select select-error rounded-md bg-white input input-bordered input-error"
               name="upazila"
             >
               <option value="">Select your Upazila</option>
@@ -216,9 +224,11 @@ export default function Register() {
           {/* password field */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Password</span>
+              <span className="label-text text-error font-semibold">
+                Password
+              </span>
             </label>
-            <label className="input input-bordered flex  justify-between items-center gap-2">
+            <label className="input input-bordered input-error flex  justify-between items-center gap-2">
               <input
                 type={show ? "text" : "password"}
                 name="password"
@@ -234,9 +244,11 @@ export default function Register() {
           {/* confirm password field */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Confirm Password</span>
+              <span className="label-text text-error font-semibold">
+                Confirm Password
+              </span>
             </label>
-            <label className="input input-bordered flex  justify-between items-center gap-2">
+            <label className="input input-bordered input-error flex  justify-between items-center gap-2">
               <input
                 type={confirmShow ? "text" : "password"}
                 name="confirmPassword"

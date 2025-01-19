@@ -15,6 +15,8 @@ import DonorMenu from "../pages/Dashboard/Donor/DonorMenu";
 import AdminMenu from "../pages/Dashboard/Admin/AdminMenu";
 import useRole from "../hooks/useRole";
 import VolunteerMenu from "../pages/Dashboard/volunteer/VolunteerMenu";
+import logo from "../assets/logo.png";
+import { AiOutlineMenu } from "react-icons/ai";
 
 export default function DashboardLayout() {
   const { user } = useAuth();
@@ -34,16 +36,16 @@ export default function DashboardLayout() {
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col ">
-          {/* content from here */}
-          <Outlet></Outlet>
           <div className="flex justify-end">
             <label
               htmlFor="my-drawer-2"
-              className="btn btn-primary drawer-button lg:hidden"
+              className="btn bg-primary text-white drawer-button lg:hidden"
             >
-              Open drawer
+              <AiOutlineMenu />
             </label>
           </div>
+          {/* content from here */}
+          <Outlet></Outlet>
         </div>
         <div className="drawer-side">
           <label
@@ -51,23 +53,25 @@ export default function DashboardLayout() {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu bg-base-200 text-base-content min-h-full p-6 w-80">
+          <ul className="menu bg-primary text-white min-h-full p-6 w-80">
             {/* Sidebar content here */}
-
-            <Link to={"/"}>
-              <BsBoxArrowUpLeft />
-            </Link>
-
-            {role === "donor" && <DonorMenu></DonorMenu>}
-
-            {role === "admin" && <AdminMenu></AdminMenu>}
-            {role === "volunteer" && <VolunteerMenu></VolunteerMenu>}
-
+            <div className="mb-8">
+              <Link to={"/"}>
+                <BsBoxArrowUpLeft />
+                <div className="flex justify-center items-center">
+                  <img className="w-14" src={logo} alt="" />
+                  <h3 className="text-3xl font-bold">BloodHope</h3>
+                </div>
+              </Link>
+            </div>
             <MenuItem
               icon={CgProfile}
               label="Profile"
               address="/dashboard/profile"
             />
+            {role === "donor" && <DonorMenu></DonorMenu>}
+            {role === "admin" && <AdminMenu></AdminMenu>}
+            {role === "volunteer" && <VolunteerMenu></VolunteerMenu>}
           </ul>
         </div>
       </div>

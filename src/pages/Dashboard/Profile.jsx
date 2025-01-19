@@ -4,6 +4,8 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import gradientAnimation from "../../assets/animation/gradient.json";
+import Lottie from "lottie-react";
 
 const image_hosting_key = import.meta.env.VITE_Image_Hosting_Key;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -119,33 +121,36 @@ export default function Profile() {
   return (
     <div>
       <div className="flex justify-center items-center h-screen">
-        <div className="bg-white shadow-lg rounded-2xl md:w-4/5 lg:w-3/5">
-          <div className="flex flex-col items-center justify-center p-4 -mt-16">
-            <a href="#" className="relative block">
-              <img
-                alt="profile"
-                src={user.photoURL}
-                className="mx-auto object-cover rounded-full h-24 w-24 border-2 border-white"
-              />
-            </a>
+        <div className=" shadow-2xl rounded-2xl md:w-4/5 lg:w-3/5">
+          <div className="flex flex-col items-center justify-center p-8">
+            {/* <a href="#" className="relative block"> */}
+            <img
+              alt="profile"
+              src={user.photoURL}
+              className="mx-auto object-cover rounded-full h-24 w-24 border-2 border-white"
+            />
+            {/* </a> */}
 
-            <p className="p-2 px-4 text-xs text-white bg-purple-600 rounded-full">
+            <p className="p-2 px-4 text-xs text-white bg-primary rounded-full">
               {userData?.role}
             </p>
 
             {!editMode && (
-              <div className="flex justify-end mt-4">
+              <div className="mt-4 w-full flex justify-end">
                 <button
                   type="button"
                   onClick={handleEdit}
-                  className="btn btn-primary"
+                  className="btn bg-gradient-to-r text-white from-primary to-secondary"
                 >
                   Edit
                 </button>
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+            <form
+              onSubmit={handleSubmit}
+              className="grid grid-cols-1 md:grid-cols-2 w-full gap-4"
+            >
               {/* Avatar */}
               <div className="form-control">
                 <label className="label">
@@ -261,15 +266,32 @@ export default function Profile() {
               </div>
 
               {/* Buttons */}
-              <div className="flex justify-center col-span-2 gap-4">
+              <div className="flex justify-center md:col-span-2 gap-4">
                 {editMode && (
-                  <button type="submit" className="btn btn-success">
+                  <button
+                    type="submit"
+                    className="btn bg-gradient-to-r text-white from-primary to-secondary"
+                  >
                     Save
                   </button>
                 )}
               </div>
             </form>
           </div>
+        </div>
+        <div className="absolute top-0 right-0 lg:flex hidden ">
+          <Lottie
+            className="w-52 "
+            animationData={gradientAnimation}
+            loop={true}
+          />
+        </div>
+        <div className="absolute bottom-0 left-80 lg:flex hidden">
+          <Lottie
+            className="w-52 "
+            animationData={gradientAnimation}
+            loop={true}
+          />
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { authContext } from "../AuthProvider/AuthProvider";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
+import logo from "../assets/logo.png";
 
 export default function Navbar() {
   const { user, signOutUser } = useAuth();
@@ -14,7 +15,7 @@ export default function Navbar() {
   };
   return (
     <div
-      className={`w-full fixed top-0 z-10 py-3 transition-all duration-500 ease-in-out`}
+      className={`w-full fixed top-0 z-10 py-3 text-white bg-primary/30 backdrop-blur-3xl transition-all duration-500 ease-in-out`}
     >
       <div className="navbar w-11/12 mx-auto">
         <div className="flex-1">
@@ -58,7 +59,7 @@ export default function Navbar() {
             </ul>
           </div>
           <a className="flex justify-center items-center gap-2">
-            <img className="w-10 h-10" src={"helo"} alt="" />
+            <img className="w-10 h-10" src={logo} alt="" />
             <h2 className="text-3xl flex items-center justify-center font-bold ">
               BloodHope
             </h2>

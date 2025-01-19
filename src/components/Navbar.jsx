@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { authContext } from "../AuthProvider/AuthProvider";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
@@ -7,6 +7,24 @@ import logo from "../assets/logo.png";
 
 export default function Navbar() {
   const { user, signOutUser } = useAuth();
+  const { pathname } = useLocation();
+  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleSignOut = () => {
     signOutUser().then(() => {
@@ -15,7 +33,13 @@ export default function Navbar() {
   };
   return (
     <div
-      className={`w-full fixed top-0 z-10 py-3 text-white bg-primary/30 backdrop-blur-3xl transition-all duration-500 ease-in-out`}
+      className={`w-full fixed top-0 z-10 transition-all duration-500 ease-in-out text-white ${
+        pathname === "/"
+          ? isScrolled
+            ? "bg-secondary/50 backdrop-blur-md" // Background color when scrolled on homepage
+            : "bg-transparent" // Transparent background on homepage
+          : "bg-secondary/45 backdrop-blur-xl" // Non-transparent background on other pages
+      }`}
     >
       <div className="navbar w-11/12 mx-auto">
         <div className="flex-1">

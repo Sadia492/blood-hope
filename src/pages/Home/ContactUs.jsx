@@ -1,8 +1,10 @@
+import Lottie from "lottie-react";
 import React from "react";
+import animation from "../../assets/animation/bloodDoc.json";
 
 const ContactUs = () => {
   return (
-    <section className=" py-10 px-6 lg:px-16">
+    <section className="w-11/12 mx-auto my-12">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Contact Us
@@ -61,6 +63,13 @@ const ContactUs = () => {
                 If you have any questions or need further assistance, feel free
                 to reach out to us.
               </p>
+            </div>
+            <div className="flex-1 flex justify-center items-center">
+              <Lottie
+                className="lg:w-4/5 "
+                animationData={animation}
+                loop={true}
+              />
             </div>
 
             <div className="space-y-4">

@@ -41,13 +41,13 @@ export default function BlogDetails() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="bg-white flex gap-6 rounded-lg shadow-lg p-8">
+    <div className="w-11/12 mx-auto mt-24">
+      <div className="bg-white flex items-center gap-6 rounded-lg shadow-lg p-8">
         <div className="flex-1">
           <img
             src={blog.image}
             alt={blog.title}
-            className="w-full h-64 object-cover rounded-md mb-6"
+            className="w-full object-cover rounded-md mb-6"
           />
         </div>
         <div className="flex-1">

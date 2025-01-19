@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import slideImg1 from "../../assets/istockphoto-983366460-612x612.jpg";
-import slideImg2 from "../../assets/istockphoto-1369132676-612x612.jpg";
+import slideImg2 from "../../assets/img1.jpg";
 import slideImg3 from "../../assets/360_F_309202280_CgsWoCAdLBe9INBvdwBKUkpaLEP4XNLa.jpg";
 
 export default function Banner() {
@@ -26,29 +26,29 @@ export default function Banner() {
     {
       id: 1,
       image: slideImg1,
-      title: "Connect with Friends",
-      title2: "Collaborate on Assignments Seamlessly",
+      title: "Save Lives Together",
+      title2: "Join the Movement to Make a Difference",
       description:
-        "Connect with your friends for group study sessions, share assignments, and exchange ideas in real-time. Learning is better when you're together!",
-      titleAnimation: "animate__backInLeft",
+        "Connect with donors and recipients to create a community of life-savers. Your donation can be the difference between life and death.",
+      titleAnimation: "animate__fadeInLeft",
     },
     {
       id: 2,
       image: slideImg2,
-      title: "Track Your Progress",
-      title2: "Stay Ahead with Real-Time Updates",
+      title: "Track Your Donations",
+      title2: "See the Impact of Your Generosity",
       description:
-        " Create assignments, complete tasks, and provide feedback to help each other grow. Foster collaboration while mastering your subjects.",
-      titleAnimation: "animate__rubberBand",
+        "Monitor your donation history, understand where your blood is being used, and stay motivated to continue saving lives.",
+      titleAnimation: "animate__pulse",
     },
     {
       id: 3,
       image: slideImg3,
-      title: "Celebrate Success Together",
-      title2: "Grade and Grow as a Team",
+      title: "Celebrate the Gift of Life",
+      title2: "Be a Hero, One Drop at a Time",
       description:
-        "Monitor your completed assignments, grades, and feedback, all in one place. Stay motivated and focused on your academic journey.",
-      titleAnimation: "animate__flipInY animate__slow",
+        "Join us in celebrating donors and volunteers who make life-saving moments possible. Together, we create a healthier future for all.",
+      titleAnimation: "animate__bounceIn animate__slow",
     },
   ];
 

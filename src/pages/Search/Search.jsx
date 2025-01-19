@@ -47,7 +47,7 @@ export default function Search() {
   };
 
   return (
-    <div>
+    <div className="w-11/12 mx-auto mt-24">
       <h1 className="text-3xl font-bold text-center mb-8">Search for Donors</h1>
 
       {/* Form for Search */}

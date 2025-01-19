@@ -11,7 +11,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import axios from "axios";
 
-const CheckoutForm = ({ fund }) => {
+const CheckoutForm = ({ fund, refetch }) => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
@@ -97,7 +97,7 @@ const CheckoutForm = ({ fund }) => {
         const { data } = await axiosSecure.post("/funding", fundingData);
         console.log(data);
         toast.success("Funding Successful!");
-        // refetch(); // Refetch data if needed
+        refetch(); // Refetch data if needed
         // navigate("/dashboard/my-fundings");
       } catch (err) {
         console.error("Error saving funding data:", err);

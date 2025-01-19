@@ -5,6 +5,7 @@ import Modal from "react-modal";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import bgImg from "../../assets/trianglify-lowres.png";
 Modal.setAppElement("#root");
 
 export default function Funding() {
@@ -14,7 +15,11 @@ export default function Funding() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const [fund, setFund] = useState(0);
-  const { data: funding, isLoading } = useQuery({
+  const {
+    data: funding,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["funding"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/funding`);
@@ -24,27 +29,54 @@ export default function Funding() {
   console.log(funding);
 
   return (
-    <div className="mt-24">
-      <button onClick={openModal} className="btn btn-warning">
-        Give Fund
-      </button>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {funding?.map((fundItem) => (
-          <div
-            key={fundItem._id}
-            className="p-4 border rounded-lg shadow-lg bg-white"
+    <div className="mt-24 w-11/12 mx-auto">
+      <h2 className="text-3xl font-bold text-center">Funding</h2>
+      <div className="flex justify-end">
+        <button
+          onClick={openModal}
+          className={` btn bg-gradient-to-r from-primary to-secondary text-white`}
+        >
+          Give Fund
+        </button>
+      </div>
+      <div>
+        <table className="table text-center border-separate border-spacing-y-3 w-full ">
+          <thead
+            style={{
+              backgroundImage: `url(${bgImg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "right",
+            }}
           >
-            <h3 className="font-bold text-lg">{fundItem.name}</h3>
-            <p>
-              <strong>Fund Amount:</strong> ${fundItem.fund}
-            </p>
-            <p>
-              <strong>Date:</strong>{" "}
-              {new Date(fundItem.date).toLocaleDateString()}{" "}
-              {new Date(fundItem.date).toLocaleTimeString()}
-            </p>
-          </div>
-        ))}
+            <tr className="text-white">
+              <th className="px-4 py-4 ">#</th>
+              <th className="px-4 py-4 ">User Name</th>
+              <th className="px-4 py-4 ">Fund Amount</th>
+              <th className="px-4 py-4 ">Funding Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {funding?.map((fund, index) => (
+              <tr
+                key={fund.id}
+                className="bg-white shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
+              >
+                <td className="px-4 py-2 border border-gray-300">
+                  {index + 1}
+                </td>
+                <td className="px-4 py-2 border border-gray-300">
+                  {fund.name}
+                </td>
+                <td className="px-4 py-2 border border-gray-300">
+                  ${fund.fund}
+                </td>
+                <td className="px-4 py-2 border border-gray-300">
+                  {fund.date.split("T")[0]}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       {/* Modal */}
@@ -82,7 +114,7 @@ export default function Funding() {
             />
           </div>
           <div className="form-control mt-6">
-            <Payment fund={fund} />
+            <Payment fund={fund} refetch={refetch} />
           </div>
         </div>
       </Modal>

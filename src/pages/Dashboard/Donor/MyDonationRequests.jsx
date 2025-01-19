@@ -92,8 +92,8 @@ export default function MyDonationRequests() {
   const totalPages = totalData ? Math.ceil(totalData.count / limit) : 1;
 
   return (
-    <div className="w-11/12 mx-auto">
-      <h2 className="text-xl font-bold mb-4">My Donation Requests</h2>
+    <div className="w-11/12 mx-auto mt-8">
+      <h2 className="text-3xl font-bold text-center">My Donation Requests</h2>
 
       {/* Filter Dropdown */}
       <label className="block mb-2">
@@ -176,39 +176,25 @@ export default function MyDonationRequests() {
                   )}
                 </td>
                 <td className="px-4 py-2 space-y-2 text-center">
-                  <div className="dropdown dropdown-left">
-                    <label tabIndex={0} className="btn btn-sm z-50 btn-ghost">
-                      <BsThreeDotsVertical />
-                    </label>
-                    <ul
-                      tabIndex={0}
-                      className="dropdown-content dropdown-top z-50 p-2 shadow bg-base-100 rounded-box w-52 flex justify-between"
+                  <div className="flex gap-1">
+                    <Link
+                      to={`/donation/${request._id}`}
+                      className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
                     >
-                      <li>
-                        <Link
-                          to={`/donation/${request._id}`}
-                          className="btn btn-sm"
-                        >
-                          <FaEye className="mx-2 cursor-pointer text-blue-500" />
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to={`/donation/update/${request._id}`}
-                          className="btn btn-sm"
-                        >
-                          <FaPen className="mx-2 cursor-pointer text-green-500" />
-                        </Link>
-                      </li>
-                      <li>
-                        <button
-                          onClick={() => handleDelete(request._id)}
-                          className="btn btn-sm"
-                        >
-                          <FaTrashAlt className="mx-2 cursor-pointer text-red-500" />
-                        </button>
-                      </li>
-                    </ul>
+                      <FaEye className="cursor-pointer" />
+                    </Link>
+                    <Link
+                      to={`/donation/update/${request._id}`}
+                      className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
+                    >
+                      <FaPen className="cursor-pointer" />
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(request._id)}
+                      className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
+                    >
+                      <FaTrashAlt className="cursor-pointer" />
+                    </button>
                   </div>
                 </td>
               </tr>

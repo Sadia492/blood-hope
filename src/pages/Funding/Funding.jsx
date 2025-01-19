@@ -24,7 +24,7 @@ export default function Funding() {
   console.log(funding);
 
   return (
-    <div>
+    <div className="mt-24">
       <button onClick={openModal} className="btn btn-warning">
         Give Fund
       </button>

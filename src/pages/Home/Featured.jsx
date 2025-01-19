@@ -3,9 +3,9 @@ import img from "../../assets/iStock-1044148970-649ea50eeb9847ecaa1e8417110a9203
 
 const Featured = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-11/12 mx-auto  p-6 rounded-lg">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-11/12 h-full mx-auto  p-6 rounded-lg">
       {/* Hero Story */}
-      <div className="col-span-1 shadow-md rounded-lg p-6 flex flex-col">
+      <div className="col-span-1 shadow-md rounded-lg p-6 flex flex-col h-full">
         <img
           src={img}
           alt="Hero Story"
@@ -21,9 +21,9 @@ const Featured = () => {
         </button>
       </div>
 
-      <div className="space-y-4 col-span-1 h-full">
+      <div className="flex flex-col justify-between col-span-1 h-full">
         {/* Stats with Infographic */}
-        <div className="col-span-1 bg-white shadow-md rounded-lg p-6 flex flex-col items-center">
+        <div className=" bg-white shadow-md rounded-lg p-6 flex flex-col items-center">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             Live Donation Stats
           </h2>
@@ -44,7 +44,7 @@ const Featured = () => {
         </div>
 
         {/* Upcoming Events */}
-        <div className="col-span-1 bg-white shadow-md rounded-lg p-6 flex flex-col">
+        <div className=" bg-white shadow-md rounded-lg p-6 flex flex-col">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             Upcoming Events
           </h2>

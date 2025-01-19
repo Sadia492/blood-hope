@@ -39,45 +39,49 @@ export default function Funding() {
           Give Fund
         </button>
       </div>
-      <div>
-        <table className="table text-center border-separate border-spacing-y-3 w-full ">
-          <thead
-            style={{
-              backgroundImage: `url(${bgImg})`,
-              backgroundSize: "cover",
-              backgroundPosition: "right",
-            }}
-          >
-            <tr className="text-white">
-              <th className="px-4 py-4 ">#</th>
-              <th className="px-4 py-4 ">User Name</th>
-              <th className="px-4 py-4 ">Fund Amount</th>
-              <th className="px-4 py-4 ">Funding Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {funding?.map((fund, index) => (
-              <tr
-                key={fund.id}
-                className="bg-white shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
-              >
-                <td className="px-4 py-2 border border-gray-300">
-                  {index + 1}
-                </td>
-                <td className="px-4 py-2 border border-gray-300">
-                  {fund.name}
-                </td>
-                <td className="px-4 py-2 border border-gray-300">
-                  ${fund.fund}
-                </td>
-                <td className="px-4 py-2 border border-gray-300">
-                  {fund.date.split("T")[0]}
-                </td>
+      {funding?.length ? (
+        <div className="overflow-x-auto">
+          <table className="table-auto w-full text-center border-separate border-spacing-y-3 table-layout-auto">
+            <thead
+              style={{
+                backgroundImage: `url(${bgImg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "right",
+              }}
+            >
+              <tr className="text-white">
+                <th className="px-4 py-4 ">#</th>
+                <th className="px-4 py-4 ">User Name</th>
+                <th className="px-4 py-4 ">Fund Amount</th>
+                <th className="px-4 py-4 ">Funding Date</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {funding?.map((fund, index) => (
+                <tr
+                  key={fund.id}
+                  className="bg-white shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
+                >
+                  <td className="px-4 py-2 border border-gray-300">
+                    {index + 1}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-300">
+                    {fund.name}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-300">
+                    ${fund.fund}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-300">
+                    {fund.date.split("T")[0]}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <p>No Data found</p>
+      )}
 
       {/* Modal */}
       <Modal

@@ -5,14 +5,16 @@ import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import Modal from "react-modal";
 import toast from "react-hot-toast";
+import Lottie from "lottie-react";
+import animation from "../../assets/animation/bloodMan.json";
 
 Modal.setAppElement("#root");
 
 export default function DonationDetails() {
-  const { id } = useParams(); // Get the request ID from URL params
+  const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { user } = useAuth(); // Get logged-in user info
+  const { user } = useAuth();
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -35,11 +37,9 @@ export default function DonationDetails() {
         const { data } = await axiosSecure.patch(`/donation-request/${id}`, {
           status: "inprogress",
         });
-        console.log(data);
         if (data.modifiedCount) {
           toast.success("Donation status updated to 'In Progress'!");
           refetch();
-          // Close the modal after 3 seconds
           setTimeout(() => {
             closeModal();
           }, 3000);
@@ -53,88 +53,117 @@ export default function DonationDetails() {
     }
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <p className="text-center text-lg">Loading...</p>;
 
   return (
-    <div className="p-6">
-      <h2 className="text-3xl font-bold mb-4">Donation Request Details</h2>
+    <div className="w-11/12 mt-24 mx-auto ">
+      <h2 className="text-3xl font-bold text-gray-800 text-center">
+        Donation Request Details
+      </h2>
+      <div className="flex-1 flex justify-center items-center">
+        <Lottie className="w-48 " animationData={animation} loop={true} />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Donation Details */}
+        <div className="p-8 rounded-lg shadow-md">
+          <h3 className="text-2xl font-semibold text-gray-700 mb-4">
+            Recipient Information
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <p>
+              <strong>Recipient Name:</strong> {donationRequest.recipientName}
+            </p>
+            <p>
+              <strong>District:</strong> {donationRequest.recipientDistrict}
+            </p>
+            <p>
+              <strong>Upazila:</strong> {donationRequest.recipientUpazila}
+            </p>
+            <p>
+              <strong>Road:</strong> {donationRequest.fullAddress}
+            </p>
+            <p>
+              <strong>Date:</strong> {donationRequest.donationDate}
+            </p>
+            <p>
+              <strong>Time:</strong> {donationRequest.donationTime}
+            </p>
+          </div>
+        </div>
 
-      {/* Donation Request Information */}
-      <div className="mb-6">
-        <p>
-          <strong>Recipients Name:</strong> {donationRequest.recipientName}
-        </p>
-        <p>
-          <strong>District:</strong> {donationRequest.recipientDistrict}
-        </p>
-        <p>
-          <strong>Upazila:</strong> {donationRequest.recipientUpazila}
-        </p>
-        <p>
-          <strong>Road:</strong> {donationRequest.fullAddress}
-        </p>
-        <p>
-          <strong>Date:</strong> {donationRequest.donationDate}
-        </p>
-        <p>
-          <strong>Time:</strong> {donationRequest.donationTime}
-        </p>
-        <p>
-          <strong>Request Status:</strong> {donationRequest.requestMessage}
-        </p>
-        <p>
-          <strong>Donation Status:</strong> {donationRequest.donationStatus}
-        </p>
+        {/* Status Information */}
+        <div className="p-8 rounded-lg shadow-md">
+          <h3 className="text-2xl font-semibold mb-2 ">Donation Status</h3>
+          <p className="mb-2">
+            <strong>Request Message:</strong> {donationRequest.requestMessage}
+          </p>
+          <p>
+            <strong>Status:</strong>{" "}
+            <span
+              className={`px-3 py-1 rounded-full text-white ${
+                donationRequest.donationStatus === "pending"
+                  ? "bg-yellow-500"
+                  : "bg-green-500"
+              }`}
+            >
+              {donationRequest.donationStatus}
+            </span>
+          </p>
+        </div>
       </div>
 
       {/* Donate Button */}
-      <button
-        onClick={openModal}
-        className="btn bg-gradient-to-r mt-3 from-primary to-secondary text-white"
-      >
-        Donate
-      </button>
+      <div className="text-center mt-8">
+        <button
+          onClick={openModal}
+          className="btn bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 text-lg font-semibold rounded-md shadow-md hover:opacity-90"
+        >
+          Donate Now
+        </button>
+      </div>
 
       {/* Modal */}
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         contentLabel="Donation Modal"
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg max-w-lg w-full"
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-lg shadow-xl max-w-lg w-full"
         overlayClassName="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50"
       >
-        <form onSubmit={handleSubmit} className="card-body">
-          <div className="form-control">
+        <h3 className="text-2xl font-bold text-gray-800 mb-4">
+          Confirm Donation
+        </h3>
+        <form onSubmit={handleSubmit}>
+          <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text">User Name</span>
+              <span className="label-text text-gray-600">User Name</span>
             </label>
             <input
               type="text"
-              placeholder="name"
               name="name"
               defaultValue={user?.displayName}
-              className="input input-bordered"
+              className="input input-bordered w-full"
               readOnly
             />
           </div>
-          <div className="form-control">
+          <div className="form-control mb-6">
             <label className="label">
-              <span className="label-text">User Email</span>
+              <span className="label-text text-gray-600">User Email</span>
             </label>
             <input
               type="email"
-              placeholder="email"
-              defaultValue={user?.email}
               name="email"
-              className="input input-bordered"
+              defaultValue={user?.email}
+              className="input input-bordered w-full"
               readOnly
             />
           </div>
-          <div className="form-control mt-6">
-            <button className="btn bg-gradient-to-r from-primary to-secondary text-white">
-              Confirm
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="btn bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 text-lg font-semibold w-full rounded-md shadow-md hover:opacity-90"
+          >
+            Confirm Donation
+          </button>
         </form>
       </Modal>
     </div>

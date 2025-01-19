@@ -93,7 +93,7 @@ export default function DonationUpdate() {
     form.reset();
   };
   return (
-    <div className="p-6 w-full mx-auto bg-white rounded-md shadow-md">
+    <div className="w-11/12 mx-auto mt-24">
       <h1 className="text-2xl font-bold text-center form-control">
         Update Donation Request
       </h1>
@@ -103,48 +103,48 @@ export default function DonationUpdate() {
       >
         {/* Requester Info (Read-Only) */}
         <div className="form-control">
-          <label className="label">Requester Name</label>
+          <label className="label text-error">Requester Name</label>
           <input
             type="text"
             name="requesterName"
             defaultValue={user?.displayName}
             readOnly
-            className="w-full px-4 py-3 rounded-md input input-bordered bg-gray-100"
+            className="w-full px-4 py-3 rounded-md input input-bordered input-error bg-gray-100"
           />
         </div>
         <div className="form-control">
-          <label className="label">Requester Email</label>
+          <label className="label text-error">Requester Email</label>
           <input
             type="email"
             name="requesterEmail"
             defaultValue={user?.email}
             readOnly
-            className="w-full px-4 py-3 rounded-md input input-bordered bg-gray-100"
+            className="w-full px-4 py-3 rounded-md input input-bordered input-error bg-gray-100"
           />
         </div>
 
         {/* Recipient Info */}
         {/* name */}
         <div className="form-control">
-          <label className="label">Recipient Name</label>
+          <label className="label text-error">Recipient Name</label>
           <input
             type="text"
             name="recipientName"
             placeholder="Recipient's full name"
             defaultValue={recipientName}
             required
-            className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+            className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error"
           />
         </div>
 
         {/* District */}
         <div className="form-control">
-          <label className="label">
+          <label className="label text-error">
             <span className="label-text">District</span>
           </label>
           <select
             required
-            className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+            className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error"
             name="district"
             value={selectedDistrict}
             onChange={(e) => {
@@ -162,12 +162,12 @@ export default function DonationUpdate() {
 
         {/* Upazila */}
         <div className="form-control">
-          <label className="label">
+          <label className="label text-error">
             <span className="label-text">Upazila</span>
           </label>
           <select
             required
-            className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+            className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error"
             name="upazila"
             value={selectedUpazila}
             disabled={!selectedDistrict} // Disable if not in edit mode or district not selected
@@ -183,38 +183,38 @@ export default function DonationUpdate() {
         </div>
 
         <div className="form-control">
-          <label className="label">Hospital Name</label>
+          <label className="label text-error">Hospital Name</label>
           <input
             type="text"
             defaultValue={hospitalName}
             name="hospitalName"
             placeholder="e.g., Dhaka Medical College Hospital"
             required
-            className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+            className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error"
           />
         </div>
 
         <div className="form-control">
-          <label className="label">Full Address Line</label>
+          <label className="label text-error">Full Address Line</label>
           <input
             type="text"
             defaultValue={fullAddress}
             name="fullAddress"
             placeholder="e.g., Zahir Raihan Rd, Dhaka"
             required
-            className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+            className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error"
           />
         </div>
 
         {/* Blood Group Selector */}
         {bloodGroup && (
           <div className="form-control">
-            <label className="label">
+            <label className="label text-error">
               <span className="label-text">Blood Group</span>
             </label>
             <select
               required
-              className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+              className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error"
               name="bloodGroup"
               defaultValue={bloodGroup || ""}
             >
@@ -233,43 +233,43 @@ export default function DonationUpdate() {
 
         {/* Date and Time */}
         <div className="form-control">
-          <label className="label">Donation Date</label>
+          <label className="label text-error">Donation Date</label>
           <input
             type="date"
             defaultValue={donationDate}
             name="donationDate"
             required
-            className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+            className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error"
           />
         </div>
         <div className="form-control">
-          <label className="label">Donation Time</label>
+          <label className="label text-error">Donation Time</label>
           <input
             type="time"
             defaultValue={donationTime}
             name="donationTime"
             required
-            className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+            className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error"
           />
         </div>
 
         {/* Request Message */}
         <div className="form-control col-span-2">
-          <label className="label">Request Message</label>
+          <label className="label text-error">Request Message</label>
           <textarea
             name="requestMessage"
             defaultValue={requestMessage}
             rows="4"
             placeholder="Explain why blood is needed in detail..."
             required
-            className="textarea textarea-bordered w-full px-4 py-3 rounded-md bg-white"
+            className="textarea textarea-bordered textarea-error w-full px-4 py-3 rounded-md bg-white"
           ></textarea>
         </div>
 
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full col-span-2 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+          className="btn bg-gradient-to-r md:col-span-2 text-white from-primary to-secondary"
         >
           Submit Request
         </button>

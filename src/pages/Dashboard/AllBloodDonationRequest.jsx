@@ -115,96 +115,100 @@ export default function AllBloodDonationRequest() {
 
       {/* Table */}
       {donationRequests?.length > 0 ? (
-        <table className="table text-center border-separate border-spacing-y-3 w-full ">
-          <thead
-            style={{
-              backgroundImage: `url(${bgImg})`,
-              backgroundSize: "cover",
-              backgroundPosition: "right",
-            }}
-          >
-            <tr className="text-white">
-              <th className="px-4 py-4 ">Requester Name</th>
-              <th className="px-4 py-4 ">Requester Email</th>
-              <th className="px-4 py-4 ">Recipient Name</th>
-              <th className="px-4 py-4 ">Request Location</th>
-              <th className="px-4 py-4 ">Donation Date</th>
-              <th className="px-4 py-4 ">Donation Time</th>
-              <th className="px-4 py-4 ">Blood Group</th>
-              <th className="px-4 py-4 ">Donation Status</th>
-              {role === "admin" && <th className="px-4 py-4 ">Action</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {donationRequests?.map((request) => (
-              <tr
-                key={request._id}
-                className="bg-white shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
-              >
-                <td className="px-4 py-2">
-                  {request.donationStatus === "inprogress" &&
-                    request.requesterName}
-                </td>
-                <td className="px-4 py-2">
-                  {request.donationStatus === "inprogress" &&
-                    request.requesterEmail}
-                </td>
-                <td className="px-4 py-2">{request.recipientName}</td>
-                <td className="px-4 py-2">
-                  {request.recipientDistrict}, {request.recipientUpazila}
-                </td>
-                <td className="px-4 py-2">{request.donationDate}</td>
-                <td className="px-4 py-2">{request.donationTime}</td>
-                <td className="px-4 py-2">{request.bloodGroup}</td>
-                <td className="px-4 py-2">
-                  {request.donationStatus}
-                  {request?.donationStatus === "inprogress" && (
-                    <div className="flex mt-2">
-                      <button
-                        onClick={() => handleUpdateStatus(request._id, "done")}
-                        className="btn btn-xs btn-success mx-1"
-                      >
-                        Done
-                      </button>
-                      <button
-                        onClick={() =>
-                          handleUpdateStatus(request._id, "canceled")
-                        }
-                        className="btn btn-xs btn-error mx-1"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  )}
-                </td>
-                {role === "admin" && (
-                  <td className="px-4 py-2 space-y-2 text-center">
-                    <div className="flex gap-1">
-                      <Link
-                        to={`/donation/${request._id}`}
-                        className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
-                      >
-                        <FaEye className="cursor-pointer" />
-                      </Link>
-                      <Link
-                        to={`/donation/update/${request._id}`}
-                        className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
-                      >
-                        <FaPen className="cursor-pointer" />
-                      </Link>
-                      <button
-                        onClick={() => handleDelete(request._id)}
-                        className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
-                      >
-                        <FaTrashAlt className="cursor-pointer" />
-                      </button>
-                    </div>
-                  </td>
-                )}
+        <div className="overflow-x-auto">
+          <table className="table-auto w-full text-center border-separate border-spacing-y-3 table-layout-auto">
+            <thead
+              style={{
+                backgroundImage: `url(${bgImg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "right",
+              }}
+            >
+              <tr className="text-white">
+                <th className="px-4 py-4 ">Requester Name</th>
+                <th className="px-4 py-4 ">Requester Email</th>
+                <th className="px-4 py-4 ">Recipient Name</th>
+                <th className="px-4 py-4 ">Request Location</th>
+                <th className="px-4 py-4 ">Donation Date</th>
+                <th className="px-4 py-4 ">Donation Time</th>
+                <th className="px-4 py-4 ">Blood Group</th>
+                <th className="px-4 py-4 ">Donation Status</th>
+                {role === "admin" && <th className="px-4 py-4 ">Action</th>}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {donationRequests?.map((request) => (
+                <tr
+                  key={request._id}
+                  className="bg-white shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
+                >
+                  <td className="px-4 py-2">
+                    {request.donationStatus === "inprogress" &&
+                      request.requesterName}
+                  </td>
+                  <td className="px-4 py-2">
+                    {request.donationStatus === "inprogress" &&
+                      request.requesterEmail}
+                  </td>
+                  <td className="px-4 py-2">{request.recipientName}</td>
+                  <td className="px-4 py-2">
+                    {request.recipientDistrict}, {request.recipientUpazila}
+                  </td>
+                  <td className="px-4 py-2">{request.donationDate}</td>
+                  <td className="px-4 py-2">{request.donationTime}</td>
+                  <td className="px-4 py-2">{request.bloodGroup}</td>
+                  <td className="px-4 py-2">
+                    {request.donationStatus}
+                    {request?.donationStatus === "inprogress" && (
+                      <div className="flex mt-2">
+                        <button
+                          onClick={() =>
+                            handleUpdateStatus(request._id, "done")
+                          }
+                          className="btn btn-xs btn-success mx-1"
+                        >
+                          Done
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleUpdateStatus(request._id, "canceled")
+                          }
+                          className="btn btn-xs btn-error mx-1"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    )}
+                  </td>
+                  {role === "admin" && (
+                    <td className="px-4 py-2 space-y-2 text-center">
+                      <div className="flex gap-1">
+                        <Link
+                          to={`/donation/${request._id}`}
+                          className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
+                        >
+                          <FaEye className="cursor-pointer" />
+                        </Link>
+                        <Link
+                          to={`/donation/update/${request._id}`}
+                          className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
+                        >
+                          <FaPen className="cursor-pointer" />
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(request._id)}
+                          className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
+                        >
+                          <FaTrashAlt className="cursor-pointer" />
+                        </button>
+                      </div>
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : (
         <p className="text-center mt-6">No Data Found</p>
       )}

@@ -29,7 +29,11 @@ export default function WelcomeUser() {
         </div>
       </div>
       <div className="flex-1 flex  justify-end items-center">
-        <Lottie className="lg:w-40 " animationData={animate} loop={true} />
+        <Lottie
+          className="lg:w-40 hidden md:flex"
+          animationData={animate}
+          loop={true}
+        />
       </div>
     </section>
   );

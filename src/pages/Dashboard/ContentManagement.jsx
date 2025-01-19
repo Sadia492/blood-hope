@@ -23,19 +23,19 @@ export default function ContentManagement() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="container mx-auto p-6">
-      <div className="flex justify-between items-center mb-4">
+    <div className="w-11/12 mt-8 mx-auto">
+      <div className="flex flex-row-reverse justify-between items-center mb-4">
         <Link
           to="/dashboard/content-management/add-blog"
-          className="btn btn-primary"
+          className="btn bg-gradient-to-r text-white from-primary to-secondary"
         >
           Add Blog
         </Link>
         {/* Filter Dropdown */}
-        <label className="block mb-2">
+        <label className="block mb-4 text-gray-700 font-semibold">
           Filter by Status:
           <select
-            className="ml-2 p-2 border rounded"
+            className="ml-2 p-3 border-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ff563d] focus:border-[#ff563d] bg-white text-gray-800 transition duration-300"
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
           >

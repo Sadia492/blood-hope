@@ -6,10 +6,12 @@ import { Link } from "react-router-dom";
 import { FaEye, FaPen, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import bgImg from "../../assets/trianglify-lowres.png";
+import useRole from "../../hooks/useRole";
 
 export default function AllBloodDonationRequest() {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const [role, roleLoading] = useRole();
   const [statusFilter, setStatusFilter] = useState(""); // For filtering requests by status
   const [currentPage, setCurrentPage] = useState(1); // Pagination
   const limit = 2; // Number of items per page
@@ -130,7 +132,7 @@ export default function AllBloodDonationRequest() {
               <th className="px-4 py-4 ">Donation Time</th>
               <th className="px-4 py-4 ">Blood Group</th>
               <th className="px-4 py-4 ">Donation Status</th>
-              <th className="px-4 py-4 ">Action</th>
+              {role === "admin" && <th className="px-4 py-4 ">Action</th>}
             </tr>
           </thead>
           <tbody>
@@ -175,28 +177,30 @@ export default function AllBloodDonationRequest() {
                     </div>
                   )}
                 </td>
-                <td className="px-4 py-2 space-y-2 text-center">
-                  <div className="flex gap-1">
-                    <Link
-                      to={`/donation/${request._id}`}
-                      className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
-                    >
-                      <FaEye className="cursor-pointer" />
-                    </Link>
-                    <Link
-                      to={`/donation/update/${request._id}`}
-                      className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
-                    >
-                      <FaPen className="cursor-pointer" />
-                    </Link>
-                    <button
-                      onClick={() => handleDelete(request._id)}
-                      className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
-                    >
-                      <FaTrashAlt className="cursor-pointer" />
-                    </button>
-                  </div>
-                </td>
+                {role === "admin" && (
+                  <td className="px-4 py-2 space-y-2 text-center">
+                    <div className="flex gap-1">
+                      <Link
+                        to={`/donation/${request._id}`}
+                        className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
+                      >
+                        <FaEye className="cursor-pointer" />
+                      </Link>
+                      <Link
+                        to={`/donation/update/${request._id}`}
+                        className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
+                      >
+                        <FaPen className="cursor-pointer" />
+                      </Link>
+                      <button
+                        onClick={() => handleDelete(request._id)}
+                        className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
+                      >
+                        <FaTrashAlt className="cursor-pointer" />
+                      </button>
+                    </div>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

@@ -2,6 +2,7 @@ import React from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useRole from "../hooks/useRole";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 export default function BlogCard({ blog, refetch }) {
   const axiosSecure = useAxiosSecure();
@@ -33,21 +34,28 @@ export default function BlogCard({ blog, refetch }) {
   };
   const handleDelete = async (blogId) => {
     if (role === "admin") {
-      console.log(blogId);
-      try {
-        const { data } = await axiosSecure.delete(`/blog/${blogId}`);
-        if (data.deletedCount) {
-          toast.success("Blog deleted successfully.");
-          refetch();
-        } else {
-          toast.error("Failed to delete blog.");
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axiosSecure.delete(`/blog/${blogId}`).then((res) => {
+            if (res.data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+              refetch();
+            }
+          });
         }
-      } catch (error) {
-        toast.error("An error occurred while deleting the blog.");
-        console.error(error);
-      }
-    } else {
-      toast.error("Only admin can delete a blog.");
+      });
     }
   };
   return (
@@ -67,7 +75,7 @@ export default function BlogCard({ blog, refetch }) {
           />
           <div className="card-actions justify-end">
             <button
-              className="btn btn-primary"
+              className="btn  bg-gradient-to-r text-white from-primary to-secondary"
               onClick={() =>
                 handlePublishUnpublish(
                   blog?._id,
@@ -78,7 +86,7 @@ export default function BlogCard({ blog, refetch }) {
               {blog.blogStatus === "draft" ? "Publish" : "Unpublish"}
             </button>
             <button
-              className="btn btn-error ml-2"
+              className="btn  bg-gradient-to-r text-white from-primary to-secondary"
               onClick={() => handleDelete(blog._id)}
             >
               Delete

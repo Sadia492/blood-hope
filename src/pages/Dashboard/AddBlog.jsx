@@ -23,9 +23,9 @@ export default function AddBlog() {
     if (!image || !image.type.startsWith("image/")) {
       return toast.error("Please upload a valid image file.");
     }
-    if (image.size > 2 * 1024 * 1024) {
-      return toast.error("Image size must be less than 2MB.");
-    }
+    // if (image.size > 2 * 1024 * 1024) {
+    //   return toast.error("Image size must be less than 2MB.");
+    // }
     if (!content.trim()) {
       return toast.error("Content cannot be empty.");
     }
@@ -64,9 +64,12 @@ export default function AddBlog() {
   };
 
   return (
-    <div className="p-8">
-      <h2 className="text-2xl font-bold">Add Blog</h2>
-      <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
+    <div className="w-11/12 mx-auto mt-8">
+      <h2 className="text-3xl text-center font-bold">Add Blog</h2>
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+      >
         <div className="form-control">
           <label className="label">
             <span className="label-text">Title</span>
@@ -75,7 +78,7 @@ export default function AddBlog() {
             type="text"
             name="title"
             placeholder="Blog Title"
-            className="input input-bordered w-full"
+            className="input input-bordered w-full input-error"
             required
           />
         </div>
@@ -91,7 +94,7 @@ export default function AddBlog() {
             required
           />
         </div>
-        <div className="form-control col-span-2">
+        <div className="form-control md:col-span-2">
           <label className="label">
             <span className="label-text">Content</span>
           </label>
@@ -101,7 +104,10 @@ export default function AddBlog() {
             onChange={(newContent) => setContent(newContent)}
           />
         </div>
-        <button type="submit" className="btn btn-primary col-span-2">
+        <button
+          type="submit"
+          className="btn md:col-span-2 bg-gradient-to-r text-white from-primary to-secondary"
+        >
           Create Blog
         </button>
       </form>

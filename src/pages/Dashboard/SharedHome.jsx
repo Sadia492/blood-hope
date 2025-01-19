@@ -13,7 +13,7 @@ export default function SharedHome() {
   const { data: stat, isLoading } = useQuery({
     queryKey: ["stat"],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/admin-stat`);
+      const { data } = await axiosSecure.get(`/admin-stat/${"donor"}`);
       return data;
     },
   });

@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { FaEye, FaPen, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import bgImg from "../../assets/trianglify-lowres.png";
 
 export default function AllBloodDonationRequest() {
   const axiosSecure = useAxiosSecure();
@@ -85,107 +86,129 @@ export default function AllBloodDonationRequest() {
   const totalPages = totalData ? Math.ceil(totalData.count / limit) : 1;
 
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-4">All Blood Donation Request</h2>
+    <div className="w-11/12 mx-auto mt-8">
+      <h2 className="text-3xl font-bold text-center">
+        All Blood Donation Request
+      </h2>
 
       {/* Filter Dropdown */}
-      <label className="block mb-2">
+      <label className="block mb-4 text-gray-700 font-semibold">
         Filter by Status:
         <select
-          className="ml-2 p-2 border rounded"
+          className="ml-2 p-3 border-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ff563d] focus:border-[#ff563d] bg-white text-gray-800 transition duration-300"
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
         >
-          <option value="">All</option>
-          <option value="pending">Pending</option>
-          <option value="inprogress">In Progress</option>
-          <option value="done">Done</option>
-          <option value="canceled">Canceled</option>
+          <option value="" className="text-gray-500">
+            All
+          </option>
+          <option value="active" className="text-gray-800">
+            Active
+          </option>
+          <option value="blocked" className="text-gray-800">
+            Blocked
+          </option>
         </select>
       </label>
 
       {/* Table */}
-      <table className="min-w-full bg-white border rounded-lg">
-        <thead>
-          <tr>
-            <th className="px-4 py-2 border">Requester Name</th>
-            <th className="px-4 py-2 border">Requester Email</th>
-            <th className="px-4 py-2 border">Recipient Name</th>
-            <th className="px-4 py-2 border">Request Location</th>
-            <th className="px-4 py-2 border">Donation Date</th>
-            <th className="px-4 py-2 border">Donation Time</th>
-            <th className="px-4 py-2 border">Blood Group</th>
-            <th className="px-4 py-2 border">Donation Status</th>
-            <th className="px-4 py-2 border">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {donationRequests?.map((request) => (
-            <tr key={request._id}>
-              <td className="px-4 py-2 border">
-                {request.donationStatus === "inprogress" &&
-                  request.requesterName}
-              </td>
-              <td className="px-4 py-2 border">
-                {request.donationStatus === "inprogress" &&
-                  request.requesterEmail}
-              </td>
-              <td className="px-4 py-2 border">{request.recipientName}</td>
-              <td className="px-4 py-2 border">
-                {request.recipientDistrict}, {request.recipientUpazila}
-              </td>
-              <td className="px-4 py-2 border">{request.donationDate}</td>
-              <td className="px-4 py-2 border">{request.donationTime}</td>
-              <td className="px-4 py-2 border">{request.bloodGroup}</td>
-              <td className="px-4 py-2 border">{request.donationStatus}</td>
-
-              <td className="px-4 py-2 border space-y-2 text-center">
-                <div className="flex">
-                  <Link to={`/donation/${request._id}`} className="btn btn-sm">
-                    <FaEye className="mx-2 cursor-pointer text-blue-500" />
-                  </Link>
-                  <Link
-                    to={`/donation/update/${request._id}`}
-                    className="btn btn-sm"
-                  >
-                    <FaPen className="mx-2 cursor-pointer text-green-500" />
-                  </Link>
-                  <button
-                    onClick={() => handleDelete(request._id)}
-                    className="btn btn-sm"
-                  >
-                    <FaTrashAlt className="mx-2 cursor-pointer text-red-500" />
-                  </button>
-                </div>
-
-                {request?.donationStatus && (
-                  <div className="flex">
-                    <button
-                      onClick={() => handleUpdateStatus(request._id, "done")}
-                      className="btn btn-sm btn-success mx-1"
+      {donationRequests?.length > 0 ? (
+        <table className="table text-center border-separate border-spacing-y-3 w-full ">
+          <thead
+            style={{
+              backgroundImage: `url(${bgImg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "right",
+            }}
+          >
+            <tr className="text-white">
+              <th className="px-4 py-4 ">Requester Name</th>
+              <th className="px-4 py-4 ">Requester Email</th>
+              <th className="px-4 py-4 ">Recipient Name</th>
+              <th className="px-4 py-4 ">Request Location</th>
+              <th className="px-4 py-4 ">Donation Date</th>
+              <th className="px-4 py-4 ">Donation Time</th>
+              <th className="px-4 py-4 ">Blood Group</th>
+              <th className="px-4 py-4 ">Donation Status</th>
+              <th className="px-4 py-4 ">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {donationRequests?.map((request) => (
+              <tr
+                key={request._id}
+                className="bg-white shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
+              >
+                <td className="px-4 py-2">
+                  {request.donationStatus === "inprogress" &&
+                    request.requesterName}
+                </td>
+                <td className="px-4 py-2">
+                  {request.donationStatus === "inprogress" &&
+                    request.requesterEmail}
+                </td>
+                <td className="px-4 py-2">{request.recipientName}</td>
+                <td className="px-4 py-2">
+                  {request.recipientDistrict}, {request.recipientUpazila}
+                </td>
+                <td className="px-4 py-2">{request.donationDate}</td>
+                <td className="px-4 py-2">{request.donationTime}</td>
+                <td className="px-4 py-2">{request.bloodGroup}</td>
+                <td className="px-4 py-2">
+                  {request.donationStatus}
+                  {request?.donationStatus === "inprogress" && (
+                    <div className="flex mt-2">
+                      <button
+                        onClick={() => handleUpdateStatus(request._id, "done")}
+                        className="btn btn-xs btn-success mx-1"
+                      >
+                        Done
+                      </button>
+                      <button
+                        onClick={() =>
+                          handleUpdateStatus(request._id, "canceled")
+                        }
+                        className="btn btn-xs btn-error mx-1"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  )}
+                </td>
+                <td className="px-4 py-2 space-y-2 text-center">
+                  <div className="flex gap-1">
+                    <Link
+                      to={`/donation/${request._id}`}
+                      className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
                     >
-                      Done
-                    </button>
-                    <button
-                      onClick={() =>
-                        handleUpdateStatus(request._id, "canceled")
-                      }
-                      className="btn btn-sm btn-error mx-1"
+                      <FaEye className="cursor-pointer" />
+                    </Link>
+                    <Link
+                      to={`/donation/update/${request._id}`}
+                      className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
                     >
-                      Cancel
+                      <FaPen className="cursor-pointer" />
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(request._id)}
+                      className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
+                    >
+                      <FaTrashAlt className="cursor-pointer" />
                     </button>
                   </div>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p className="text-center mt-6">No Data Found</p>
+      )}
 
       {/* Pagination */}
       <div className="flex justify-between items-center mt-4">
         <button
-          className="p-2 bg-blue-500 text-white rounded disabled:opacity-50"
+          className="btn bg-gradient-to-r text-white from-primary to-secondary  disabled:text-gray-400"
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
         >
@@ -195,7 +218,7 @@ export default function AllBloodDonationRequest() {
           Page {currentPage} of {totalPages}
         </span>
         <button
-          className="p-2 bg-blue-500 text-white rounded disabled:opacity-50"
+          className="btn bg-gradient-to-r text-white from-primary to-secondary  disabled:text-gray-400"
           onClick={() =>
             setCurrentPage((prev) => Math.min(prev + 1, totalPages))
           }

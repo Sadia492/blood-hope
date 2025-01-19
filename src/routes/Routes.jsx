@@ -22,6 +22,8 @@ import Blog from "../pages/Blog/Blog";
 import BlogDetails from "../pages/Blog/BlogDetails";
 import Funding from "../pages/Funding/Funding";
 import DonationUpdate from "../pages/Dashboard/DonationUpdate";
+import AdminRoute from "./AdminRoute";
+import AdminMenu from "../pages/Dashboard/Admin/AdminMenu";
 // import DonorHome from "../pages/Dashboard/DonorHome";
 const router = createBrowserRouter([
   {
@@ -42,7 +44,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/funding",
-        element: <Funding></Funding>,
+        element: (
+          <PrivateRoute>
+            <Funding></Funding>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/blog/:id",
@@ -54,11 +60,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/donation/:id",
-        element: <DonationDetails></DonationDetails>,
+        element: (
+          <PrivateRoute>
+            <DonationDetails></DonationDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/donation/update/:id",
-        element: <DonationUpdate></DonationUpdate>,
+        element: (
+          <PrivateRoute>
+            <DonationUpdate></DonationUpdate>
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -78,17 +92,26 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // donor routes
       {
         index: true,
         element: <RoleBasedHome></RoleBasedHome>,
       },
       {
         path: "my-donation-requests",
-        element: <MyDonationRequests></MyDonationRequests>,
+        element: (
+          <PrivateRoute>
+            <MyDonationRequests></MyDonationRequests>
+          </PrivateRoute>
+        ),
       },
       {
         path: "create-donation-request",
-        element: <CreateDonationRequest></CreateDonationRequest>,
+        element: (
+          <PrivateRoute>
+            <CreateDonationRequest></CreateDonationRequest>
+          </PrivateRoute>
+        ),
       },
       {
         path: "profile",
@@ -98,25 +121,46 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      // admin and volunteer routes
       {
         path: "all-users",
-        element: <AllUser></AllUser>,
+        element: (
+          <AdminRoute>
+            <AllUser></AllUser>
+          </AdminRoute>
+        ),
       },
       {
         path: "all-blood-donation-request",
-        element: <AllBloodDonationRequest></AllBloodDonationRequest>,
+        element: (
+          <AdminRoute>
+            <AllBloodDonationRequest></AllBloodDonationRequest>
+          </AdminRoute>
+        ),
       },
       {
         path: "content-management",
-        element: <ContentManagement></ContentManagement>,
+        element: (
+          <AdminRoute>
+            <ContentManagement></ContentManagement>
+          </AdminRoute>
+        ),
       },
       {
         path: "content-management/add-blog",
-        element: <AddBlog></AddBlog>,
+        element: (
+          <AdminRoute>
+            <AddBlog></AddBlog>
+          </AdminRoute>
+        ),
       },
       {
         path: "donor-home",
-        element: <DonorHome></DonorHome>,
+        element: (
+          <PrivateRoute>
+            <DonorHome></DonorHome>
+          </PrivateRoute>
+        ),
       },
     ],
   },

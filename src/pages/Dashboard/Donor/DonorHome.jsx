@@ -5,12 +5,17 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { FaEye, FaPen, FaTrashAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 export default function DonorHome() {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  const { data: lastRequests, isLoading } = useQuery({
+  const {
+    data: lastRequests,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["lastRequests", user.email],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
@@ -20,29 +25,48 @@ export default function DonorHome() {
     },
   });
 
-  const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this request?")) {
-      try {
-        const { data } = await axiosSecure.delete(`/donation-requests/${id}`);
-        if (data.deletedCount) {
-          toast.success("Donation request deleted successfully.");
-        }
-      } catch (error) {
-        toast.error("Failed to delete the donation request.");
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/donation-request/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          }
+        });
       }
-    }
+    });
   };
+  const handleUpdateStatus = async (id, status) => {
+    console.log(id, status);
+    // Handle status update
 
-  const handleStatusUpdate = async (id, status) => {
     try {
-      const { data } = await axiosSecure.patch(`/donation-requests/${id}`, {
-        donationStatus: status,
+      const { data } = await axiosSecure.patch(`/donation-request/${id}`, {
+        status,
       });
+      refetch(); // Refetch data after status update
+      console.log(data);
       if (data.modifiedCount) {
-        toast.success(`Donation status updated to '${status}'.`);
+        toast.success(
+          `You have ${status === "done" ? "completed" : "canceled"} the request`
+        );
       }
     } catch (error) {
-      toast.error("Failed to update donation status.");
+      console.error("Error updating donation status:", error);
     }
   };
 
@@ -59,6 +83,8 @@ export default function DonorHome() {
         <table className="min-w-full bg-white border rounded-lg mt-6">
           <thead>
             <tr>
+              <th className="px-4 py-2 border">Requester Name</th>
+              <th className="px-4 py-2 border">Requester Email</th>
               <th className="px-4 py-2 border">Recipient Name</th>
               <th className="px-4 py-2 border">Request Location</th>
               <th className="px-4 py-2 border">Donation Date</th>
@@ -71,6 +97,14 @@ export default function DonorHome() {
           <tbody>
             {lastRequests.map((request) => (
               <tr key={request._id}>
+                <td className="px-4 py-2 border">
+                  {request.donationStatus === "inprogress" &&
+                    request.requesterName}
+                </td>
+                <td className="px-4 py-2 border">
+                  {request.donationStatus === "inprogress" &&
+                    request.requesterEmail}
+                </td>
                 <td className="px-4 py-2 border">{request.recipientName}</td>
                 <td className="px-4 py-2 border">
                   {request.recipientDistrict}, {request.recipientUpazila}
@@ -79,37 +113,45 @@ export default function DonorHome() {
                 <td className="px-4 py-2 border">{request.donationTime}</td>
                 <td className="px-4 py-2 border">{request.bloodGroup}</td>
                 <td className="px-4 py-2 border">{request.donationStatus}</td>
-                <td className="px-4 py-2 border">
-                  <Link to={`/donation/${request._id}`}>
-                    <FaEye className="mx-2 cursor-pointer text-blue-500" />
-                  </Link>
-                  {request.donationStatus === "pending" && (
-                    <>
-                      <Link to={`/dashboard/edit-donation/${request._id}`}>
-                        <FaPen className="mx-2 cursor-pointer text-green-500" />
-                      </Link>
-                      <button onClick={() => handleDelete(request._id)}>
-                        <FaTrashAlt className="mx-2 cursor-pointer text-red-500" />
-                      </button>
-                    </>
-                  )}
-                  {request.donationStatus === "inprogress" && (
-                    <>
+                <td className="px-4 py-2 border space-y-2 text-center">
+                  <div className="flex">
+                    <Link
+                      to={`/donation/${request._id}`}
+                      className="btn btn-sm"
+                    >
+                      <FaEye className="mx-2 cursor-pointer text-blue-500" />
+                    </Link>
+                    <Link
+                      to={`/donation/update/${request._id}`}
+                      className="btn btn-sm"
+                    >
+                      <FaPen className="mx-2 cursor-pointer text-green-500" />
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(request._id)}
+                      className="btn btn-sm"
+                    >
+                      <FaTrashAlt className="mx-2 cursor-pointer text-red-500" />
+                    </button>
+                  </div>
+
+                  {request?.donationStatus && (
+                    <div className="flex">
                       <button
-                        onClick={() => handleStatusUpdate(request._id, "done")}
+                        onClick={() => handleUpdateStatus(request._id, "done")}
                         className="btn btn-sm btn-success mx-1"
                       >
                         Done
                       </button>
                       <button
                         onClick={() =>
-                          handleStatusUpdate(request._id, "canceled")
+                          handleUpdateStatus(request._id, "canceled")
                         }
                         className="btn btn-sm btn-error mx-1"
                       >
                         Cancel
                       </button>
-                    </>
+                    </div>
                   )}
                 </td>
               </tr>

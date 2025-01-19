@@ -5,6 +5,7 @@ import useAuth from "../../../hooks/useAuth";
 import { FaEye, FaPen, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 export default function MyDonationRequests() {
   const axiosSecure = useAxiosSecure();
@@ -64,6 +65,25 @@ export default function MyDonationRequests() {
       }
     });
   };
+  const handleUpdateStatus = async (id, status) => {
+    console.log(id, status);
+    // Handle status update
+
+    try {
+      const { data } = await axiosSecure.patch(`/donation-request/${id}`, {
+        status,
+      });
+      refetch(); // Refetch data after status update
+      console.log(data);
+      if (data.modifiedCount) {
+        toast.success(
+          `You have ${status === "done" ? "completed" : "canceled"} the request`
+        );
+      }
+    } catch (error) {
+      console.error("Error updating donation status:", error);
+    }
+  };
 
   // Calculate total pages
   const totalPages = totalData ? Math.ceil(totalData.count / limit) : 1;
@@ -92,7 +112,10 @@ export default function MyDonationRequests() {
       <table className="min-w-full bg-white border rounded-lg">
         <thead>
           <tr>
+            <th className="px-4 py-2 border">Requester Name</th>
+            <th className="px-4 py-2 border">Requester Email</th>
             <th className="px-4 py-2 border">Recipient Name</th>
+
             <th className="px-4 py-2 border">Request Location</th>
             <th className="px-4 py-2 border">Donation Date</th>
             <th className="px-4 py-2 border">Donation Time</th>
@@ -104,6 +127,17 @@ export default function MyDonationRequests() {
         <tbody>
           {donationRequest?.map((request) => (
             <tr key={request._id}>
+              {/* {
+                request.status==="inprogress" 
+              } */}
+              <td className="px-4 py-2 border">
+                {request.donationStatus === "inprogress" &&
+                  request.requesterName}
+              </td>
+              <td className="px-4 py-2 border">
+                {request.donationStatus === "inprogress" &&
+                  request.requesterEmail}
+              </td>
               <td className="px-4 py-2 border">{request.recipientName}</td>
               <td className="px-4 py-2 border">
                 {request.recipientDistrict}, {request.recipientUpazila}
@@ -112,25 +146,50 @@ export default function MyDonationRequests() {
               <td className="px-4 py-2 border">{request.donationTime}</td>
               <td className="px-4 py-2 border">{request.bloodGroup}</td>
               <td className="px-4 py-2 border">{request.donationStatus}</td>
-              <td className="px-4 py-2 border">
-                <Link to={`/donation/${request._id}`} className="btn">
-                  <FaEye />
-                </Link>
-                <Link to={`/donation/update/${request._id}`} className="btn">
-                  <FaPen />
-                </Link>
-                <button
-                  onClick={() => handleDelete(request._id)}
-                  className="btn"
-                >
-                  <FaTrashAlt />
-                </button>
+              <td className="px-4 py-2 border space-y-2 text-center">
+                <div className="flex">
+                  <Link to={`/donation/${request._id}`} className="btn btn-sm">
+                    <FaEye className="mx-2 cursor-pointer text-blue-500" />
+                  </Link>
+                  <Link
+                    to={`/donation/update/${request._id}`}
+                    className="btn btn-sm"
+                  >
+                    <FaPen className="mx-2 cursor-pointer text-green-500" />
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(request._id)}
+                    className="btn btn-sm"
+                  >
+                    <FaTrashAlt className="mx-2 cursor-pointer text-red-500" />
+                  </button>
+                </div>
+
+                {request?.donationStatus && (
+                  <div className="flex">
+                    <button
+                      onClick={() => handleUpdateStatus(request._id, "done")}
+                      className="btn btn-sm btn-success mx-1"
+                    >
+                      Done
+                    </button>
+                    <button
+                      onClick={() =>
+                        handleUpdateStatus(request._id, "canceled")
+                      }
+                      className="btn btn-sm btn-error mx-1"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                )}
               </td>
               {/* {request?.donationStatus === "inprogress" ? (
+               
               ) : (
-              <td colSpan="7" className="px-4 py-2 border text-center">
-                No Action Allowed
-              </td>
+                <td colSpan="7" className="px-4 py-2 border text-center">
+                  No Action Allowed
+                </td>
               )} */}
             </tr>
           ))}

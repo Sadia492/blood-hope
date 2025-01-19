@@ -3,6 +3,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Lottie from "lottie-react";
+import loginAnimation from "../../assets/animation/login.json";
 
 export default function Login() {
   const [show, setShow] = useState(false);
@@ -27,9 +29,9 @@ export default function Login() {
     form.reset();
   };
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen w-11/12 mx-auto">
       {" "}
-      <div className="card flex-1 w-full p-4 max-w-sm shadow-2xl">
+      <div className="card flex-1 w-full p-4  shadow-2xl">
         <form onSubmit={handleLogin} className="card-body">
           <h2 className="text-3xl font-bold bg-gradient-to-r from-primary from-0 to-75% to-secondary text-transparent bg-clip-text text-center">
             LOGIN HERE
@@ -82,6 +84,13 @@ export default function Login() {
             </Link>
           </p>
         </form>
+      </div>
+      <div className="flex-1 flex justify-center items-center">
+        <Lottie
+          className="lg:w-4/5 "
+          animationData={loginAnimation}
+          loop={true}
+        />
       </div>
     </div>
   );

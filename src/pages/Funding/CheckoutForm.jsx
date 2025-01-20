@@ -11,7 +11,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import axios from "axios";
 
-const CheckoutForm = ({ fund, refetch }) => {
+const CheckoutForm = ({ fund, refetch, closeModal }) => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
@@ -90,14 +90,14 @@ const CheckoutForm = ({ fund, refetch }) => {
         };
 
         const { data } = await axiosSecure.post("/funding", fundingData);
-
-        toast.success("Funding Successful!");
-        refetch(); // Refetch data if needed
-        // navigate("/dashboard/my-fundings");
+        if (data.insertedId) {
+          toast.success("Funding Successful!");
+          refetch(); // Refetch data if needed
+        }
       } catch (err) {
       } finally {
         setProcessing(false);
-        // closeModal();
+        closeModal();
       }
     }
   };

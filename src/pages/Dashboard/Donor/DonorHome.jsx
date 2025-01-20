@@ -81,122 +81,128 @@ export default function DonorHome() {
         <title>BloodHope | Home</title>
       </Helmet>
       <WelcomeUser></WelcomeUser>
-      <h2
-        className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
-      >
-        Recent Donation Requests
-      </h2>
-      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
-        Discover the latest donation requests from individuals and families in
-        need. Your contribution can bring warmth and hope to those facing
-        challenging times
-      </p>
-      {lastRequests?.length > 0 ? (
-        <div className="overflow-x-scroll">
-          <table className="table-auto w-full text-center border-separate border-spacing-y-3 table-layout-auto">
-            <thead
-              className="bg-cover bg-right"
-              style={{
-                backgroundImage: `url(${bgImg})`,
-                backgroundSize: "cover",
-                backgroundPosition: "right",
-              }}
-            >
-              <tr className="text-white">
-                <th className="px-4 py-2 sm:px-2">Requester Name</th>
-                <th className="px-4 py-2 sm:px-2">Requester Email</th>
-                <th className="px-4 py-2 sm:px-2">Recipient Name</th>
-                <th className="px-4 py-2 sm:px-2">Request Location</th>
-                <th className="px-4 py-2 sm:px-2">Donation Date</th>
-                <th className="px-4 py-2 sm:px-2">Donation Time</th>
-                <th className="px-4 py-2 sm:px-2">Blood Group</th>
-                <th className="px-4 py-2 sm:px-2">Donation Status</th>
-                <th className="px-4 py-2 sm:px-2">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {lastRequests?.map((request) => (
-                <tr
-                  key={request._id}
-                  className="bg-white shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
+      {lastRequests.length > 0 && (
+        <div className="mt-8">
+          <h2
+            className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+          >
+            Recent Donation Requests
+          </h2>
+          <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+            Discover the latest donation requests from individuals and families
+            in need. Your contribution can bring warmth and hope to those facing
+            challenging times
+          </p>
+          {lastRequests?.length > 0 ? (
+            <div className="overflow-x-scroll">
+              <table className="table-auto w-full text-center border-separate border-spacing-y-3 table-layout-auto">
+                <thead
+                  className="bg-cover bg-right"
+                  style={{
+                    backgroundImage: `url(${bgImg})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "right",
+                  }}
                 >
-                  <td className="px-2 py-2">
-                    {request.donationStatus === "inprogress" &&
-                      request.requesterName}
-                  </td>
-                  <td className="px-2 py-2">
-                    {request.donationStatus === "inprogress" &&
-                      request.requesterEmail}
-                  </td>
-                  <td className="px-2 py-2">{request.recipientName}</td>
-                  <td className="px-2 py-2">
-                    {request.recipientDistrict}, {request.recipientUpazila}
-                  </td>
-                  <td className="px-2 py-2">{request.donationDate}</td>
-                  <td className="px-2 py-2">{request.donationTime}</td>
-                  <td className="px-2 py-2">{request.bloodGroup}</td>
-                  <td className="px-4 py-2">
-                    {request.donationStatus}
-                    {request?.donationStatus === "inprogress" && (
-                      <div className="flex mt-2">
-                        <button
-                          onClick={() =>
-                            handleUpdateStatus(request._id, "done")
-                          }
-                          className="btn btn-xs btn-success mx-1"
-                        >
-                          Done
-                        </button>
-                        <button
-                          onClick={() =>
-                            handleUpdateStatus(request._id, "canceled")
-                          }
-                          className="btn btn-xs btn-error mx-1"
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    )}
-                  </td>
-                  <td className="px-2 py-2">
-                    <div className="flex gap-1 justify-center">
-                      <Link
-                        to={`/donation/${request._id}`}
-                        className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
-                      >
-                        <FaEye className="cursor-pointer" />
-                      </Link>
-                      <Link
-                        to={`/donation/update/${request._id}`}
-                        className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
-                      >
-                        <FaPen className="cursor-pointer" />
-                      </Link>
-                      <button
-                        onClick={() => handleDelete(request._id)}
-                        className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
-                      >
-                        <FaTrashAlt className="cursor-pointer" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <p className="text-center mt-6">No Data Found</p>
-      )}
+                  <tr className="text-white">
+                    <th className="px-4 py-2 sm:px-2">Requester Name</th>
+                    <th className="px-4 py-2 sm:px-2">Requester Email</th>
+                    <th className="px-4 py-2 sm:px-2">Recipient Name</th>
+                    <th className="px-4 py-2 sm:px-2">Request Location</th>
+                    <th className="px-4 py-2 sm:px-2">Donation Date</th>
+                    <th className="px-4 py-2 sm:px-2">Donation Time</th>
+                    <th className="px-4 py-2 sm:px-2">Blood Group</th>
+                    <th className="px-4 py-2 sm:px-2">Donation Status</th>
+                    <th className="px-4 py-2 sm:px-2">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {lastRequests?.map((request) => (
+                    <tr
+                      key={request._id}
+                      className="bg-white shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
+                    >
+                      <td className="px-2 py-2">
+                        {request.donationStatus === "inprogress" &&
+                          request.requesterName}
+                      </td>
+                      <td className="px-2 py-2">
+                        {request.donationStatus === "inprogress" &&
+                          request.requesterEmail}
+                      </td>
+                      <td className="px-2 py-2">{request.recipientName}</td>
+                      <td className="px-2 py-2">
+                        {request.recipientDistrict}, {request.recipientUpazila}
+                      </td>
+                      <td className="px-2 py-2">{request.donationDate}</td>
+                      <td className="px-2 py-2">{request.donationTime}</td>
+                      <td className="px-2 py-2">{request.bloodGroup}</td>
+                      <td className="px-4 py-2">
+                        {request.donationStatus}
+                        {request?.donationStatus === "inprogress" && (
+                          <div className="flex mt-2">
+                            <button
+                              onClick={() =>
+                                handleUpdateStatus(request._id, "done")
+                              }
+                              className="btn btn-xs btn-success mx-1"
+                            >
+                              Done
+                            </button>
+                            <button
+                              onClick={() =>
+                                handleUpdateStatus(request._id, "canceled")
+                              }
+                              className="btn btn-xs btn-error mx-1"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-2 py-2">
+                        <div className="flex gap-1 justify-center">
+                          <Link
+                            to={`/donation/${request._id}`}
+                            className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
+                          >
+                            <FaEye className="cursor-pointer" />
+                          </Link>
+                          <Link
+                            to={`/donation/update/${request._id}`}
+                            className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
+                          >
+                            <FaPen className="cursor-pointer" />
+                          </Link>
+                          <button
+                            onClick={() => handleDelete(request._id)}
+                            className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
+                          >
+                            <FaTrashAlt className="cursor-pointer" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <p className="text-center font-bold text-primary text-2xl mt-6">
+              No Data Found
+            </p>
+          )}
 
-      <div className="flex justify-center items-center mt-6">
-        <Link
-          to={"/dashboard/my-donation-requests"}
-          className="btn bg-gradient-to-r text-white from-primary to-secondary"
-        >
-          View My All Requests
-        </Link>
-      </div>
+          <div className="flex justify-center items-center mt-6">
+            <Link
+              to={"/dashboard/my-donation-requests"}
+              className="btn bg-gradient-to-r text-white from-primary to-secondary"
+            >
+              View My All Requests
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

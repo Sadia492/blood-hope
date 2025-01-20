@@ -93,7 +93,9 @@ export default function Funding() {
           </table>
         </div>
       ) : (
-        <p>No Data found</p>
+        <p className="text-center font-bold text-primary text-2xl mt-6">
+          No Data found
+        </p>
       )}
 
       {/* Modal */}
@@ -131,7 +133,7 @@ export default function Funding() {
             />
           </div>
           <div className="form-control mt-6">
-            <Payment fund={fund} refetch={refetch} />
+            <Payment fund={fund} refetch={refetch} closeModal={closeModal} />
           </div>
         </div>
       </Modal>

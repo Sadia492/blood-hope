@@ -225,7 +225,9 @@ export default function AllUser() {
             </table>
           </div>
         ) : (
-          <p className="font-bold text-center text-3xl">No Data Found</p>
+          <p className="text-center font-bold text-primary text-2xl mt-6">
+            No Data Found
+          </p>
         )}
       </div>
 

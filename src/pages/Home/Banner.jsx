@@ -6,9 +6,12 @@ import slideImg1 from "../../assets/istockphoto-983366460-612x612.jpg";
 import slideImg2 from "../../assets/img1.jpg";
 import slideImg3 from "../../assets/360_F_309202280_CgsWoCAdLBe9INBvdwBKUkpaLEP4XNLa.jpg";
 import { Typewriter } from "react-simple-typewriter";
+import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 export default function Banner() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { user } = useAuth();
   // Slider settings with the afterChange callback
   const settings = {
     dots: true,
@@ -91,12 +94,20 @@ export default function Banner() {
               <p className={`lg:w-1/2 text-center text-white`}>
                 {slide.description}
               </p>
-              <a
-                href="/blood-donation-requests"
-                className={` btn bg-gradient-to-r from-primary to-secondary text-white`}
-              >
-                Connect Now
-              </a>
+              <div className="space-x-3">
+                <Link
+                  to={user ? "/" : "/register"}
+                  className={` btn bg-gradient-to-r from-primary to-secondary text-white`}
+                >
+                  Join as a donor
+                </Link>
+                <Link
+                  to="/search"
+                  className={` btn bg-gradient-to-r from-primary to-secondary text-white`}
+                >
+                  Search Donors
+                </Link>
+              </div>
             </div>
           </div>
         ))}

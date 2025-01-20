@@ -5,11 +5,11 @@ import CheckoutForm from "./CheckoutForm";
 // import CheckoutForm from "./CheckoutForm";
 
 const stripePromise = loadStripe(import.meta.env.VITE_Stripe_Public_Key);
-export default function Payment({ fund, refetch }) {
+export default function Payment({ fund, refetch, closeModal }) {
   return (
     <Elements stripe={stripePromise}>
       {/* Form component */}
-      <CheckoutForm fund={fund} refetch={refetch} />
+      <CheckoutForm fund={fund} refetch={refetch} closeModal={closeModal} />
     </Elements>
   );
 }

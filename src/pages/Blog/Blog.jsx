@@ -64,7 +64,9 @@ export default function Blog() {
           ))}
         </div>
       ) : (
-        <p>No Data Found</p>
+        <p className="text-center font-bold text-primary text-2xl mt-6">
+          No Data Found
+        </p>
       )}
     </div>
   );

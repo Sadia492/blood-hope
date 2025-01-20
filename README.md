@@ -7,11 +7,12 @@
 ## Admin Credentials 🔑
 
 - **Email**: mira@mira.com
-- **Password**: mira12
+- **Password**: Mira12
 
 ## Live Site URL 🌐
 
-[Visit BloodHope](https://blood-hope-2fafa.web.app/)
+- [**BloodHope Live Site**](https://blood-hope-2fafa.web.app/)
+- [**BloodHope Alternative Live Site**](https://blood-hope1.netlify.app/)
 
 ---
 

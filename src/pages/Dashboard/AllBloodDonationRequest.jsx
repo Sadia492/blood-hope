@@ -216,7 +216,9 @@ export default function AllBloodDonationRequest() {
           </table>
         </div>
       ) : (
-        <p className="text-center mt-6">No Data Found</p>
+        <p className="text-center font-bold text-primary text-2xl mt-6">
+          No Data Found
+        </p>
       )}
 
       {/* Pagination */}

@@ -35,7 +35,7 @@ export default function DonationUpdate() {
       setSelectedBloodGroup(request?.bloodGroup || "");
     }
   }, [request]);
-  console.log(selectedDistrict, selectedUpazila);
+
   const {
     bloodGroup,
     donationDate,
@@ -74,13 +74,13 @@ export default function DonationUpdate() {
       donationTime,
       requestMessage,
     };
-    console.log(donationTime);
+
     // if (userData?.status === "active") {
     const { data } = await axiosSecure.put(
       `/donation-request/${id}`,
       donationRequest
     );
-    console.log(data);
+
     if (data.modifiedCount) {
       Swal.fire({
         position: "center",
@@ -95,11 +95,7 @@ export default function DonationUpdate() {
     }
 
     refetch();
-    // } else {
-    //   toast.error("you have been blocked by the admin");
-    // }
 
-    // console.log(donationRequest); // Replace this with an API call to save the dat
     form.reset();
   };
 

@@ -27,7 +27,6 @@ export default function BlogCard({ blog, refetch }) {
         }
       } catch (error) {
         toast.error("An error occurred while updating blog status.");
-        console.error(error);
       }
     } else {
       toast.error("Only admin can perform this action.");

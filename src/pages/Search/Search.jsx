@@ -33,7 +33,6 @@ export default function Search() {
           upazila,
         },
       });
-      console.log(data);
 
       setDonors(data);
 
@@ -41,7 +40,6 @@ export default function Search() {
         toast.error("No donors found for the selected criteria.");
       }
     } catch (error) {
-      console.error("Error fetching donors", error);
       toast.error("Error fetching donor data.");
     }
 

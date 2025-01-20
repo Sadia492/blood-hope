@@ -42,13 +42,13 @@ const CreateDonationRequest = () => {
       requestMessage,
       donationStatus: "pending",
     };
-    console.log(donationTime);
+
     if (userData?.status === "active") {
       const { data } = await axiosSecure.post(
         "/donation-requests",
         donationRequest
       );
-      console.log(data);
+
       if (data.insertedId) {
         Swal.fire({
           position: "center",
@@ -62,7 +62,6 @@ const CreateDonationRequest = () => {
       toast.error("you have been blocked by the admin");
     }
 
-    // console.log(donationRequest); // Replace this with an API call to save the dat
     form.reset();
   };
   if (isLoading || loading) return <LoadingSpinner></LoadingSpinner>;

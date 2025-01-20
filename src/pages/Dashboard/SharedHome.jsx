@@ -31,7 +31,7 @@ export default function SharedHome() {
     (curr, prev) => curr + parseInt(prev.fund),
     0
   );
-  console.log(totalFund);
+
   if (isFunding || isLoading) return <LoadingSpinner></LoadingSpinner>;
 
   return (

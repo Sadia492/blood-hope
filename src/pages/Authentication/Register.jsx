@@ -94,7 +94,7 @@ export default function Register() {
             updateUser({ displayName: name, photoURL: image }).then(() => {});
 
             const { data } = await axiosPublic.post("/users", user);
-            console.log(data);
+
             if (data.insertedId) {
               navigate("/");
               toast.success("Registration successful");
@@ -107,7 +107,6 @@ export default function Register() {
 
       // Proceed with registration logic (e.g., calling `createUser`)
     } catch (error) {
-      console.error("Image upload failed:", error.message);
       setError("Failed to upload the avatar. Please try again.");
     }
   };

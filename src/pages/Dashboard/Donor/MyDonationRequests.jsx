@@ -70,7 +70,6 @@ export default function MyDonationRequests() {
     });
   };
   const handleUpdateStatus = async (id, status) => {
-    console.log(id, status);
     // Handle status update
 
     try {
@@ -78,15 +77,13 @@ export default function MyDonationRequests() {
         status,
       });
       refetch(); // Refetch data after status update
-      console.log(data);
+
       if (data.modifiedCount) {
         toast.success(
           `You have ${status === "done" ? "completed" : "canceled"} the request`
         );
       }
-    } catch (error) {
-      console.error("Error updating donation status:", error);
-    }
+    } catch (error) {}
   };
 
   // Calculate total pages

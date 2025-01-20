@@ -95,7 +95,6 @@ export default function Profile() {
       form.reset();
     } catch (error) {
       toast.error(error.message);
-      console.error(error);
     } finally {
       setLoading(false);
       setEditMode(false); // Exit edit mode after saving

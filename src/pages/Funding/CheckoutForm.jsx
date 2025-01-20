@@ -32,9 +32,7 @@ const CheckoutForm = ({ fund, refetch }) => {
         currency: "usd",
       });
       setClientSecret(response.data.clientSecret);
-    } catch (error) {
-      console.error(error.response?.data || "Error creating payment intent.");
-    }
+    } catch (error) {}
   };
 
   const stripe = useStripe();
@@ -68,9 +66,7 @@ const CheckoutForm = ({ fund, refetch }) => {
     });
     if (error) {
       setProcessing(false);
-      return console.log("[error]", error);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
     }
     // confirm payment
     const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
@@ -83,7 +79,6 @@ const CheckoutForm = ({ fund, refetch }) => {
       },
     });
 
-    console.log(paymentIntent);
     if (paymentIntent.status === "succeeded") {
       try {
         // Save funding data in the database
@@ -95,12 +90,11 @@ const CheckoutForm = ({ fund, refetch }) => {
         };
 
         const { data } = await axiosSecure.post("/funding", fundingData);
-        console.log(data);
+
         toast.success("Funding Successful!");
         refetch(); // Refetch data if needed
         // navigate("/dashboard/my-fundings");
       } catch (err) {
-        console.error("Error saving funding data:", err);
       } finally {
         setProcessing(false);
         // closeModal();

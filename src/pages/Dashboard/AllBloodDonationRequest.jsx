@@ -67,7 +67,6 @@ export default function AllBloodDonationRequest() {
     });
   };
   const handleUpdateStatus = async (id, status) => {
-    console.log(id, status);
     // Handle status update
 
     try {
@@ -80,9 +79,7 @@ export default function AllBloodDonationRequest() {
         );
       }
       refetch(); // Refetch data after status update
-    } catch (error) {
-      console.error("Error updating donation status:", error);
-    }
+    } catch (error) {}
   };
 
   // Calculate total pages

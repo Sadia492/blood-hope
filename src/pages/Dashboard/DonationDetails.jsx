@@ -48,7 +48,6 @@ export default function DonationDetails() {
         }
       } catch (error) {
         toast.error("Failed to update donation status.");
-        console.error(error);
       }
     } else {
       toast.error(

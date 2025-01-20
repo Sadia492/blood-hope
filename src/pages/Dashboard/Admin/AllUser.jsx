@@ -37,8 +37,7 @@ export default function AllUser() {
       return data;
     },
   });
-  console.log(totalUsers);
-  console.log(allUser);
+
   const totalPages = totalUsers ? Math.ceil(totalUsers.count / limit) : 1;
 
   const handleBlockUnblock = async (userEmail, status) => {
@@ -56,7 +55,6 @@ export default function AllUser() {
       }
     } catch (error) {
       toast.error("An error occurred while updating user status.");
-      console.error(error);
     }
   };
 
@@ -77,7 +75,6 @@ export default function AllUser() {
       }
     } catch (error) {
       toast.error("An error occurred while updating user role.");
-      console.error(error);
     }
   };
   if ((isLoading, totalLoading)) return <LoadingSpinner></LoadingSpinner>;

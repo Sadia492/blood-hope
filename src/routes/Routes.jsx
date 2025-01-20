@@ -24,11 +24,13 @@ import Funding from "../pages/Funding/Funding";
 import DonationUpdate from "../pages/Dashboard/DonationUpdate";
 import AdminRoute from "./AdminRoute";
 import AdminMenu from "../pages/Dashboard/Admin/AdminMenu";
+import ErrorPage from "../components/ErrorPage";
 // import DonorHome from "../pages/Dashboard/DonorHome";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -91,6 +93,7 @@ const router = createBrowserRouter([
         <DashboardLayout></DashboardLayout>
       </PrivateRoute>
     ),
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       // donor routes
       {

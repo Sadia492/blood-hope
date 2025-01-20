@@ -70,7 +70,7 @@ export default function Navbar() {
               <NavLink to="/search">
                 <li>Search</li>
               </NavLink>
-              <NavLink to="/requests">
+              <NavLink to="/blood-donation-requests">
                 <li>Donation Requests</li>
               </NavLink>
               <NavLink to="/blog">

@@ -4,6 +4,7 @@ import axios from "axios";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 export default function BlogDetails() {
   const { id } = useParams();
@@ -26,7 +27,10 @@ export default function BlogDetails() {
 
   return (
     <div className="w-11/12 mx-auto mt-24">
-      <div className="bg-white flex items-center gap-6 rounded-lg shadow-lg p-8">
+      <Helmet>
+        <title>BloodHope | Blog Details</title>
+      </Helmet>
+      <div className="bg-white flex flex-col lg:flex-row items-center gap-6 rounded-lg shadow-lg p-8">
         <div className="flex-1">
           <img
             src={blog.image}

@@ -49,10 +49,7 @@ const HeroStories = () => {
       </h2>
       <Slider {...settings}>
         {stories.map((story) => (
-          <div
-            key={story.id}
-            className="flex flex-col items-center p-6 bg-white shadow-md rounded-lg"
-          >
+          <div key={story.id} className="flex flex-col items-center rounded-lg">
             <img
               src={story.img}
               alt={story.title}

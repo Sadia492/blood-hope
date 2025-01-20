@@ -6,6 +6,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useLoaderData } from "react-router-dom";
 import useLocationData from "../../hooks/useLocationData";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 export default function Search() {
   const [donors, setDonors] = useState([]);
@@ -50,10 +51,16 @@ export default function Search() {
 
   return (
     <div className="w-11/12 mx-auto mt-24">
+      <Helmet>
+        <title>BloodHope | Search</title>
+      </Helmet>
       <h1 className="text-3xl font-bold text-center mb-8">Search for Donors</h1>
 
       {/* Form for Search */}
-      <form onSubmit={handleSubmit} className="card-body grid grid-cols-4">
+      <form
+        onSubmit={handleSubmit}
+        className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
+      >
         {/* Blood Group */}
         <div className="form-control">
           <label className="label">

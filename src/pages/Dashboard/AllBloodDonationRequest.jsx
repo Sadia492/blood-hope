@@ -9,6 +9,7 @@ import bgImg from "../../assets/trianglify-lowres.png";
 import useRole from "../../hooks/useRole";
 import toast from "react-hot-toast";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 export default function AllBloodDonationRequest() {
   const axiosSecure = useAxiosSecure();
@@ -92,6 +93,9 @@ export default function AllBloodDonationRequest() {
 
   return (
     <div className="w-11/12 mx-auto mt-8">
+      <Helmet>
+        <title>BloodHope | All Blood Donation Requests</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-center">
         All Blood Donation Request
       </h2>

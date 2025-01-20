@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import bgImg from "../../assets/trianglify-lowres.png";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 Modal.setAppElement("#root");
 
 export default function Funding() {
@@ -31,6 +32,9 @@ export default function Funding() {
 
   return (
     <div className="mt-24 w-11/12 mx-auto">
+      <Helmet>
+        <title>BloodHope | Funding</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-center">Funding</h2>
       <div className="flex justify-end">
         <button

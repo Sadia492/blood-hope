@@ -8,6 +8,7 @@ import gradientAnimation from "../../assets/animation/gradient.json";
 import Lottie from "lottie-react";
 import useLocationData from "../../hooks/useLocationData";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 const image_hosting_key = import.meta.env.VITE_Image_Hosting_Key;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -18,15 +19,18 @@ export default function Profile() {
   const [editMode, setEditMode] = useState(false);
   const [image, setImage] = useState("");
   const { user, setLoading, updateUser, loading } = useAuth();
-  const { districts, upazilas, userData, isLoading } = useLocationData();
+  const { districts, upazilas, userData, refetch, isLoading } =
+    useLocationData();
   // States to manage the dropdown selections
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedUpazila, setSelectedUpazila] = useState("");
+  const [selectedBloodGroup, setSelectedBloodGroup] = useState("");
 
   useEffect(() => {
     if (userData) {
       setSelectedDistrict(userData.district || "");
       setSelectedUpazila(userData.upazila || "");
+      setSelectedBloodGroup(userData?.bloodGroup || "");
     }
   }, [userData]);
 
@@ -75,7 +79,7 @@ export default function Profile() {
       await updateUser({ displayName: name, photoURL: imageURL });
 
       // Update user data in the database
-      const { data } = await axiosPublic.put(
+      const { data } = await axiosSecure.put(
         `/user/${user?.email}`,
         updatedUserData
       );
@@ -84,7 +88,9 @@ export default function Profile() {
         toast.success("User updated successfully");
         setSelectedDistrict(district); // Update state after success
         setSelectedUpazila(upazila); // Update state after success
+        setSelectedBloodGroup(bloodGroup);
       }
+      refetch();
 
       form.reset();
     } catch (error) {
@@ -100,16 +106,17 @@ export default function Profile() {
 
   return (
     <div>
+      <Helmet>
+        <title>BloodHope | Profile</title>
+      </Helmet>
       <div className="flex justify-center items-center h-screen">
         <div className=" shadow-2xl rounded-2xl md:w-4/5 lg:w-3/5">
           <div className="flex flex-col items-center justify-center p-8">
-            {/* <a href="#" className="relative block"> */}
             <img
               alt="profile"
               src={user.photoURL}
               className="mx-auto object-cover rounded-full h-24 w-24 border-2 border-white"
             />
-            {/* </a> */}
 
             <p className="p-2 px-4 text-xs text-white bg-primary rounded-full">
               {userData?.role}
@@ -183,8 +190,11 @@ export default function Profile() {
                     required
                     className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
                     name="bloodGroup"
-                    defaultValue={userData?.bloodGroup || ""}
+                    value={selectedBloodGroup}
                     disabled={!editMode}
+                    onChange={(e) => {
+                      setSelectedBloodGroup(e.target.value);
+                    }}
                   >
                     <option value="">Select your Blood Group</option>
                     <option value="A+">A+</option>

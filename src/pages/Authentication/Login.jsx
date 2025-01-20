@@ -6,6 +6,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Lottie from "lottie-react";
 import loginAnimation from "../../assets/animation/login.json";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 export default function Login() {
   const [show, setShow] = useState(false);
@@ -30,8 +31,10 @@ export default function Login() {
     form.reset();
   };
   return (
-    <div className="flex justify-center items-center h-screen w-11/12 mx-auto">
-      {" "}
+    <div className="flex flex-col-reverse lg:flex-row justify-center items-center h-screen w-11/12 mx-auto">
+      <Helmet>
+        <title>BloodHope | Login</title>
+      </Helmet>
       <div className="card flex-1 w-full p-4  shadow-2xl">
         <form onSubmit={handleLogin} className="card-body">
           <h2 className="text-3xl font-bold bg-gradient-to-r from-primary from-0 to-75% to-secondary text-transparent bg-clip-text text-center">

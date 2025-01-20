@@ -7,6 +7,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import WelcomeUser from "../../components/WelcomeUser";
 import { MdBloodtype } from "react-icons/md";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 export default function SharedHome() {
   const axiosSecure = useAxiosSecure();
@@ -35,6 +36,9 @@ export default function SharedHome() {
 
   return (
     <div className="w-11/12 mx-auto mt-8">
+      <Helmet>
+        <title>BloodHope | Home</title>
+      </Helmet>
       <WelcomeUser></WelcomeUser>
 
       <div className="mt-12">

@@ -8,13 +8,14 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import bgImg from "../../../assets/trianglify-lowres.png";
 import LoadingSpinner from "../../../components/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 export default function MyDonationRequests() {
   const axiosSecure = useAxiosSecure();
   const { user, loading } = useAuth();
   const [statusFilter, setStatusFilter] = useState(""); // For filtering const [currentPage, setCurrentPage] = useState(1); // Pagination
   const [currentPage, setCurrentPage] = useState(1); // Pagination
-  const limit = 2; // Number of items per page
+  const limit = 10; // Number of items per page
 
   // Fetch paginated and filtered donation requests
   const {
@@ -96,6 +97,9 @@ export default function MyDonationRequests() {
 
   return (
     <div className="w-11/12 mx-auto mt-8">
+      <Helmet>
+        <title>BloodHope | My Donation Requests</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-center">My Donation Requests</h2>
 
       {/* Filter Dropdown */}

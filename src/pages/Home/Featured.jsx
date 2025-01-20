@@ -5,7 +5,7 @@ const Featured = () => {
   return (
     <div className="w-11/12 mx-auto mt-12">
       <h2 className="font-bold text-3xl text-center">Featured</h2>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-11/12 h-full mx-auto  p-6 rounded-lg">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6  h-full mx-auto rounded-lg">
         {/* Hero Story */}
         <HeroStories></HeroStories>
 

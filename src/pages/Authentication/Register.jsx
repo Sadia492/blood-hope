@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import Lottie from "lottie-react";
 import registerAnimation from "../../assets/animation/register.json";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 const image_hosting_key = import.meta.env.VITE_Image_Hosting_Key;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -113,12 +114,18 @@ export default function Register() {
   if (isLoading || isPending) return <LoadingSpinner></LoadingSpinner>;
 
   return (
-    <div className="flex justify-center items-center min-h-screen w-11/12 mx-auto">
+    <div className="flex flex-col-reverse lg:flex-row justify-center items-center min-h-screen w-11/12 mx-auto">
+      <Helmet>
+        <title>BloodHope | Register</title>
+      </Helmet>
       <div className="card bg-base-100 w-full flex-1 shadow-2xl">
         <h2 className="text-3xl font-bold bg-gradient-to-r from-primary from-0 to-70% to-secondary text-transparent bg-clip-text text-center">
           REGISTER NOW
         </h2>
-        <form onSubmit={handleRegister} className="card-body grid grid-cols-2">
+        <form
+          onSubmit={handleRegister}
+          className="card-body grid   grid-cols-1 md:grid-cols-2"
+        >
           {/* name field */}
           <div className="form-control">
             <label className="label">
@@ -155,7 +162,7 @@ export default function Register() {
             <input
               type="file"
               name="avatar"
-              className="file-input file-input-bordered input-error file-input-error w-full max-w-xs"
+              className="file-input file-input-bordered input-error file-input-error w-full "
               accept="image/*"
               required
             />
@@ -267,7 +274,7 @@ export default function Register() {
               </button>
             </label>
           </div>
-          <div className="form-control mt-6 col-span-2">
+          <div className="form-control mt-6 md:col-span-2">
             <button className="btn bg-gradient-to-r from-primary to-secondary text-white">
               Register
             </button>
@@ -275,7 +282,7 @@ export default function Register() {
           {error && (
             <p className="text-red-500 text-center col-span-2">{error}</p>
           )}
-          <p className="text-center col-span-2">
+          <p className="text-center md:col-span-2">
             Already have an account? Please{" "}
             <Link className="text-red-500 font-bold" to="/login">
               Login

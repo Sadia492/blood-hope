@@ -7,6 +7,8 @@ import Modal from "react-modal";
 import toast from "react-hot-toast";
 import Lottie from "lottie-react";
 import animation from "../../assets/animation/bloodMan.json";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 Modal.setAppElement("#root");
 
@@ -14,7 +16,7 @@ export default function DonationDetails() {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -55,10 +57,13 @@ export default function DonationDetails() {
     }
   };
 
-  if (isLoading) return <p className="text-center text-lg">Loading...</p>;
+  if (isLoading || loading) return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="w-11/12 mt-24 mx-auto ">
+      <Helmet>
+        <title>BloodHope | Donation Details</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-gray-800 text-center">
         Donation Request Details
       </h2>

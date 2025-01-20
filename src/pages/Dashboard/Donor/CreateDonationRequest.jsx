@@ -5,12 +5,14 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import LoadingSpinner from "../../../components/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 const CreateDonationRequest = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
   const { districts, upazilas, userData, isLoading } = useLocationData();
-  console.log(userData);
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -63,9 +65,13 @@ const CreateDonationRequest = () => {
     // console.log(donationRequest); // Replace this with an API call to save the dat
     form.reset();
   };
+  if (isLoading || loading) return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="w-11/12 mx-auto p-8 rounded-md shadow-md ">
+      <Helmet>
+        <title>BloodHope | Create Donation Request</title>
+      </Helmet>
       <h1 className="text-2xl font-bold text-center form-control">
         Create Donation Request
       </h1>

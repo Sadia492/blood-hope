@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import bgImg from "../../../assets/trianglify-lowres.png";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import LoadingSpinner from "../../../components/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 export default function AllUser() {
   const axiosSecure = useAxiosSecure();
@@ -83,6 +84,9 @@ export default function AllUser() {
 
   return (
     <div className="w-11/12 mx-auto mt-8">
+      <Helmet>
+        <title>BloodHope | All Users</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-center">All Users</h2>
 
       {/* Filter Dropdown */}
@@ -108,105 +112,113 @@ export default function AllUser() {
       {/* User Table */}
       <div className="">
         {allUser?.length > 0 ? (
-          <table className="table text-center border-separate border-spacing-y-3 w-full ">
-            <thead
-              style={{
-                backgroundImage: `url(${bgImg})`,
-                backgroundSize: "cover",
-                backgroundPosition: "right",
-              }}
-            >
-              <tr>
-                <th>#</th>
-                <th>Avatar</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {allUser?.map((user, idx) => (
-                <tr
-                  key={user?._id}
-                  className="bg-white shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
-                >
-                  <td>{idx + 1}</td>
-                  <td>
-                    <div className="avatar">
-                      <div className="w-12 rounded-full">
-                        <img src={user?.image} alt="Avatar" />
-                      </div>
-                    </div>
-                  </td>
-                  <td>{user?.name}</td>
-                  <td>{user?.email}</td>
-                  <td>{user?.role}</td>
-                  <td>
-                    <span
-                      className={`badge ${
-                        user?.status === "active"
-                          ? "badge-success"
-                          : "badge-error"
-                      }`}
-                    >
-                      {user?.status}
-                    </span>
-                  </td>
-                  <td>
-                    <div className="dropdown dropdown-left">
-                      <label tabIndex={0} className="btn btn-sm btn-ghost">
-                        <BsThreeDotsVertical></BsThreeDotsVertical>
-                      </label>
-                      <ul
-                        tabIndex={0}
-                        className="dropdown-content dropdown-top menu z-50 p-2 shadow bg-base-100 rounded-box w-52"
-                      >
-                        <li>
-                          <button
-                            className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
-                            onClick={() =>
-                              handleBlockUnblock(
-                                user?.email,
-                                user.status === "active" ? "blocked" : "active"
-                              )
-                            }
-                          >
-                            {user.status === "active" ? "Block" : "Unblock"}
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
-                            onClick={() =>
-                              handleRoleChange(
-                                user?.email,
-                                user?.role,
-                                "volunteer"
-                              )
-                            }
-                          >
-                            Make Volunteer
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
-                            onClick={() =>
-                              handleRoleChange(user?.email, user?.role, "admin")
-                            }
-                          >
-                            Make Admin
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="table text-center border-separate border-spacing-y-3 w-full ">
+              <thead
+                style={{
+                  backgroundImage: `url(${bgImg})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "right",
+                }}
+              >
+                <tr>
+                  <th>#</th>
+                  <th>Avatar</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {allUser?.map((user, idx) => (
+                  <tr
+                    key={user?._id}
+                    className="bg-white shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
+                  >
+                    <td>{idx + 1}</td>
+                    <td>
+                      <div className="avatar">
+                        <div className="w-12 rounded-full">
+                          <img src={user?.image} alt="Avatar" />
+                        </div>
+                      </div>
+                    </td>
+                    <td>{user?.name}</td>
+                    <td>{user?.email}</td>
+                    <td>{user?.role}</td>
+                    <td>
+                      <span
+                        className={`badge ${
+                          user?.status === "active"
+                            ? "badge-success"
+                            : "badge-error"
+                        }`}
+                      >
+                        {user?.status}
+                      </span>
+                    </td>
+                    <td>
+                      <div className="dropdown dropdown-left">
+                        <label tabIndex={0} className="btn btn-sm btn-ghost">
+                          <BsThreeDotsVertical></BsThreeDotsVertical>
+                        </label>
+                        <ul
+                          tabIndex={0}
+                          className="dropdown-content dropdown-top menu z-50 p-2 shadow bg-base-100 rounded-box w-52"
+                        >
+                          <li>
+                            <button
+                              className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
+                              onClick={() =>
+                                handleBlockUnblock(
+                                  user?.email,
+                                  user.status === "active"
+                                    ? "blocked"
+                                    : "active"
+                                )
+                              }
+                            >
+                              {user.status === "active" ? "Block" : "Unblock"}
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
+                              onClick={() =>
+                                handleRoleChange(
+                                  user?.email,
+                                  user?.role,
+                                  "volunteer"
+                                )
+                              }
+                            >
+                              Make Volunteer
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              className="btn btn-sm bg-gradient-to-r text-white from-primary to-secondary"
+                              onClick={() =>
+                                handleRoleChange(
+                                  user?.email,
+                                  user?.role,
+                                  "admin"
+                                )
+                              }
+                            >
+                              Make Admin
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : (
           <p className="font-bold text-center text-3xl">No Data Found</p>
         )}

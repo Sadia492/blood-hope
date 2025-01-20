@@ -25,7 +25,11 @@ const useLocationData = () => {
     },
   });
   // single user Data get
-  const { data: userData, isLoading: isUserLoading } = useQuery({
+  const {
+    data: userData,
+    isLoading: isUserLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["user", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/user/${user?.email}`);
@@ -37,6 +41,7 @@ const useLocationData = () => {
     districts,
     upazilas,
     userData,
+    refetch,
     isLoading: isDistrictsLoading || isUpazilasLoading || isUserLoading, // Combined loading state
   };
 };

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import BlogCard from "../../components/BlogCard";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 export default function ContentManagement() {
   const axiosSecure = useAxiosSecure();
@@ -25,6 +26,9 @@ export default function ContentManagement() {
 
   return (
     <div className="w-11/12 mt-8 mx-auto">
+      <Helmet>
+        <title>BloodHope | Content Management</title>
+      </Helmet>
       <div className="flex flex-row-reverse justify-between items-center mb-4">
         <Link
           to="/dashboard/content-management/add-blog"

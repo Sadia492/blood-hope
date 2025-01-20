@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 export default function DonationUpdate() {
   const { id } = useParams();
@@ -13,9 +14,14 @@ export default function DonationUpdate() {
   // States to manage the dropdown selections
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedUpazila, setSelectedUpazila] = useState("");
+  const [selectedBloodGroup, setSelectedBloodGroup] = useState("");
   const axiosSecure = useAxiosSecure();
   const { user, loading } = useAuth();
-  const { data: request, isLoading: requestLoading } = useQuery({
+  const {
+    data: request,
+    refetch,
+    isLoading: requestLoading,
+  } = useQuery({
     queryKey: ["request", id],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/donation-request/${id}`);
@@ -26,6 +32,7 @@ export default function DonationUpdate() {
     if (request) {
       setSelectedDistrict(request?.recipientDistrict || "");
       setSelectedUpazila(request?.recipientUpazila || "");
+      setSelectedBloodGroup(request?.bloodGroup || "");
     }
   }, [request]);
   console.log(selectedDistrict, selectedUpazila);
@@ -41,17 +48,14 @@ export default function DonationUpdate() {
     recipientUpazila,
     requestMessage,
   } = request || {};
-  const [district, setDistrict] = useState(recipientDistrict);
-  console.log(district);
+  // const [district, setDistrict] = useState(recipientDistrict);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const requesterName = user.displayName;
-    const requesterEmail = user.email;
     const recipientName = form.recipientName.value;
-    // const recipientDistrict = form.recipientDistrict.value;
-    // const recipientUpazila = form.recipientUpazila.value;
+    const recipientDistrict = form.district.value;
+    const recipientUpazila = form.upazila.value;
     const hospitalName = form.hospitalName.value;
     const fullAddress = form.fullAddress.value;
     const bloodGroup = form.bloodGroup.value;
@@ -61,11 +65,11 @@ export default function DonationUpdate() {
 
     const donationRequest = {
       recipientName,
-      selectedDistrict,
-      selectedDistrict,
+      recipientDistrict, // Correct form value
+      recipientUpazila, // Correct form value
       hospitalName,
       fullAddress,
-      bloodGroup,
+      bloodGroup, // Correct form value
       donationDate,
       donationTime,
       requestMessage,
@@ -81,11 +85,16 @@ export default function DonationUpdate() {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "donation updated successfully",
+        title: "Donation updated successfully",
         showConfirmButton: false,
         timer: 1500,
       });
+      setSelectedDistrict(recipientDistrict); // Update dropdown state
+      setSelectedUpazila(recipientUpazila); // Update dropdown state
+      setSelectedBloodGroup(bloodGroup); // Update dropdown state
     }
+
+    refetch();
     // } else {
     //   toast.error("you have been blocked by the admin");
     // }
@@ -99,6 +108,9 @@ export default function DonationUpdate() {
 
   return (
     <div className="w-11/12 mx-auto mt-24">
+      <Helmet>
+        <title>BloodHope | Update</title>
+      </Helmet>
       <h1 className="text-2xl font-bold text-center form-control">
         Update Donation Request
       </h1>
@@ -152,9 +164,7 @@ export default function DonationUpdate() {
             className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error"
             name="district"
             value={selectedDistrict}
-            onChange={(e) => {
-              setSelectedDistrict(e.target.value);
-            }}
+            onChange={(e) => setSelectedDistrict(e.target.value)}
           >
             <option value="">Select your District</option>
             {districts?.map((district) => (
@@ -175,7 +185,6 @@ export default function DonationUpdate() {
             className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error"
             name="upazila"
             value={selectedUpazila}
-            disabled={!selectedDistrict} // Disable if not in edit mode or district not selected
             onChange={(e) => setSelectedUpazila(e.target.value)}
           >
             <option value="">Select your Upazila</option>
@@ -221,7 +230,10 @@ export default function DonationUpdate() {
               required
               className="w-full px-4 py-3 rounded-md bg-white input input-bordered input-error"
               name="bloodGroup"
-              defaultValue={bloodGroup || ""}
+              value={selectedBloodGroup}
+              onChange={(e) => {
+                setSelectedBloodGroup(e.target.value);
+              }}
             >
               <option value="">Select your Blood Group</option>
               <option value="A+">A+</option>

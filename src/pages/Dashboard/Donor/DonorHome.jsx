@@ -10,6 +10,7 @@ import WelcomeUser from "../../../components/WelcomeUser";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import bgImg from "../../../assets/trianglify-lowres.png";
 import LoadingSpinner from "../../../components/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 export default function DonorHome() {
   const axiosSecure = useAxiosSecure();
@@ -80,6 +81,9 @@ export default function DonorHome() {
 
   return (
     <div className="w-11/12 mx-auto mt-4">
+      <Helmet>
+        <title>BloodHope | Home</title>
+      </Helmet>
       <WelcomeUser></WelcomeUser>
       <h2 className="text-center text-4xl font-bold mt-8">
         Recent Donation Requests

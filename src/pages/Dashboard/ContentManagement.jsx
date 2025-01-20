@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import BlogCard from "../../components/BlogCard";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function ContentManagement() {
   const axiosSecure = useAxiosSecure();
@@ -20,7 +21,7 @@ export default function ContentManagement() {
     },
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="w-11/12 mt-8 mx-auto">

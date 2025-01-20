@@ -1,6 +1,7 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useRole from "../hooks/useRole";
 import useAuth from "../hooks/useAuth";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -8,7 +9,7 @@ const AdminRoute = ({ children }) => {
   const location = useLocation();
 
   if (loading || roleLoading) {
-    return <progress className="progress w-56"></progress>;
+    return <LoadingSpinner></LoadingSpinner>;
   }
 
   if (user && role !== "donor") {

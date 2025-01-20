@@ -5,16 +5,17 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function DonationUpdate() {
   const { id } = useParams();
-  const { districts, upazilas } = useLocationData();
+  const { districts, upazilas, isLoading } = useLocationData();
   // States to manage the dropdown selections
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedUpazila, setSelectedUpazila] = useState("");
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
-  const { data: request, isLoading } = useQuery({
+  const { user, loading } = useAuth();
+  const { data: request, isLoading: requestLoading } = useQuery({
     queryKey: ["request", id],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/donation-request/${id}`);
@@ -92,6 +93,10 @@ export default function DonationUpdate() {
     // console.log(donationRequest); // Replace this with an API call to save the dat
     form.reset();
   };
+
+  if (isLoading || requestLoading || loading)
+    return <LoadingSpinner></LoadingSpinner>;
+
   return (
     <div className="w-11/12 mx-auto mt-24">
       <h1 className="text-2xl font-bold text-center form-control">

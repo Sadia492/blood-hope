@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import useAuth from "../../../hooks/useAuth";
 import bgImg from "../../../assets/trianglify-lowres.png";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 
 export default function AllUser() {
   const axiosSecure = useAxiosSecure();
@@ -27,7 +27,7 @@ export default function AllUser() {
   });
 
   // Fetch total count for pagination
-  const { data: totalUsers } = useQuery({
+  const { data: totalUsers, isLoading: totalLoading } = useQuery({
     queryKey: ["totalUsers", statusFilter],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
@@ -79,6 +79,7 @@ export default function AllUser() {
       console.error(error);
     }
   };
+  if ((isLoading, totalLoading)) return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="w-11/12 mx-auto mt-8">

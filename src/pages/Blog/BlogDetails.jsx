@@ -3,12 +3,10 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function BlogDetails() {
   const { id } = useParams();
-  //   const [blog, setBlog] = useState(null);
-  //   const [loading, setLoading] = useState(true);
-
   const axiosPublic = useAxiosPublic();
   const { data: blog = [], isLoading } = useQuery({
     queryKey: ["blog"],
@@ -18,22 +16,8 @@ export default function BlogDetails() {
     },
   });
 
-  //   useEffect(() => {
-  //     const fetchBlog = async () => {
-  //       try {
-  //         const { data } = await axios.get(`/blogs/${id}`);
-  //         setBlog(data);
-  //       } catch (error) {
-  //         console.error("Error fetching blog details", error);
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     };
-  //     fetchBlog();
-  //   }, [id]);
-
   if (isLoading) {
-    return <div>Loading blog...</div>;
+    return <LoadingSpinner></LoadingSpinner>;
   }
 
   if (!blog) {

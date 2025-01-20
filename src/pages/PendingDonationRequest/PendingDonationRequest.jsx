@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Link, useNavigate } from "react-router-dom";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function PendingDonationRequest() {
   const axiosPublic = useAxiosPublic();
@@ -16,7 +17,7 @@ export default function PendingDonationRequest() {
       return data;
     },
   });
-
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
   return (
     <div className="w-11/12 mx-auto mt-24">
       <h1 className="text-3xl font-bold text-center mb-8">

@@ -6,6 +6,8 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import gradientAnimation from "../../assets/animation/gradient.json";
 import Lottie from "lottie-react";
+import useLocationData from "../../hooks/useLocationData";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const image_hosting_key = import.meta.env.VITE_Image_Hosting_Key;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -15,35 +17,11 @@ export default function Profile() {
   const axiosPublic = useAxiosPublic();
   const [editMode, setEditMode] = useState(false);
   const [image, setImage] = useState("");
-  const { user, setLoading, updateUser } = useAuth();
-  const { data: userData, isLoading } = useQuery({
-    queryKey: ["user", user.email],
-    queryFn: async () => {
-      const { data } = await axiosSecure.get(`/user/${user.email}`);
-      return data;
-    },
-  });
-
+  const { user, setLoading, updateUser, loading } = useAuth();
+  const { districts, upazilas, userData, isLoading } = useLocationData();
   // States to manage the dropdown selections
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedUpazila, setSelectedUpazila] = useState("");
-  const { data: districts } = useQuery({
-    queryKey: ["districts"],
-    queryFn: async () => {
-      const { data } = await axiosPublic.get("/districts");
-      return data;
-    },
-  });
-
-  const { data: upazilas } = useQuery({
-    queryKey: ["upazilas", selectedDistrict], // Refetch upazilas when district changes
-    queryFn: async () => {
-      const { data } = await axiosPublic.get(
-        `/upazilas?district=${selectedDistrict}`
-      );
-      return data;
-    },
-  });
 
   useEffect(() => {
     if (userData) {
@@ -117,6 +95,8 @@ export default function Profile() {
       setEditMode(false); // Exit edit mode after saving
     }
   };
+
+  if (isLoading || loading) return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div>

@@ -4,10 +4,11 @@ import useLocationData from "../../../hooks/useLocationData";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const CreateDonationRequest = () => {
   const { user } = useAuth();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const { districts, upazilas, userData, isLoading } = useLocationData();
   console.log(userData);
   const handleFormSubmit = async (e) => {
@@ -41,7 +42,7 @@ const CreateDonationRequest = () => {
     };
     console.log(donationTime);
     if (userData?.status === "active") {
-      const { data } = await axiosPublic.post(
+      const { data } = await axiosSecure.post(
         "/donation-requests",
         donationRequest
       );

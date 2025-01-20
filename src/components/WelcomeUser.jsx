@@ -2,9 +2,11 @@ import React from "react";
 import useAuth from "../hooks/useAuth";
 import Lottie from "lottie-react";
 import animate from "../assets/animation/bloodMan.json";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function WelcomeUser() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  if (loading) return <LoadingSpinner></LoadingSpinner>;
   return (
     <section className="bg-gradient-to-r flex justify-between from-secondary to-primary text-white py-10 px-6 rounded-lg shadow-md">
       <div className="flex items-center justify-between">

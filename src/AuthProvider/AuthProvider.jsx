@@ -31,10 +31,7 @@ export default function AuthProvider({ children }) {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
-  //   const signInWithGoogle = () => {
-  //     setLoading(true);
-  //     return signInWithPopup(auth, googleProvider);
-  //   };
+
   const updateUser = (profileData) => {
     setLoading(true);
     return updateProfile(auth.currentUser, profileData);
@@ -43,7 +40,6 @@ export default function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
-        // get token and store client
         const userInfo = { email: currentUser.email };
         axiosPublic.post("/jwt", userInfo).then((res) => {
           if (res.data.token) {
@@ -52,7 +48,6 @@ export default function AuthProvider({ children }) {
           }
         });
       } else {
-        // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)
         localStorage.removeItem("access-token");
         setLoading(false);
       }

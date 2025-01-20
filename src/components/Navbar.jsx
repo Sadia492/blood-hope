@@ -134,9 +134,12 @@ export default function Navbar() {
                   </div>
                   <ul
                     tabIndex={0}
-                    className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-52 p-2 "
+                    className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-52 p-2 gap-3"
                   >
-                    <NavLink className="p-2" to="/dashboard">
+                    <NavLink
+                      className="btn bg-gradient-to-r from-primary to-secondary text-white"
+                      to="/dashboard"
+                    >
                       <li>Dashboard</li>
                     </NavLink>
                     <Link

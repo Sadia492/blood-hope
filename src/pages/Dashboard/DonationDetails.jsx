@@ -49,7 +49,9 @@ export default function DonationDetails() {
         console.error(error);
       }
     } else {
-      toast.error("Donation request is already in progress");
+      toast.error(
+        `Donation request is already ${donationRequest.donationStatus}`
+      );
     }
   };
 

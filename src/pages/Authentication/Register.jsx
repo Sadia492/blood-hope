@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import Lottie from "lottie-react";
 import registerAnimation from "../../assets/animation/register.json";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const image_hosting_key = import.meta.env.VITE_Image_Hosting_Key;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -18,14 +19,14 @@ export default function Register() {
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   const { createUser, setUser, updateUser, setLoading } = useAuth();
-  const { data: districts, isLoading } = useQuery({
+  const { data: districts = [], isLoading } = useQuery({
     queryKey: ["districts"],
     queryFn: async () => {
       const { data } = await axiosPublic.get("/districts");
       return data;
     },
   });
-  const { data: upazilas, isPending } = useQuery({
+  const { data: upazilas = [], isPending } = useQuery({
     queryKey: ["upazilas"],
     queryFn: async () => {
       const { data } = await axiosPublic.get("/upazilas");
@@ -109,6 +110,7 @@ export default function Register() {
       setError("Failed to upload the avatar. Please try again.");
     }
   };
+  if (isLoading || isPending) return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="flex justify-center items-center min-h-screen w-11/12 mx-auto">

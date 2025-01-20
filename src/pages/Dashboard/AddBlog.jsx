@@ -23,9 +23,7 @@ export default function AddBlog() {
     if (!image || !image.type.startsWith("image/")) {
       return toast.error("Please upload a valid image file.");
     }
-    // if (image.size > 2 * 1024 * 1024) {
-    //   return toast.error("Image size must be less than 2MB.");
-    // }
+
     if (!content.trim()) {
       return toast.error("Content cannot be empty.");
     }
@@ -58,7 +56,6 @@ export default function AddBlog() {
         }
       }
     } catch (error) {
-      console.error("Error:", error.message);
       toast.error("Failed to upload image or save blog. Please try again.");
     }
   };

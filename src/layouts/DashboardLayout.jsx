@@ -36,7 +36,7 @@ export default function DashboardLayout() {
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col ">
-          <div className="flex justify-end">
+          <div className="flex justify-end my-8">
             <label
               htmlFor="my-drawer-2"
               className="btn bg-primary text-white drawer-button lg:hidden"

@@ -83,7 +83,7 @@ export default function Banner() {
                 {slide.description}
               </p>
               <a
-                href="/assignments"
+                href="/blood-donation-requests"
                 className={` btn bg-gradient-to-r from-primary to-secondary text-white`}
               >
                 Connect Now

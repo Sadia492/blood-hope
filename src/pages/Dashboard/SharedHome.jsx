@@ -6,9 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import WelcomeUser from "../../components/WelcomeUser";
 import { MdBloodtype } from "react-icons/md";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function SharedHome() {
-  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const { data: stat, isLoading } = useQuery({
     queryKey: ["stat"],
@@ -31,6 +31,7 @@ export default function SharedHome() {
     0
   );
   console.log(totalFund);
+  if (isFunding || isLoading) return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="w-11/12 mx-auto mt-8">

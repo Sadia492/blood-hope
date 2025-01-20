@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Lottie from "lottie-react";
 import loginAnimation from "../../assets/animation/login.json";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function Login() {
   const [show, setShow] = useState(false);

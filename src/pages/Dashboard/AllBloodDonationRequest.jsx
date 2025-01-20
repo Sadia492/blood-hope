@@ -7,10 +7,12 @@ import { FaEye, FaPen, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import bgImg from "../../assets/trianglify-lowres.png";
 import useRole from "../../hooks/useRole";
+import toast from "react-hot-toast";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function AllBloodDonationRequest() {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [role, roleLoading] = useRole();
   const [statusFilter, setStatusFilter] = useState(""); // For filtering requests by status
   const [currentPage, setCurrentPage] = useState(1); // Pagination
@@ -32,7 +34,7 @@ export default function AllBloodDonationRequest() {
     keepPreviousData: true, // Prevents blank data during page transition
   });
 
-  const { data: totalData } = useQuery({
+  const { data: totalData, isLoading: totalLoading } = useQuery({
     queryKey: ["totalData", user.email],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/total-donation-requests`);
@@ -52,7 +54,6 @@ export default function AllBloodDonationRequest() {
       if (result.isConfirmed) {
         axiosSecure.delete(`/donation-request/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
-            refetch();
             Swal.fire({
               title: "Deleted!",
               text: "Your file has been deleted.",
@@ -72,13 +73,12 @@ export default function AllBloodDonationRequest() {
       const { data } = await axiosSecure.patch(`/donation-request/${id}`, {
         status,
       });
-      refetch(); // Refetch data after status update
-      console.log(data);
       if (data.modifiedCount) {
         toast.success(
           `You have ${status === "done" ? "completed" : "canceled"} the request`
         );
       }
+      refetch(); // Refetch data after status update
     } catch (error) {
       console.error("Error updating donation status:", error);
     }
@@ -86,6 +86,9 @@ export default function AllBloodDonationRequest() {
 
   // Calculate total pages
   const totalPages = totalData ? Math.ceil(totalData.count / limit) : 1;
+
+  if (isLoading || roleLoading || totalLoading || loading)
+    return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="w-11/12 mx-auto mt-8">

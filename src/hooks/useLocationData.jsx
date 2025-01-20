@@ -7,6 +7,7 @@ const useLocationData = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  // districts
   const { data: districts, isLoading: isDistrictsLoading } = useQuery({
     queryKey: ["districts"],
     queryFn: async () => {
@@ -14,6 +15,7 @@ const useLocationData = () => {
       return data;
     },
   });
+  // upazila get
 
   const { data: upazilas, isLoading: isUpazilasLoading } = useQuery({
     queryKey: ["upazilas"],
@@ -22,6 +24,7 @@ const useLocationData = () => {
       return data;
     },
   });
+  // single user Data get
   const { data: userData, isLoading: isUserLoading } = useQuery({
     queryKey: ["user", user?.email],
     queryFn: async () => {

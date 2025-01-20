@@ -6,12 +6,13 @@ import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import bgImg from "../../assets/trianglify-lowres.png";
+import LoadingSpinner from "../../components/LoadingSpinner";
 Modal.setAppElement("#root");
 
 export default function Funding() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const [fund, setFund] = useState(0);
@@ -26,7 +27,7 @@ export default function Funding() {
       return data;
     },
   });
-  console.log(funding);
+  if (isLoading || loading) return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="mt-24 w-11/12 mx-auto">

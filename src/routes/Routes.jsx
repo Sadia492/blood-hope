@@ -121,7 +121,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      // admin and volunteer routes
+      // admin  routes
       {
         path: "all-users",
         element: (
@@ -130,6 +130,7 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+      //admin and volunteer routes
       {
         path: "all-blood-donation-request",
         element: (

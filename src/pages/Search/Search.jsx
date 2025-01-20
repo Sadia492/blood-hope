@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useLoaderData } from "react-router-dom";
 import useLocationData from "../../hooks/useLocationData";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function Search() {
   const [donors, setDonors] = useState([]);
@@ -15,7 +16,7 @@ export default function Search() {
   // States for form fields
   const [bloodGroup, setBloodGroup] = useState("");
   const [district, setDistrict] = useState("");
-  const [upazila, setUpazila] = useState("");
+  const [upazila, setUpazila, isLoading] = useState("");
 
   // Form submit handler
   const handleSubmit = async (e) => {
@@ -45,6 +46,7 @@ export default function Search() {
 
     setLoading(false);
   };
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="w-11/12 mx-auto mt-24">

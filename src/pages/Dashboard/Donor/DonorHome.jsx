@@ -9,10 +9,11 @@ import Swal from "sweetalert2";
 import WelcomeUser from "../../../components/WelcomeUser";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import bgImg from "../../../assets/trianglify-lowres.png";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 
 export default function DonorHome() {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
   const {
     data: lastRequests,
@@ -73,8 +74,8 @@ export default function DonorHome() {
     }
   };
 
-  if (isLoading) {
-    return <p>Loading...</p>;
+  if (isLoading || loading) {
+    return <LoadingSpinner></LoadingSpinner>;
   }
 
   return (
@@ -84,7 +85,7 @@ export default function DonorHome() {
         Recent Donation Requests
       </h2>
       {lastRequests?.length > 0 ? (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-scroll">
           <table className="table-auto w-full text-center border-separate border-spacing-y-3 table-layout-auto">
             <thead
               className="bg-cover bg-right"

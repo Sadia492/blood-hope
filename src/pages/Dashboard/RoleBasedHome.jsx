@@ -5,10 +5,11 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { Navigate } from "react-router-dom";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function RoleBasedHome() {
   // const { role } = useAuth(); // Assume `role` is fetched from the auth context
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const { data: userRole, isLoading } = useQuery({
@@ -23,4 +24,5 @@ export default function RoleBasedHome() {
   } else if (userRole?.role === "admin" || userRole?.role === "volunteer") {
     return <SharedHome />;
   }
+  if (loading || isLoading) return <LoadingSpinner></LoadingSpinner>;
 }

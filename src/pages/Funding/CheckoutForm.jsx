@@ -106,29 +106,6 @@ const CheckoutForm = ({ fund, refetch }) => {
         // closeModal();
       }
     }
-
-    // if (paymentIntent.status === "succeeded") {
-    //   try {
-    //     // Save data in db
-    //     await axiosSecure.post("/order", {
-    //       ...purchaseInfo,
-    //       transactionId: paymentIntent?.id,
-    //     });
-    //     // decrease quantity from plant collection
-    //     await axiosSecure.patch(`/plants/quantity/${purchaseInfo?.plantId}`, {
-    //       quantityToUpdate: totalQuantity,
-    //       status: "decrease",
-    //     });
-    //     toast.success("Order Successful!");
-    //     refetch();
-    //     navigate("/dashboard/my-orders");
-    //   } catch (err) {
-    //     console.log(err);
-    //   } finally {
-    //     setProcessing(false);
-    //     closeModal();
-    //   }
-    // }
   };
 
   return (
@@ -154,11 +131,9 @@ const CheckoutForm = ({ fund, refetch }) => {
           className="btn"
           disabled={!stripe || !clientSecret || processing}
           type="submit"
-          //   label={`Pay ${purchaseInfo?.price}$`}
         >
           Pay
         </button>
-        {/* <button outline={true} onClick={closeModal} label={"Cancel"} /> */}
       </div>
     </form>
   );

@@ -3,10 +3,11 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import useRole from "../hooks/useRole";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function BlogCard({ blog, refetch }) {
   const axiosSecure = useAxiosSecure();
-  const [role, isLoading] = useRole();
+  const [role, roleLoading] = useRole();
 
   const handlePublishUnpublish = async (blogId, blogStatus) => {
     if (role === "admin") {
@@ -56,8 +57,13 @@ export default function BlogCard({ blog, refetch }) {
           });
         }
       });
+    } else {
+      toast.error("Only admin can perform this action.");
     }
   };
+  if (roleLoading) {
+    return <LoadingSpinner></LoadingSpinner>;
+  }
   return (
     <div>
       <div className="card bg-base-100 w-96 shadow-xl h-full">

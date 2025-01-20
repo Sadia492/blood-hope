@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function Blog() {
   const axiosPublic = useAxiosPublic();
@@ -12,6 +13,7 @@ export default function Blog() {
       return data;
     },
   });
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="mt-24 w-11/12 mx-auto">

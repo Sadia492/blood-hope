@@ -7,10 +7,11 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import bgImg from "../../../assets/trianglify-lowres.png";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 
 export default function MyDonationRequests() {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [statusFilter, setStatusFilter] = useState(""); // For filtering const [currentPage, setCurrentPage] = useState(1); // Pagination
   const [currentPage, setCurrentPage] = useState(1); // Pagination
   const limit = 2; // Number of items per page
@@ -32,7 +33,7 @@ export default function MyDonationRequests() {
   });
 
   // Fetch total count for pagination
-  const { data: totalData } = useQuery({
+  const { data: totalData, isLoading: totalLoading } = useQuery({
     queryKey: ["total", user.email, statusFilter],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
@@ -89,6 +90,9 @@ export default function MyDonationRequests() {
 
   // Calculate total pages
   const totalPages = totalData ? Math.ceil(totalData.count / limit) : 1;
+
+  if (isLoading || loading || totalLoading)
+    return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="w-11/12 mx-auto mt-8">

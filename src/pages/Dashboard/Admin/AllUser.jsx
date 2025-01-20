@@ -11,7 +11,7 @@ export default function AllUser() {
   const axiosSecure = useAxiosSecure();
   const [statusFilter, setStatusFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1); // Pagination
-  const limit = 2; // Number of items per page
+  const limit = 10; // Number of items per page
   const {
     data: allUser,
     isLoading,

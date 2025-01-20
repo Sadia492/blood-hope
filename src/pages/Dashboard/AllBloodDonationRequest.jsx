@@ -17,7 +17,7 @@ export default function AllBloodDonationRequest() {
   const [role, roleLoading] = useRole();
   const [statusFilter, setStatusFilter] = useState(""); // For filtering requests by status
   const [currentPage, setCurrentPage] = useState(1); // Pagination
-  const limit = 2; // Number of items per page
+  const limit = 10; // Number of items per page
 
   // Use the new format for useQuery in React Query v5
   const {

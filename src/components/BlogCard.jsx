@@ -66,9 +66,13 @@ export default function BlogCard({ blog, refetch }) {
   }
   return (
     <div>
-      <div className="card bg-base-100 w-96 shadow-xl h-full">
+      <div className="card bg-base-100  shadow-xl h-full">
         <figure>
-          <img src={blog.image} alt="Shoes" />
+          <img
+            className="h-60 w-full object-cover"
+            src={blog.image}
+            alt="Shoes"
+          />
         </figure>
         <div className="card-body">
           <h2 className="card-title">
@@ -77,7 +81,11 @@ export default function BlogCard({ blog, refetch }) {
           </h2>
           <div
             className="blog-content"
-            dangerouslySetInnerHTML={{ __html: blog?.content }}
+            dangerouslySetInnerHTML={{
+              __html:
+                (blog?.content?.substring(0, 200) || "") +
+                (blog?.content?.length > 200 ? "..." : ""),
+            }}
           />
           <div className="card-actions justify-end">
             <button

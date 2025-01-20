@@ -32,7 +32,7 @@ export default function Blog() {
               <img
                 src={blog.image}
                 alt={blog.title}
-                className="w-full h-48 object-cover"
+                className="w-full h-60 object-cover"
               />
               <div className="p-6">
                 <h2 className="text-2xl font-bold mb-2">{blog.title}</h2>

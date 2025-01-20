@@ -35,7 +35,15 @@ export default function Funding() {
       <Helmet>
         <title>BloodHope | Funding</title>
       </Helmet>
-      <h2 className="text-3xl font-bold text-center">Funding</h2>
+      <h2
+        className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+      >
+        Funding
+      </h2>
+      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-2">
+        Contribute to support life-saving campaigns and initiatives. Every
+        donation brings us closer to making a greater impact together.
+      </p>
       <div className="flex justify-end">
         <button
           onClick={openModal}

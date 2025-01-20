@@ -96,27 +96,29 @@ export default function AllBloodDonationRequest() {
       <Helmet>
         <title>BloodHope | All Blood Donation Requests</title>
       </Helmet>
-      <h2 className="text-3xl font-bold text-center">
+      <h2
+        className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+      >
         All Blood Donation Request
       </h2>
+      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+        Manage all incoming blood donation requests here—approve, track, and
+        ensure the right connections are made between donors and recipients.
+      </p>
 
       {/* Filter Dropdown */}
-      <label className="block mb-4 text-gray-700 font-semibold">
+      <label className="block mb-2">
         Filter by Status:
         <select
-          className="ml-2 p-3 border-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ff563d] focus:border-[#ff563d] bg-white text-gray-800 transition duration-300"
+          className="ml-2 p-2 border rounded"
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
         >
-          <option value="" className="text-gray-500">
-            All
-          </option>
-          <option value="active" className="text-gray-800">
-            Active
-          </option>
-          <option value="blocked" className="text-gray-800">
-            Blocked
-          </option>
+          <option value="">All</option>
+          <option value="pending">Pending</option>
+          <option value="inprogress">In Progress</option>
+          <option value="done">Done</option>
+          <option value="canceled">Canceled</option>
         </select>
       </label>
 

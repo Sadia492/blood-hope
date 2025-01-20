@@ -24,9 +24,15 @@ export default function PendingDonationRequest() {
       <Helmet>
         <title>BloodHope | Donation Requests</title>
       </Helmet>
-      <h1 className="text-3xl font-bold text-center mb-8">
+      <h1
+        className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+      >
         Blood Donation Requests
       </h1>
+      <p className="text-center lg:w-3/5 mx-auto  text-gray-600  mb-8">
+        View all pending donation requests in one place. Respond promptly and
+        make a difference in someone's life today.
+      </p>
 
       {requests?.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

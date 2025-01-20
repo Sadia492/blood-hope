@@ -29,6 +29,15 @@ export default function ContentManagement() {
       <Helmet>
         <title>BloodHope | Content Management</title>
       </Helmet>
+      <h2
+        className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+      >
+        Content Management
+      </h2>
+      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+        Manage and share valuable content here—admins and volunteers can view,
+        create, and add blogs to keep the community informed.
+      </p>
       <div className="flex flex-row-reverse justify-between items-center mb-4">
         <Link
           to="/dashboard/content-management/add-blog"

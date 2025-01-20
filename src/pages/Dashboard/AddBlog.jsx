@@ -62,7 +62,15 @@ export default function AddBlog() {
 
   return (
     <div className="w-11/12 mx-auto mt-8">
-      <h2 className="text-3xl text-center font-bold">Add Blog</h2>
+      <h2
+        className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+      >
+        Add Blog
+      </h2>
+      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+        Add a new blog here—write, format, and share valuable content with our
+        users to keep them informed and engaged.
+      </p>
       <form
         onSubmit={handleSubmit}
         className="grid grid-cols-1 md:grid-cols-2 gap-6"

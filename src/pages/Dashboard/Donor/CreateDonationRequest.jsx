@@ -72,9 +72,15 @@ const CreateDonationRequest = () => {
       <Helmet>
         <title>BloodHope | Create Donation Request</title>
       </Helmet>
-      <h1 className="text-2xl font-bold text-center form-control">
+      <h1
+        className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+      >
         Create Donation Request
       </h1>
+      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+        Fill out the details to create your blood donation request and get the
+        help you need when it matters most.
+      </p>
       <form
         onSubmit={handleFormSubmit}
         className="grid gap-x-6 gap-y-4 grid-cols-1 md:grid-cols-2"

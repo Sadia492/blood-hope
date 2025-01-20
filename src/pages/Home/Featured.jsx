@@ -1,18 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HeroStories from "../../components/HeroStories";
+import img from "../../assets/Blood donation-pana.png";
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import AOS CSS
 
 const Featured = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Animation duration
+      easing: "ease-in-out", // Easing function
+    });
+  }, []);
+
   return (
     <div className="w-11/12 mx-auto mt-12">
-      <h2 className="font-bold text-3xl text-center">Featured</h2>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6  h-full mx-auto rounded-lg">
+      <h2
+        className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+      >
+        Featured
+      </h2>
+      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-4">
+        Explore inspiring stories, real-time donation stats, and upcoming events
+        to make a difference. Join us in saving lives and spreading hope through
+        the power of blood donation.
+      </p>
+      <div
+        data-aos="fade-up"
+        className="grid grid-cols-1 lg:grid-cols-3 gap-6  h-full mx-auto rounded-lg"
+      >
         {/* Hero Story */}
         <HeroStories></HeroStories>
+        <div>
+          <img src={img} alt="" />
+        </div>
 
-        <div className="flex flex-col justify-between col-span-1 h-full">
+        <div className="flex flex-col justify-between gap-2 col-span-1 h-full">
           {/* Stats with Infographic */}
           <div className=" bg-white shadow-md rounded-lg p-6 flex flex-col items-center">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+            <h2
+              className={`text-2xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+            >
               Live Donation Stats
             </h2>
             <div className="w-full">
@@ -33,7 +60,9 @@ const Featured = () => {
 
           {/* Upcoming Events */}
           <div className=" bg-white shadow-md rounded-lg p-6 flex flex-col">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+            <h2
+              className={`text-2xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+            >
               Upcoming Events
             </h2>
             <ul className="space-y-4">

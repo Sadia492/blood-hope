@@ -100,8 +100,15 @@ export default function MyDonationRequests() {
       <Helmet>
         <title>BloodHope | My Donation Requests</title>
       </Helmet>
-      <h2 className="text-3xl font-bold text-center">My Donation Requests</h2>
-
+      <h2
+        className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+      >
+        My Donation Requests
+      </h2>
+      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-4">
+        View and track your blood donation requests here. Stay updated on the
+        status of your request and connect with potential donors.
+      </p>
       {/* Filter Dropdown */}
       <label className="block mb-2">
         Filter by Status:

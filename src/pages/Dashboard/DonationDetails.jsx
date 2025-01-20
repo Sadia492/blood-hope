@@ -64,9 +64,15 @@ export default function DonationDetails() {
       <Helmet>
         <title>BloodHope | Donation Details</title>
       </Helmet>
-      <h2 className="text-3xl font-bold text-gray-800 text-center">
+      <h2
+        className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+      >
         Donation Request Details
       </h2>
+      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+        View all the details of the donation request here—track the status,
+        urgency, and any additional information provided by the requester.
+      </p>
       <div className="flex-1 flex justify-center items-center">
         <Lottie className="w-48 " animationData={animation} loop={true} />
       </div>

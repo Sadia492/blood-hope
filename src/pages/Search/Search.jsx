@@ -54,8 +54,15 @@ export default function Search() {
       <Helmet>
         <title>BloodHope | Search</title>
       </Helmet>
-      <h1 className="text-3xl font-bold text-center mb-8">Search for Donors</h1>
-
+      <h1
+        className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+      >
+        Search for Donors
+      </h1>
+      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-4 mb-8">
+        Find life-saving blood donors in your area effortlessly. Connect with
+        volunteers ready to help in emergencies.
+      </p>
       {/* Form for Search */}
       <form
         onSubmit={handleSubmit}

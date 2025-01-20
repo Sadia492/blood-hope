@@ -1,16 +1,34 @@
 import Lottie from "lottie-react";
-import React from "react";
+import React, { useEffect } from "react";
 import animation from "../../assets/animation/bloodDoc.json";
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import AOS CSS
 
 const ContactUs = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Animation duration
+      easing: "ease-in-out", // Easing function
+    });
+  }, []);
+
   return (
     <section className="w-11/12 mx-auto my-12">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+        <h2
+          className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+        >
           Contact Us
         </h2>
+        <p className="text-center lg:w-3/5 mx-auto text-gray-600 mt-4">
+          Have questions or need assistance? Reach out to us, and we’ll be happy
+          to help. Your support makes a difference in saving lives.
+        </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div
+          data-aos="fade-up"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6"
+        >
           {/* Contact Form */}
           <div className=" p-6 shadow-md rounded-lg">
             <h3 className="text-xl font-semibold text-gray-700 mb-4">
@@ -46,7 +64,7 @@ const ContactUs = () => {
 
               <button
                 type="submit"
-                className="w-full bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 transition"
+                className={` btn bg-gradient-to-r from-primary to-secondary text-white w-full`}
               >
                 Send Message
               </button>

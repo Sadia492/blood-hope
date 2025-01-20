@@ -111,9 +111,15 @@ export default function DonationUpdate() {
       <Helmet>
         <title>BloodHope | Update</title>
       </Helmet>
-      <h1 className="text-2xl font-bold text-center form-control">
+      <h1
+        className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+      >
         Update Donation Request
       </h1>
+      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+        Update the details of the donation request here—modify the status,
+        urgency, or any other relevant information to keep the request current
+      </p>
       <form
         onSubmit={handleFormSubmit}
         className="grid gap-x-6 gap-y-4 grid-cols-2"

@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import slideImg1 from "../../assets/istockphoto-983366460-612x612.jpg";
 import slideImg2 from "../../assets/img1.jpg";
 import slideImg3 from "../../assets/360_F_309202280_CgsWoCAdLBe9INBvdwBKUkpaLEP4XNLa.jpg";
+import { Typewriter } from "react-simple-typewriter";
 
 export default function Banner() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -72,7 +73,15 @@ export default function Banner() {
               <h1
                 className={`text-5xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
               >
-                {slide.title}
+                <Typewriter
+                  words={[`${slide.title}`]}
+                  loop={true} // Set to true to loop through the words
+                  cursor
+                  cursorStyle="_"
+                  typeSpeed={130} // Adjust typing speed (default is 100)
+                  deleteSpeed={100} // Adjust delete speed (default is 50)
+                  delaySpeed={1000} // Delay between typing and deleting (default is 1000)
+                />
               </h1>
               <h1
                 className={`text-5xl font-bold bg-gradient-to-r text-center from-secondary to-primary text-transparent bg-clip-text`}

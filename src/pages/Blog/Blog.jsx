@@ -21,7 +21,15 @@ export default function Blog() {
       <Helmet>
         <title>BloodHope | Blog</title>
       </Helmet>
-      <h1 className="text-3xl font-bold text-center mb-8">Blog</h1>
+      <h1
+        className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+      >
+        Blog
+      </h1>
+      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+        Explore insightful articles and stories about the impact of blood
+        donation. Stay informed and inspired to make a meaningful difference.
+      </p>
       {publishedBlogs.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {publishedBlogs?.map((blog) => (

@@ -85,9 +85,16 @@ export default function DonorHome() {
         <title>BloodHope | Home</title>
       </Helmet>
       <WelcomeUser></WelcomeUser>
-      <h2 className="text-center text-4xl font-bold mt-8">
+      <h2
+        className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+      >
         Recent Donation Requests
       </h2>
+      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+        Discover the latest donation requests from individuals and families in
+        need. Your contribution can bring warmth and hope to those facing
+        challenging times
+      </p>
       {lastRequests?.length > 0 ? (
         <div className="overflow-x-scroll">
           <table className="table-auto w-full text-center border-separate border-spacing-y-3 table-layout-auto">

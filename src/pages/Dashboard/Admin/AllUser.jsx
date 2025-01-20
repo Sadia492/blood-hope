@@ -87,7 +87,15 @@ export default function AllUser() {
       <Helmet>
         <title>BloodHope | All Users</title>
       </Helmet>
-      <h2 className="text-3xl font-bold text-center">All Users</h2>
+      <h2
+        className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+      >
+        All Users
+      </h2>
+      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+        Manage user access here—block users, elevate trustworthy individuals to
+        admin or volunteer roles, and ensure smooth operation.
+      </p>
 
       {/* Filter Dropdown */}
       <label className="block mb-4 text-gray-700 font-semibold">

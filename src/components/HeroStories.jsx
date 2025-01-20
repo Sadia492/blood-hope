@@ -44,7 +44,9 @@ const HeroStories = () => {
 
   return (
     <div className="w-full p-6 shadow-md rounded-lg">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+      <h2
+        className={`text-2xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
+      >
         Hero Stories
       </h2>
       <Slider {...settings}>
@@ -60,7 +62,7 @@ const HeroStories = () => {
             </h3>
             <p className="text-gray-600 text-center">{story.description}</p>
             <button
-              className={` btn bg-gradient-to-r from-primary to-secondary text-white`}
+              className={` btn bg-gradient-to-r mt-4 from-primary to-secondary text-white`}
             >
               Read More
             </button>

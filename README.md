@@ -10,18 +10,6 @@
 - [BloodHope Live Site](https://blood-hope-2fafa.web.app/)  
 - [BloodHope Alternative Live Site](https://blood-hope1.netlify.app/)  
 
-## Table of Contents 📖  
-
-- [Features](#features-⚙️)  
-- [Technologies Used](#technologies-used-💻)  
-- [Dependencies](#dependencies-📦)  
-- [Installation Guide](#installation-guide-🛠️)  
-- [Admin Credentials](#admin-credentials-🔑)  
-- [Screenshots](#screenshots-📸)  
-- [Contributors](#contributors-🤝)  
-- [License](#license-📜)  
-
----
 
 ## Features ⚙️  
 

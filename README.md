@@ -115,26 +115,5 @@ Use the following credentials to log in as an **Admin**:
 
 ---
 
-## Screenshots 📸  
-
-![BloodHope Dashboard](https://via.placeholder.com/800x400?text=Dashboard+Screenshot)  
-
-> *More screenshots will be added soon...*  
-
----
-
-## Contributors 🤝  
-
-- **[Your Name](https://github.com/your-github-profile)** – Developer & Maintainer  
-- **Community Contributors** – Open-source contributions are welcome!  
-
----
-
-## License 📜  
-
-This project is licensed under the **MIT License**.  
-
----
-
 🚀 *Feel free to contribute, open issues, and improve the platform!*  
 

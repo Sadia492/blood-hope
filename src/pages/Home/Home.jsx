@@ -5,6 +5,7 @@ import ContactUs from "./ContactUs";
 import { Helmet } from "react-helmet-async";
 import FAQ from "./Faq";
 import Newsletter from "./Newsletter";
+import Testimonials from "./Testimonials";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Featured></Featured>
       <FAQ></FAQ>
       <ContactUs></ContactUs>
+      <Testimonials></Testimonials>
       <Newsletter></Newsletter>
     </div>
   );

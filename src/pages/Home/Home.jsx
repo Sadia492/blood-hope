@@ -3,6 +3,7 @@ import Banner from "./Banner";
 import Featured from "./Featured";
 import ContactUs from "./ContactUs";
 import { Helmet } from "react-helmet-async";
+import FAQ from "./Faq";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       </Helmet>
       <Banner></Banner>
       <Featured></Featured>
+      <FAQ></FAQ>
       <ContactUs></ContactUs>
     </div>
   );

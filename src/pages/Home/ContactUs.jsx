@@ -14,7 +14,7 @@ const ContactUs = () => {
 
   return (
     <section className="w-11/12 mx-auto my-12">
-      <div className="max-w-7xl mx-auto">
+      <div className="">
         <h2
           className={`text-3xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
         >

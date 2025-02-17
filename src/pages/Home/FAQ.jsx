@@ -14,7 +14,7 @@ export default function FAQ() {
   }, []);
 
   return (
-    <div id="faq" className="w-11/12 mx-auto mt-12" data-aos="fade-up">
+    <div id="faq" className="w-11/12 mx-auto mt-12">
       <h2 className="text-3xl font-bold mb-2 text-center bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
         Frequently Asked Questions
       </h2>

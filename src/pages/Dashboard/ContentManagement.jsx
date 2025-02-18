@@ -34,7 +34,7 @@ export default function ContentManagement() {
       >
         Content Management
       </h2>
-      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+      <p className="text-center lg:w-3/5 mx-auto     mt-2 mb-8">
         Manage and share valuable content here—admins and volunteers can view,
         create, and add blogs to keep the community informed.
       </p>
@@ -46,7 +46,7 @@ export default function ContentManagement() {
           Add Blog
         </Link>
         {/* Filter Dropdown */}
-        <label className="block mb-4 text-gray-700 font-semibold">
+        <label className="block mb-4   font-semibold">
           Filter by Status:
           <select
             className="ml-2 p-3 border-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ff563d] focus:border-[#ff563d] bg-white text-gray-800 transition duration-300"

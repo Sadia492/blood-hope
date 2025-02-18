@@ -71,7 +71,7 @@ export default function DonationDetails() {
       >
         Donation Request Details
       </h2>
-      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+      <p className="text-center lg:w-3/5 mx-auto     mt-2 mb-8">
         View all the details of the donation request here—track the status,
         urgency, and any additional information provided by the requester.
       </p>
@@ -81,7 +81,7 @@ export default function DonationDetails() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Donation Details */}
         <div className="p-8 rounded-lg shadow-md">
-          <h3 className="text-2xl font-semibold text-gray-700 mb-4">
+          <h3 className="text-2xl font-semibold   mb-4">
             Recipient Information
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -152,7 +152,7 @@ export default function DonationDetails() {
         <form onSubmit={handleSubmit}>
           <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text text-gray-600">User Name</span>
+              <span className="label-text   ">User Name</span>
             </label>
             <input
               type="text"
@@ -164,7 +164,7 @@ export default function DonationDetails() {
           </div>
           <div className="form-control mb-6">
             <label className="label">
-              <span className="label-text text-gray-600">User Email</span>
+              <span className="label-text   ">User Email</span>
             </label>
             <input
               type="email"

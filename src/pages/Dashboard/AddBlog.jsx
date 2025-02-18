@@ -67,7 +67,7 @@ export default function AddBlog() {
       >
         Add Blog
       </h2>
-      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+      <p className="text-center lg:w-3/5 mx-auto     mt-2 mb-8">
         Add a new blog here—write, format, and share valuable content with our
         users to keep them informed and engaged.
       </p>

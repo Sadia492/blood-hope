@@ -89,20 +89,20 @@ export default function AllUser() {
       >
         All Users
       </h2>
-      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+      <p className="text-center lg:w-3/5 mx-auto     mt-2 mb-8">
         Manage user access here—block users, elevate trustworthy individuals to
         admin or volunteer roles, and ensure smooth operation.
       </p>
 
       {/* Filter Dropdown */}
-      <label className="block mb-4 text-gray-700 font-semibold">
+      <label className="block mb-4   font-semibold">
         Filter by Status:
         <select
-          className="ml-2 p-3 border-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ff563d] focus:border-[#ff563d] bg-white text-gray-800 transition duration-300"
+          className="ml-2 p-3 border-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ff563d] focus:border-[#ff563d] text-gray-800 transition duration-300"
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
         >
-          <option value="" className="text-gray-500">
+          <option value="" className="   ">
             All
           </option>
           <option value="active" className="text-gray-800">
@@ -140,7 +140,7 @@ export default function AllUser() {
                 {allUser?.map((user, idx) => (
                   <tr
                     key={user?._id}
-                    className="bg-white shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
+                    className=" shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
                   >
                     <td>{idx + 1}</td>
                     <td>

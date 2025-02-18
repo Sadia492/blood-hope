@@ -14,6 +14,7 @@ import {
 } from "recharts";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 
 export default function Overview() {
   const axiosSecure = useAxiosSecure();
@@ -101,10 +102,13 @@ export default function Overview() {
 
   return (
     <div className="w-11/12 mx-auto mt-10">
+      <Helmet>
+        <title>BloodHope | Overview</title>
+      </Helmet>
       <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text text-center">
         Dashboard Overview
       </h1>
-      <p className="text-center text-gray-600 mb-8">
+      <p className="text-center    mb-8">
         Get insights into donations, donor statistics, and requests.
       </p>
 
@@ -127,7 +131,7 @@ export default function Overview() {
       {/* Charts Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Bar Chart */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className=" p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-bold text-center">Donations Over Time</h2>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={donationData}>
@@ -140,7 +144,7 @@ export default function Overview() {
         </div>
 
         {/* Pie Chart */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className=" p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-bold text-center">
             Blood Group Distribution
           </h2>

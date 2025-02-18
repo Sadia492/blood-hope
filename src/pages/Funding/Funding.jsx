@@ -40,7 +40,7 @@ export default function Funding() {
       >
         Funding
       </h2>
-      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-2">
+      <p className="text-center lg:w-3/5 mx-auto     mt-2 mb-2">
         Contribute to support life-saving campaigns and initiatives. Every
         donation brings us closer to making a greater impact together.
       </p>
@@ -73,7 +73,7 @@ export default function Funding() {
               {funding?.map((fund, index) => (
                 <tr
                   key={fund.id}
-                  className="bg-white shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
+                  className=" shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
                 >
                   <td className="px-4 py-2 border border-gray-300">
                     {index + 1}

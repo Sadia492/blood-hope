@@ -30,7 +30,7 @@ export default function BlogDetails() {
       <Helmet>
         <title>BloodHope | Blog Details</title>
       </Helmet>
-      <div className="bg-white flex flex-col lg:flex-row items-center gap-6 rounded-lg shadow-lg p-8">
+      <div className="border flex flex-col lg:flex-row items-center gap-6 rounded-lg shadow-lg p-8">
         <div className="flex-1">
           <img
             src={blog.image}

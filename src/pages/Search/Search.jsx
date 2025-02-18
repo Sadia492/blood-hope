@@ -57,7 +57,7 @@ export default function Search() {
       >
         Search for Donors
       </h1>
-      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-4 mb-8">
+      <p className="text-center lg:w-3/5 mx-auto     mt-4 mb-8">
         Find life-saving blood donors in your area effortlessly. Connect with
         volunteers ready to help in emergencies.
       </p>
@@ -157,11 +157,9 @@ export default function Search() {
                   className="bg-white p-6 rounded-lg shadow-lg"
                 >
                   <h3 className="text-xl font-semibold mb-2">{donor.name}</h3>
-                  <p className="text-gray-600">
-                    Blood Group: {donor.bloodGroup}
-                  </p>
-                  <p className="text-gray-600">District: {donor.district}</p>
-                  <p className="text-gray-600">Upazila: {donor.upazila}</p>
+                  <p className="  ">Blood Group: {donor.bloodGroup}</p>
+                  <p className="  ">District: {donor.district}</p>
+                  <p className="  ">Upazila: {donor.upazila}</p>
                 </div>
               </div>
             ))}

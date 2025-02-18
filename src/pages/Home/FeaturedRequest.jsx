@@ -25,7 +25,7 @@ export default function FeaturedRequest() {
       >
         Featured Donation Requests
       </h1>
-      <p className="text-center lg:w-3/5 mx-auto  text-gray-600  mb-8">
+      <p className="text-center lg:w-3/5 mx-auto      mb-8">
         View pending donation requests. Respond promptly and make a difference
         in someone's life today.
       </p>
@@ -33,20 +33,17 @@ export default function FeaturedRequest() {
       {requests?.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {requests.slice(0, 4).map((request) => (
-            <div
-              key={request._id}
-              className="bg-white p-6 rounded-lg shadow-md"
-            >
+            <div key={request._id} className="border p-6 rounded-lg shadow-md">
               <h2 className="text-xl font-bold mb-2">
                 {request.recipientName}
               </h2>
-              <p className="text-gray-600">
+              <p className="  ">
                 Location: {request.recipientDistrict},{" "}
                 {request.recipientDistrict}
               </p>
-              <p className="text-gray-600">Blood Group: {request.bloodGroup}</p>
-              <p className="text-gray-600">Date: {request.donationDate}</p>
-              <p className="text-gray-600">Time: {request.donationTime}</p>
+              <p className="  ">Blood Group: {request.bloodGroup}</p>
+              <p className="  ">Date: {request.donationDate}</p>
+              <p className="  ">Time: {request.donationTime}</p>
               <Link
                 to={`/donation/${request._id}`}
                 className="btn bg-primary text-white mt-4"

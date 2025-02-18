@@ -19,7 +19,7 @@ export default function KeyFeatures() {
       <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text mt-12">
         Key Features
       </h2>
-      <p className="text-center text-gray-500 lg:w-1/2 mb-12 mx-auto">
+      <p className="text-center     lg:w-1/2 mb-12 mx-auto">
         Discover the powerful features of our platform that drive change and
         connect people. Together, we can ignite impact, spread awareness, and
         build a global network of support for those in need.
@@ -39,7 +39,7 @@ export default function KeyFeatures() {
             </div>
 
             <h2 className="font-bold text-2xl mt-4">Save Lives Together</h2>
-            <p className="text-justify mt-2 text-gray-500 font-medium">
+            <p className="text-justify mt-2     font-medium">
               Every drop counts! BloodHope connects donors with those in urgent
               need, ensuring that every donation makes a life-saving impact.
               Life matters to us.
@@ -54,7 +54,7 @@ export default function KeyFeatures() {
               />
             </div>
             <h2 className="font-bold text-2xl">Spread the Hope</h2>
-            <p className="text-justify mt-2 text-gray-500 font-medium">
+            <p className="text-justify mt-2     font-medium">
               Share urgent donation requests across social media and online
               networks. Together, we can reach more people and save more lives.
             </p>
@@ -68,7 +68,7 @@ export default function KeyFeatures() {
               />
             </div>
             <h2 className="font-bold text-2xl">Connect & Support</h2>
-            <p className="text-justify mt-2 text-gray-500 font-medium">
+            <p className="text-justify mt-2     font-medium">
               BloodHope builds a strong donor community worldwide. Supporters
               can find, connect, and assist those in need—because together, we
               make a difference.{" "}

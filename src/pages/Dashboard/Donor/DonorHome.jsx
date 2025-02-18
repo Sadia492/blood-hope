@@ -88,7 +88,7 @@ export default function DonorHome() {
           >
             Recent Donation Requests
           </h2>
-          <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+          <p className="text-center lg:w-3/5 mx-auto     mt-2 mb-8">
             Discover the latest donation requests from individuals and families
             in need. Your contribution can bring warmth and hope to those facing
             challenging times

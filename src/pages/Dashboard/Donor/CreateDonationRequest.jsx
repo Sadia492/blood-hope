@@ -76,7 +76,7 @@ const CreateDonationRequest = () => {
       >
         Create Donation Request
       </h1>
-      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+      <p className="text-center lg:w-3/5 mx-auto     mt-2 mb-8">
         Fill out the details to create your blood donation request and get the
         help you need when it matters most.
       </p>

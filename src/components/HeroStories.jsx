@@ -60,7 +60,7 @@ const HeroStories = () => {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               {story.title}
             </h3>
-            <p className="text-gray-600 text-center">{story.description}</p>
+            <p className="   text-center">{story.description}</p>
             <button
               className={` btn bg-gradient-to-r mt-4 from-primary to-secondary text-white`}
             >

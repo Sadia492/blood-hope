@@ -19,7 +19,7 @@ const Featured = () => {
       >
         Featured
       </h2>
-      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-4">
+      <p className="text-center lg:w-3/5 mx-auto     mt-4">
         Explore inspiring stories, real-time donation stats, and upcoming events
         to make a difference. Join us in saving lives and spreading hope through
         the power of blood donation.
@@ -36,7 +36,7 @@ const Featured = () => {
 
         <div className="flex flex-col justify-between gap-2 col-span-1 h-full">
           {/* Stats with Infographic */}
-          <div className=" bg-white shadow-md rounded-lg p-6 flex flex-col items-center">
+          <div className="  shadow-md rounded-lg p-6 flex flex-col items-center">
             <h2
               className={`text-2xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
             >
@@ -47,19 +47,19 @@ const Featured = () => {
                 <h3 className="text-lg font-semibold text-red-600">
                   Units Collected This Month
                 </h3>
-                <p className="text-gray-700 text-2xl font-bold">500</p>
+                <p className="  text-2xl font-bold">500</p>
               </div>
               <div className="bg-blue-100 p-4 rounded-lg">
                 <h3 className="text-lg font-semibold text-blue-600">
                   Lives Saved So Far
                 </h3>
-                <p className="text-gray-700 text-2xl font-bold">1,200</p>
+                <p className="  text-2xl font-bold">1,200</p>
               </div>
             </div>
           </div>
 
           {/* Upcoming Events */}
-          <div className=" bg-white shadow-md rounded-lg p-6 flex flex-col">
+          <div className="  shadow-md rounded-lg p-6 flex flex-col">
             <h2
               className={`text-2xl font-bold bg-gradient-to-r text-center from-primary to-secondary text-transparent bg-clip-text`}
             >
@@ -68,15 +68,15 @@ const Featured = () => {
             <ul className="space-y-4">
               <li className="flex justify-between items-center">
                 <span>City Hall Blood Drive</span>
-                <span className="text-sm text-gray-500">Jan 20, 2025</span>
+                <span className="text-sm    ">Jan 20, 2025</span>
               </li>
               <li className="flex justify-between items-center">
                 <span>Community Center Campaign</span>
-                <span className="text-sm text-gray-500">Jan 22, 2025</span>
+                <span className="text-sm    ">Jan 22, 2025</span>
               </li>
               <li className="flex justify-between items-center">
                 <span>Winter Drive Challenge</span>
-                <span className="text-sm text-gray-500">Jan 25, 2025</span>
+                <span className="text-sm    ">Jan 25, 2025</span>
               </li>
             </ul>
             <button

@@ -112,7 +112,7 @@ export default function DonationUpdate() {
       >
         Update Donation Request
       </h1>
-      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+      <p className="text-center lg:w-3/5 mx-auto     mt-2 mb-8">
         Update the details of the donation request here—modify the status,
         urgency, or any other relevant information to keep the request current
       </p>

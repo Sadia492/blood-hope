@@ -98,7 +98,7 @@ export default function AllBloodDonationRequest() {
       >
         All Blood Donation Request
       </h2>
-      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-2 mb-8">
+      <p className="text-center lg:w-3/5 mx-auto     mt-2 mb-8">
         Manage all incoming blood donation requests here—approve, track, and
         ensure the right connections are made between donors and recipients.
       </p>
@@ -146,7 +146,7 @@ export default function AllBloodDonationRequest() {
               {donationRequests?.map((request) => (
                 <tr
                   key={request._id}
-                  className="bg-white shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
+                  className="shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
                 >
                   <td className="px-4 py-2">
                     {request.donationStatus === "inprogress" &&

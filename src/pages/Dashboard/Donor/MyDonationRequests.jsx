@@ -102,7 +102,7 @@ export default function MyDonationRequests() {
       >
         My Donation Requests
       </h2>
-      <p className="text-center lg:w-3/5 mx-auto  text-gray-600 mt-4">
+      <p className="text-center lg:w-3/5 mx-auto     mt-4">
         View and track your blood donation requests here. Stay updated on the
         status of your request and connect with potential donors.
       </p>
@@ -150,7 +150,7 @@ export default function MyDonationRequests() {
               {donationRequest?.map((request) => (
                 <tr
                   key={request._id}
-                  className="bg-white shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
+                  className=" shadow-lg rounded-lg hover:scale-105 duration-300 ease-in-out transition-all"
                 >
                   <td className="px-2 py-2">
                     {request.donationStatus === "inprogress" &&

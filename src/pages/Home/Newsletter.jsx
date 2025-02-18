@@ -16,7 +16,7 @@ export default function Newsletter() {
       <h2 className="text-3xl font-bold mb-2 text-center bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
         Newsletter
       </h2>
-      <p className="text-center text-gray-500 lg:w-1/2 mb-12 mx-auto">
+      <p className="text-center     lg:w-1/2 mb-12 mx-auto">
         The Newsletter section encourages users to stay connected by subscribing
         to receive the latest updates, news, and exclusive offers. It includes
         an email input field and a clear call-to-action button.

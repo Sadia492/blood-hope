@@ -187,7 +187,7 @@ export default function Profile() {
                   </label>
                   <select
                     required
-                    className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+                    className="w-full px-4 py-3 rounded-md input input-bordered"
                     name="bloodGroup"
                     value={selectedBloodGroup}
                     disabled={!editMode}
@@ -215,7 +215,7 @@ export default function Profile() {
                 </label>
                 <select
                   required
-                  className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+                  className="w-full px-4 py-3 rounded-md input input-bordered"
                   name="district"
                   value={selectedDistrict}
                   disabled={!editMode}
@@ -239,7 +239,7 @@ export default function Profile() {
                 </label>
                 <select
                   required
-                  className="w-full px-4 py-3 rounded-md bg-white input input-bordered"
+                  className="w-full px-4 py-3 rounded-md  input input-bordered"
                   name="upazila"
                   value={selectedUpazila}
                   disabled={!editMode || !selectedDistrict} // Disable if not in edit mode or district not selected

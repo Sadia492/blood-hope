@@ -32,7 +32,7 @@ export default function Testimonials() {
       <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text mt-12">
         Testimonials
       </h2>
-      <p className="text-center text-gray-500 lg:w-1/2 mb-12 mx-auto">
+      <p className="text-center     lg:w-1/2 mb-12 mx-auto">
         The testimonial section highlights user feedback and experiences,
         showcasing reviews and ratings from satisfied customers. It builds trust
         and credibility.

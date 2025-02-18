@@ -11,7 +11,7 @@ export default function DashboardNav() {
     });
   };
   return (
-    <div className="navbar bg-base-100 px-10">
+    <div className="navbar pl-10 lg:pr-10 pr-0">
       <div className="flex-1">
         <Link to={"/"}>
           <div className="flex justify-center items-center">

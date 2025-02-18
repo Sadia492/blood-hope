@@ -104,11 +104,11 @@ export default function Profile() {
   if (isLoading || loading) return <LoadingSpinner></LoadingSpinner>;
 
   return (
-    <div>
+    <div className="">
       <Helmet>
         <title>BloodHope | Profile</title>
       </Helmet>
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex  justify-center items-center">
         <div className=" shadow-2xl rounded-2xl md:w-4/5 lg:w-3/5">
           <div className="flex flex-col items-center justify-center p-8">
             <img

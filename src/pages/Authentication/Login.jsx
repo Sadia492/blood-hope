@@ -12,6 +12,7 @@ export default function Login() {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
   const { signInUser, setUser } = useAuth();
   const handleLogin = (e) => {
     e.preventDefault();
@@ -30,6 +31,15 @@ export default function Login() {
       });
     form.reset();
   };
+  const fillCredentials = (role) => {
+    const creds = {
+      donor: { email: "hero@hero.com", password: "Hero12" },
+      volunteer: { email: "sara@sara.com", password: "Sara12" },
+      admin: { email: "mira@mira.com", password: "Mira12" },
+    };
+    setCredentials(creds[role]);
+  };
+
   return (
     <div className="flex flex-col-reverse lg:flex-row justify-center items-center h-screen w-11/12 mx-auto">
       <Helmet>
@@ -40,6 +50,29 @@ export default function Login() {
           <h2 className="text-3xl font-bold bg-gradient-to-r from-primary from-0 to-75% to-secondary text-transparent bg-clip-text text-center">
             LOGIN HERE
           </h2>
+          <div className="flex space-x-2 justify-center">
+            <button
+              type="button"
+              className="btn bg-gradient-to-r from-primary to-secondary text-white"
+              onClick={() => fillCredentials("donor")}
+            >
+              Donor Credentials
+            </button>
+            <button
+              type="button"
+              className="btn bg-gradient-to-r from-primary to-secondary text-white"
+              onClick={() => fillCredentials("volunteer")}
+            >
+              Volunteer Credentials
+            </button>
+            <button
+              type="button"
+              className="btn bg-gradient-to-r from-primary to-secondary text-white"
+              onClick={() => fillCredentials("admin")}
+            >
+              Admin Credentials
+            </button>
+          </div>
           <div className="form-control">
             <label className="label">
               <span className="label-text text-error font-semibold">Email</span>
@@ -48,6 +81,7 @@ export default function Login() {
               type="email"
               name="email"
               placeholder="email"
+              value={credentials.email ? credentials.email : ""}
               className="input input-bordered input-error "
               required
             />
@@ -63,6 +97,7 @@ export default function Login() {
                 type={show ? "text" : "password"}
                 name="password"
                 placeholder="password"
+                value={credentials.password ? credentials.password : ""}
                 className=""
                 required
               />

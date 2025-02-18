@@ -25,6 +25,7 @@ import DonationUpdate from "../pages/Dashboard/DonationUpdate";
 import AdminRoute from "./AdminRoute";
 import AdminMenu from "../pages/Dashboard/Admin/AdminMenu";
 import ErrorPage from "../components/ErrorPage";
+import Overview from "../pages/Dashboard/Overview";
 // import DonorHome from "../pages/Dashboard/DonorHome";
 const router = createBrowserRouter([
   {
@@ -62,11 +63,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/donation/:id",
-        element: (
-          <PrivateRoute>
-            <DonationDetails></DonationDetails>
-          </PrivateRoute>
-        ),
+        element: <DonationDetails></DonationDetails>,
       },
       {
         path: "/donation/update/:id",
@@ -99,6 +96,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <RoleBasedHome></RoleBasedHome>,
+      },
+      {
+        path: "overview",
+        element: <Overview></Overview>,
       },
       {
         path: "my-donation-requests",

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../../components/LoadingSpinner";
@@ -7,7 +7,8 @@ import { Helmet } from "react-helmet-async";
 
 export default function PendingDonationRequest() {
   const axiosPublic = useAxiosPublic();
-
+  const [sortOrder, setSortOrder] = useState("asc"); // Default sorting order
+  const [selectedBloodGroup, setSelectedBloodGroup] = useState("All"); // Blood group filter state
   // Fetch pending donation requests
   const { data: requests = [], isLoading } = useQuery({
     queryKey: ["pendingRequests"],
@@ -18,6 +19,20 @@ export default function PendingDonationRequest() {
       return data;
     },
   });
+  // Function to sort requests by date
+  const sortedRequests = [...requests]
+    .sort((a, b) => {
+      const dateA = new Date(a.donationDate);
+      const dateB = new Date(b.donationDate);
+      return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+    })
+    // Filter by selected blood group if not "All"
+    .filter((request) =>
+      selectedBloodGroup === "All"
+        ? true
+        : request.bloodGroup === selectedBloodGroup
+    );
+
   if (isLoading) return <LoadingSpinner></LoadingSpinner>;
   return (
     <div className="w-11/12 mx-auto mt-24">
@@ -33,10 +48,37 @@ export default function PendingDonationRequest() {
         View all pending donation requests in one place. Respond promptly and
         make a difference in someone's life today.
       </p>
+      {/* Sort Button */}
+      <div className="flex justify-end mb-4 gap-4">
+        <select
+          onChange={(e) => setSortOrder(e.target.value)}
+          value={sortOrder}
+          className="select border-primary border-2 w-full max-w-xs"
+        >
+          <option value="asc">Sort by Date: Oldest First</option>
+          <option value="desc">Sort by Date: Newest First</option>
+        </select>
+        {/* Filter by Blood Group Dropdown */}
+        <select
+          onChange={(e) => setSelectedBloodGroup(e.target.value)}
+          value={selectedBloodGroup}
+          className="select border-primary border-2 w-full max-w-xs"
+        >
+          <option value="All">All Blood Groups</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+        </select>
+      </div>
 
-      {requests?.length > 0 ? (
+      {sortedRequests?.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {requests.map((request) => (
+          {sortedRequests.map((request) => (
             <div
               key={request._id}
               className="bg-white p-6 rounded-lg shadow-md"

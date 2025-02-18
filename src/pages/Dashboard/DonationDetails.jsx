@@ -9,12 +9,14 @@ import Lottie from "lottie-react";
 import animation from "../../assets/animation/bloodMan.json";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 Modal.setAppElement("#root");
 
 export default function DonationDetails() {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user, loading } = useAuth();
   const openModal = () => setIsModalOpen(true);
@@ -27,10 +29,11 @@ export default function DonationDetails() {
   } = useQuery({
     queryKey: ["donationRequest", id],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/donation-request/${id}`);
+      const { data } = await axiosPublic.get(`/donation-request/${id}`);
       return data;
     },
   });
+  console.log(donationRequest);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -83,7 +86,8 @@ export default function DonationDetails() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <p>
-              <strong>Recipient Name:</strong> {donationRequest.recipientName}
+              <strong>Recipient Name:</strong>{" "}
+              {donationRequest.recipientName || ""}
             </p>
             <p>
               <strong>District:</strong> {donationRequest.recipientDistrict}

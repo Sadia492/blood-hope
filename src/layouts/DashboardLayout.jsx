@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { BsGraphUp } from "react-icons/bs";
-import { FaHome, FaUserCog } from "react-icons/fa";
+import { FaGlobe, FaHome, FaUserCog } from "react-icons/fa";
 import MenuItem from "../shared/MenuItem";
 import { CgProfile } from "react-icons/cg";
 import { BsBoxArrowUpLeft } from "react-icons/bs";
@@ -64,6 +64,11 @@ export default function DashboardLayout() {
                 </div>
               </Link>
             </div>
+            <MenuItem
+              icon={FaGlobe}
+              label="Overview"
+              address="/dashboard/overview"
+            />
             <MenuItem
               icon={CgProfile}
               label="Profile"

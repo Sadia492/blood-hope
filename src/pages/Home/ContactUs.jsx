@@ -84,7 +84,7 @@ const ContactUs = () => {
             </div>
             <div className="flex-1 flex justify-center items-center">
               <Lottie
-                className="lg:w-4/5 "
+                className="lg:w-3/5 "
                 animationData={animation}
                 loop={true}
               />

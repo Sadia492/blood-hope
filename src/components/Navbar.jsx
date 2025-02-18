@@ -41,7 +41,7 @@ export default function Navbar() {
           : "bg-secondary/45 backdrop-blur-xl" // Non-transparent background on other pages
       }`}
     >
-      <div className="navbar w-11/12 mx-auto">
+      <div className="navbar w-11/12 mx-auto px-0">
         <div className="flex-1">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="lg:hidden">

@@ -7,6 +7,7 @@ import FAQ from "./Faq";
 import Newsletter from "./Newsletter";
 import Testimonials from "./Testimonials";
 import KeyFeatures from "./KeyFeatures";
+import FeaturedRequest from "./FeaturedRequest";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       </Helmet>
       <Banner></Banner>
       <KeyFeatures></KeyFeatures>
+      <FeaturedRequest></FeaturedRequest>
       <Featured></Featured>
       <FAQ></FAQ>
       <ContactUs></ContactUs>

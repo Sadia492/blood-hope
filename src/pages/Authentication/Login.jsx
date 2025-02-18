@@ -82,6 +82,9 @@ export default function Login() {
               name="email"
               placeholder="email"
               value={credentials.email ? credentials.email : ""}
+              onChange={(e) =>
+                setCredentials({ ...credentials, email: e.target.value })
+              }
               className="input input-bordered input-error "
               required
             />
@@ -98,6 +101,9 @@ export default function Login() {
                 name="password"
                 placeholder="password"
                 value={credentials.password ? credentials.password : ""}
+                onChange={(e) =>
+                  setCredentials({ ...credentials, password: e.target.value })
+                }
                 className=""
                 required
               />

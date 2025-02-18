@@ -17,6 +17,7 @@ import useRole from "../hooks/useRole";
 import VolunteerMenu from "../pages/Dashboard/volunteer/VolunteerMenu";
 import logo from "../assets/logo.png";
 import { AiOutlineMenu } from "react-icons/ai";
+import DashboardNav from "../pages/Dashboard/DashboardNav";
 
 export default function DashboardLayout() {
   const { user } = useAuth();
@@ -45,6 +46,7 @@ export default function DashboardLayout() {
             </label>
           </div>
           {/* content from here */}
+          <DashboardNav></DashboardNav>
           <Outlet></Outlet>
         </div>
         <div className="drawer-side">

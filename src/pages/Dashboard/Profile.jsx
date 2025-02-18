@@ -268,7 +268,7 @@ export default function Profile() {
             </form>
           </div>
         </div>
-        <div className="absolute top-0 right-0 lg:flex hidden ">
+        <div className="absolute top-10 right-0 lg:flex hidden ">
           <Lottie
             className="w-52 "
             animationData={gradientAnimation}

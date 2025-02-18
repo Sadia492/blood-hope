@@ -59,30 +59,46 @@ export default function Footer() {
             <p>All rights reserved</p>
           </div>
           <div className="flex flex-wrap  gap-4">
-            <button className="flex border rounded-full justify-center items-center px-4 py-2 gap-2">
+            <Link
+              target="_blank"
+              to={"https://www.instagram.com/"}
+              className="flex border rounded-full justify-center items-center px-4 py-2 gap-2"
+            >
               <p className="text-white text-2xl">
                 <FaInstagram />
               </p>
               Instagram
-            </button>
-            <button className="flex border rounded-full justify-center items-center px-4 py-2 gap-2">
+            </Link>
+            <Link
+              target="_blank"
+              to={"https://www.facebook.com/profile.php?id=100077898306645"}
+              className="flex border rounded-full justify-center items-center px-4 py-2 gap-2"
+            >
               <p className="text-white text-2xl">
                 <FaFacebook />
               </p>
               Facebook
-            </button>
-            <button className="flex border rounded-full justify-center items-center px-4 py-2 gap-2">
+            </Link>
+            <Link
+              target="_blank"
+              to={"https://x.com/"}
+              className="flex border rounded-full justify-center items-center px-4 py-2 gap-2"
+            >
               <p className="text-white text-2xl">
                 <FaXTwitter />
               </p>
               Twitter
-            </button>
-            <button className="flex border rounded-full justify-center items-center px-4 py-2 gap-2">
+            </Link>
+            <Link
+              target="_blank"
+              to={"https://www.linkedin.com/in/sadia-afrin01"}
+              className="flex border rounded-full justify-center items-center px-4 py-2 gap-2"
+            >
               <p className="text-white text-2xl">
                 <FaLinkedin />
               </p>
               Linkedin
-            </button>
+            </Link>
           </div>
         </div>
       </div>
